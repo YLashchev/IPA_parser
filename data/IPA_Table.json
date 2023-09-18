@@ -1,0 +1,1032 @@
+{
+
+"CONSONANT" :  
+        { 
+            "VOICELESS BILABIAL PLOSIVE" : 
+                {
+                    "IPA" : "p",
+                    "code" : "0070"
+                },
+            "VOICED BILABIAL PLOSIVE" : 
+                {
+                    "IPA" : "b",
+                    "code" : "0062"
+                },
+
+            "VOICELESS DENTAL/ALVEOLAR PLOSIVE" :
+                {
+                    "IPA" : "t",
+                    "code" : "0074"
+                },                                                
+
+            "VOICED DENTAL/ALVEOLAR PLOSIVE" :
+            {  
+                "IPA" : "d",
+                "code" : "0064"
+            },
+
+            "VOICELESS RETROFLEX PLOSIVE" :
+            {
+                "IPA" : "ʈ",
+                "code" : "0288"
+            },
+
+            "VOICED RETROFLEX PLOSIVE" :
+            {
+                "IPA" : "ɖ",
+                "code" : "0256"
+            },
+
+            "VOICELESS PALATAL PLOSIVE" :
+            {
+                "IPA" : "c",
+                "code" : "0063"
+            },
+
+            "VOICED PALATAL PLOSIVE" :
+            {
+                "IPA" : "ɟ",
+                "code" : "025f"
+            },
+
+            "VOICELESS VELAR PLOSIVE" :
+            {
+                "IPA" : "k",
+                "code" : "006b"
+            },
+
+            "VOICED VELAR PLOSIVE" :
+            {
+                "IPA" : "g",
+                "code" : "0261"
+            },
+
+            "SMALL LATIN G": 
+            {
+                "IPA" : "ɡ",
+                "code" : "0067"
+            },
+
+            "VOICELESS UVULAR PLOSIVE" :
+            {
+                "IPA" :  "q",
+                "code" : "0071"
+            },
+
+            "VOICED UVULAR PLOSIVE" :
+            {
+                "IPA" :  "ɢ",
+                "code" : "0262"
+            },
+
+            "GLOTTAL PLOSIVE" :
+            {
+                "IPA" :  "ʔ",
+                "code" : "0294"
+            },
+
+            "VOICELESS BILABIAL NASAL" :
+            {
+                "IPA" :  "m",
+                "code" : "006d"
+            },
+
+
+            "VOICED LABIODENTAL NASAL" :
+            {
+                "IPA" :  "ɱ",
+                "code" :  "0271"
+            },
+
+            "VOICELESS DENTAL/ALVEOLAR NASAL" :
+            {
+                "IPA" :  "n",
+                "code" :  "006e"
+            },
+
+            "VOICED RETROFLEX NASAL" :
+            {
+                "IPA" :  "ɳ",
+                "code" :  "0273"
+            },
+
+            "VOICED PALATAL NASAL" :
+            {
+                "IPA" :  "ɲ",
+                "code" :  "0272"
+            },
+
+            "VOICELESS VELAR NASAL" :
+            {
+                "IPA" :  "ŋ",
+                "code" :  "014b"
+            },
+
+            "VOICED UVULAR NASAL" :
+            {
+                "IPA" :  "ɴ",
+                "code" :  "0274"
+            },
+
+            "VOICELESS BILABIAL TRILL" :
+            {
+                "IPA" :  "ʙ",
+                "code" :  "0299"
+            },
+
+            "VOICELESS DENTAL/ALVEOLAR TRILL" :
+            {
+                "IPA" :  "r",
+                "code" :  "0072"
+            },
+
+            "VOICED UVULAR TRILL" :
+            {
+                "IPA" :  "ʀ",
+                "code" :  "0280"
+            },
+
+            "VOICED LABIODENTAL FLAP" :
+            {
+                "IPA" :  "ⱱ",
+                "code" :  "2c71"
+            },
+
+            "VOICED DENTAL/ALVEOLAR TAP" :
+            {
+                "IPA" :  "ɾ",
+                "code" :  "027e"
+            },
+
+            "VOICED RETROFLEX FLAP" :
+            {
+                "IPA" :  "ɽ",
+                "code" :  "027d"
+            },
+
+            "VOICELESS BILAIAL FRICATIVE" :
+            {
+                "IPA" :  "ɸ",
+                "code" :  "0278"
+            },  
+
+            "VOICED BILIABIAL FRICATIVE" :
+            {
+                "IPA" :  "β",
+                "code" :  "03b2"
+            },
+
+            "VOICELESS LABIODENTAL FRICATIVE" :
+            {
+                "IPA" :  "f",
+                "code" :  "0066"
+            },
+
+            "VOICED LABIODENTAL FRICATIVE" :
+            {
+                "IPA" :  "v",
+                "code" :  "0076"
+            },
+
+            "VOICELESS DENTAL FRICATIVE" :
+            {
+                "IPA" :  "θ",
+                "code" :  "03b8"
+            },
+
+            "VOICED DENTAL FRICATIVE" :
+            {
+                "IPA" :  "ð",
+                "code" :  "00f0"
+            },
+
+            "VOICELESS ALVEOLAR FRICATIVE" :
+            {
+                "IPA" :  "s",
+                "code" :  "0073"
+            },
+
+            "VOICED ALVEOLAR FRICATIVE" :
+            {
+                "IPA" :  "z",
+                "code" :  "007a"
+            },
+
+            "VOICELESS POSTALVEOLAR FRICATIVE" :
+            {
+                "IPA" :  "ʃ",
+                "code" :  "0283"
+            },
+
+            "VOICED POSTALVEOLAR FRICATIVE" :
+            {
+                "IPA" :  "ʒ",
+                "code" :  "0292"
+            },
+
+            "VOICELESS RETROFLEX FRICATIVE" :
+            {
+                "IPA" :  "ʂ",
+                "code" :  "0282"
+            },
+
+            "VOICED RETROFLEX FRICATIVE" :
+            {
+                "IPA" :  "ʐ",
+                "code" :  "0290"
+            },
+
+            "VOICELESS PALATAL FRICATIVE" :
+            {
+                "IPA" :  "ç",
+                "code" :  "00e7"
+            },
+
+            "VOICED PALATAL FRICATIVE" :
+            {
+                "IPA" :  "ʝ",
+                "code" :  "029d"
+            },
+
+            "VOICELESS VELAR FRICATIVE" :
+            {
+                "IPA" :  "x",
+                "code" :  "0078"
+            },
+
+            "VOICED VELAR FRICATIVE" :
+            {
+                "IPA" :  "ɣ",
+                "code" :  "0263"
+            },
+
+            "VOICELESS UVULAR FRICATIVE" :
+            {
+                "IPA" :  "χ",
+                "code" :  "03c7"
+            },
+
+            "VOICED UVULAR FRICATIVE" :
+            {
+                "IPA" :  "ʁ",
+                "code" :  "0281"
+            },
+
+            "VOICELESS PHARYNGEAL FRICATIVE" :
+            {
+                "IPA" :  "ħ",
+                "code" :  "0127"
+            },
+
+            "VOICED PHARYNGEAL FRICATIVE" :
+            {
+                "IPA" :  "ʕ",
+                "code" :  "0295"
+            },
+
+            "VOICELESS GLOTTAL FRICATIVE" :
+            {
+                "IPA" :  "h",
+                "code" :  "0068"
+            },
+
+            "VOICED GLOTTAL FRICATIVE" :
+            {
+                "IPA" :  "ɦ",
+                "code" :  "0266"
+            },
+
+            "VOICELESS DENTAL/ALVEOLAR LATERAL FRICATIVE" :
+            {
+                "IPA" :  "ɬ",
+                "code" :  "026c"
+            },
+            
+            "VOICED DENTAL/ALVEOLAR LATERAL FRICATIVE" :
+            {
+                "IPA" :  "ɮ",
+                "code" :  "026e"
+            },
+
+            "VOICED LABIODENTAL APPROXIMANT" :
+            {
+                "IPA" :  "ʋ",
+                "code" :  "028b"
+            },
+
+            "VOICED DENTAL/ALVEOLAR APPROXIMANT" :
+            {
+                "IPA" :  "ɹ",
+                "code" :  "0279"
+            },
+
+            "VOICED RETROFLEX APPROXIMANT" :
+            {
+                "IPA" :  "ɻ",
+                "code" :  "027b"
+            },
+
+            "VOICED PALATAL APPROXIMANT" :
+            {
+                "IPA" :  "j",
+                "code" :  "006a"
+            },
+
+            "VOICED VELAR APPROXIMANT" :
+            {
+                "IPA" :  "ɰ",
+                "code" :  "0270"
+            },
+
+            "VOICED DENTAL/ALVEOLAR LATERAL APPROXIMANT" :
+            {
+                "IPA" :  "l",
+                "code" :  "006c"
+            },
+
+            "VOICED RETROFLEX LATERAL APPROXIMANT" :
+            {
+                "IPA" :  "ɭ",
+                "code" :  "026d"
+            },
+
+            "VOICED PALATAL LATERAL APPROXIMANT" :
+            {
+                "IPA" :  "ʎ",
+                "code" :  "028e"
+            },
+
+            "VOICED VELAR LATERAL APPROXIMANT" :
+            {
+                "IPA" :  "ʟ",
+                "code" :  "029f"
+            },
+
+            "VELARIZED VOICED DENTAL/ALVEOLAR LATERAL APPROXIMANT" : 
+            {
+                "IPA" :  "ɫ",
+                "code" :  "026b"
+            },
+
+            "BILABIAL CLICK" : 
+            {
+                "IPA" :  "ʘ",
+                "code" :  "0298"
+            },
+
+            "DENTAL CLICK" : 
+            {
+                "IPA" :  "ǀ",
+                "code" :  "01c0"
+            },
+
+            "(POST)ALVEOLAR CLICK" : 
+            {
+                "IPA" :  "ǃ",
+                "code" :  "01c3"
+            },
+
+            "PALATOALVEOLAR CLICK" : 
+            {
+                "IPA" :  "ǂ",
+                "code" :  "01c2"
+            },
+
+            "ALVEOLAR LATERAL CLICK" : 
+            {
+                "IPA" :  "ǁ",
+                "code" :  "01c1"
+            },
+
+            "VOICED BILABIAL IMPLOSIVE" : 
+            {
+                "IPA" :  "ɓ",
+                "code" :  "0253"
+            },
+
+            "VOICED DENTAL/ALVEOLAR IMPLOSIVE" : 
+            {
+                "IPA" :  "ɗ",
+                "code" :  "0257"
+            },
+
+            "VOICED PALATAL IMPLOSIVE" : 
+            {
+                "IPA" :  "ʄ",
+                "code" :  "0284"
+            },
+
+            "VOICED VELAR IMPLOSIVE" : 
+            {
+                "IPA" :  "ɠ",
+                "code" :  "0260"
+            },
+
+            "VOICED UVULAR IMPLOSIVE" : 
+            {
+                "IPA" :  "ʛ",
+                "code" :  "029b"
+            },
+
+            "VOICELESS LABIAL-VELAR FRICATIVE" : 
+            {
+                "IPA" :  "ʍ",
+                "code" :  "028d"
+            },
+
+            "VOICED LABIAL-VELAR APPROXIMANT" : 
+            {
+                "IPA" :  "w",
+                "code" :  "0077"
+            },
+
+            "VOICED LABIAL-PALATAL APPROXIMANT" : 
+            {
+                "IPA" :  "ɥ",
+                "code" :  "0265"
+            },
+
+            "VOICELESS EPIGLOTTAL FRICATIVE" : 
+            {
+                "IPA" :  "ʜ",
+                "code" :  "029c"
+            },
+
+            "VOICED EPIGLOTTAL FRICATIVE" : 
+            {
+                "IPA" :  "ʢ",
+                "code" :  "02a2"
+            },
+
+            "EPIGLOTTAL PLOSIVE" : 
+            {
+                "IPA" :  "ʡ",
+                "code" :  "02a1"
+            },
+
+            "VOICELESS ALVEOLO-PALATAL FRICATIVE" : 
+            {
+                "IPA" :  "ɕ",
+                "code" :  "0255"
+            },
+
+            "VOICED ALVEOLO-PALATAL FRICATIVE" : 
+            {
+                "IPA" :  "ʑ",
+                "code" :  "0291"
+            },
+
+            "VOICED ALVEOLAR LATERAL FLAP" : 
+            {
+                "IPA" :  "ɺ",
+                "code" :  "027a"
+            },
+
+            "VOICELESS POSTALVEOLAR-VELAR FRICATIVE" : 
+            {
+                "IPA" :  "ɧ",
+                "code" :  "0267"
+            },
+
+            "SMALL CAPITAL J" : 
+            {
+                "IPA" :  "ᴊ",
+                "code" :  "1d0a"
+            },
+
+        "VOICELESS POSTALVEOLAR AFFRICATE" : 
+        {
+            "IPA" :  "ʧ",
+            "code" :  "02a7"
+        },
+
+        "VOICED POSTALVEOLAR AFFRICATE" : 
+        {
+            "IPA" :  "ʤ",
+            "code" :  "02a4"
+        },
+
+        "VOICELESS DENTAL/ALVEOLAR AFFRICATE" : 
+        {
+            "IPA" :  "ʦ",
+            "code" :  "02a6"
+        },
+
+        "VOICED ALVEOLAR AFFRICATE" :  
+        {
+            "IPA" :  "ʣ",
+            "code" :  "02a3"
+        },
+
+
+        "VOICELESS ALVEOLO-PALATAL AFFRICATE" : 
+        {
+            "IPA" :  "ʨ",
+            "code" :  "02a8"
+        },
+
+        "VOICED ALVEOLO-PALATAL AFFRICATE" : 
+        {
+            "IPA" :  "ʥ",
+            "code" :  "02a5"
+        },
+
+        "SMALL LETTER S" : 
+        {
+            "IPA" :  "ˢ",
+            "code" :  "02e2"
+        }
+
+
+        },
+
+
+
+
+"VOWEL" : 
+     {
+
+        "CLOSE FRONT UNROUNDED VOWEL" :  
+        {
+            "IPA" :  "i",
+            "code" :  "0069"
+        },
+
+        "CLOSE FRONT ROUNDED VOWEL" :  
+        {
+            "IPA" :  "y",
+            "code" :  "0079"
+        },
+
+        "NEAR-CLOSE NEAR-FRONT UNROUNDED VOWEL" :  
+        {
+            "IPA" :  "ɪ",
+            "code" :  "026a"
+        },
+
+        "NEAR-CLOSE NEAR-FRONT ROUNDED VOWEL" : 
+         {
+            "IPA" :  "ʏ",
+            "code" :  "028f"
+        },
+
+        "CLOSE-MID FRONT UNROUNDED VOWEL" :  
+        {
+            "IPA" :  "e",
+            "code" :  "0065"
+        },
+
+        "CLOSE-MID FRONT ROUNDED VOWEL" : 
+         {
+            "IPA" :  "ø",
+            "code" :  "00f8"
+        },
+
+        "OPEN-MID FRONT UNROUNDED VOWEL" : 
+         {
+            "IPA" :  "ɛ",
+            "code" :  "025b"
+        },
+
+        "OPEN-MID FRONT ROUNDED VOWEL" : 
+         {
+            "IPA" :  "œ",
+            "code" :  "0153"
+        },
+
+        "NEAR-OPEN FRONT UNROUNDED VOWEL" :  {
+            "IPA" :  "æ",
+            "code" :  "00e6"
+        },
+        "CLOSE-BACK UNROUNDED VOWEL" :  {
+            "IPA" :  "ı",
+            "code" :  "0131"
+        },
+
+        "OPEN FRONT UNROUNDED VOWEL" :  {
+            "IPA" :  "a",
+            "code" :  "0061"
+        },
+
+        "OPEN FRONT ROUNDED VOWEL" :  {
+            "IPA" :  "ɶ",
+            "code" :  "0276"
+        },
+
+        "CLOSE CENTRAL UNROUNDED VOWEL" :  {
+            "IPA" :  "ɨ",
+            "code" :  "0268"
+        },
+
+        "CLOSE CENTRAL ROUNDED VOWEL" :  {
+            "IPA" :  "ʉ",
+            "code" :  "0289"
+        },
+
+        "CLOSE-MID CENTRAL ROUNDED VOWEL" : {
+            "IPA" :  "ɵ",
+            "code" :  "0275"
+        },
+
+        "MID CENTRAL VOWEL" :  {
+            "IPA" :  "ə",
+            "code" :  "0259"
+        },
+
+        "HIGH MID CENTRAL UNROUNDED VOWEL" :  {
+            "IPA" :  "ɘ",
+            "code" :  "0258"
+        },
+
+        "OPEN-MID CENTRAL UNROUNDED VOWEL" :  {
+            "IPA" :  "ɜ",
+            "code" :  "025c"
+        },
+
+        "OPEN-MID CENTRAL ROUNDED VOWEL" :  {
+            "IPA" :  "ɞ",
+            "code" :  "025e"
+        },
+
+        "NEAR-OPEN CENTRAL VOWEL" :  {
+            "IPA" :  "ɐ",
+            "code" :  "0250"
+        },
+
+        "CLOSE BACK UNROUNDED VOWEL" :  {
+            "IPA" :  "ɯ",
+            "code" :  "026f"
+        },
+
+        "CLOSE BACK ROUNDED VOWEL" :  {
+            "IPA" :  "u",
+            "code" :  "0075"
+        },
+
+        "NEAR-CLOSE NEAR-BACK ROUNDED VOWEL" :  {
+            "IPA" :  "ʊ",
+            "code" :  "028a"
+        },
+
+        "CLOSE-MID BACK UNROUNDED VOWEL" :  {
+            "IPA" :  "ɤ",
+            "code" :  "0264"
+        },
+
+        "CLOSE-MID BACK ROUNDED VOWEL" :  {
+            "IPA" :  "o",
+            "code" :  "006f"
+        },
+
+        "OPEN-MID BACK UNROUNDED VOWEL" :  {
+            "IPA" :  "ʌ",
+            "code" :  "028c"
+        },
+
+        "OPEN-MID BACK ROUNDED VOWEL" :  {
+            "IPA" :  "ɔ",
+            "code" :  "0254"
+        },
+
+        "OPEN BACK UNROUNDED VOWEL" :  {
+            "IPA" :  "ɑ",
+            "code" :  "0251"
+        },
+
+        "OPEN BACK ROUNDED VOWEL" :  {
+            "IPA" :  "ɒ",
+            "code" :  "0252"
+        },
+
+        "R-COLORORED VOWEL" :  {
+            "IPA" :  "ɚ",
+            "code" :  "025a"
+        },
+
+        "R-COLOROURED VOWEL" :  {
+            "IPA" :  "ɝ",
+            "code" :  "025d"
+        }
+
+            },
+
+"DIACRITIC" :  
+        {
+
+        "VOICELESS" :  {
+            "IPA" :  " ̥",
+            "code" :  "0325"
+        },
+
+        "VOICELESS(ABOVE)" :  {
+            "IPA" :  " ̊",
+            "code" :  "030a"
+        },
+
+        "VOICED" :  {
+            "IPA" :  " ̬",
+            "code" :  "032c"
+        },
+
+        "ASIPIRATED" :  {
+            "IPA" :  "ʰ",
+            "code" :  "02b0"
+        },
+
+        "MORE ROUNDED" :  {
+            "IPA" :  " ̹",
+            "code" :  "0339"
+        },
+
+        "LESS ROUNDED" :  {
+            "IPA" :  " ̜",
+            "code" :  "031c"
+        },
+
+        "ADVANCED" :  {
+            "IPA" :  " ̟",
+            "code" :  "031f"
+        },
+
+        "RETRACTED" :  {
+            "IPA" :  " ̠",
+            "code" :  "0320"
+        },
+
+        "CENTRALIZED" :  {
+            "IPA" :  " ̈",
+            "code" :  "0308"
+        },
+
+        "MID-CENTRALIZED" :  {
+            "IPA" :  " ̽",
+            "code" :  "033d"
+        },
+
+        "SYLLABIC" :  {
+            "IPA" :  " ̩",
+            "code" :  "0329"
+        },
+
+        "NON-SYLLABIC" :  {
+            "IPA" :  " ̯",
+            "code" :  "032f"
+        },
+
+        "RHOTICITY" :  {
+            "IPA" :  " ˞",
+            "code" :  "02de"
+        },
+
+        "BREATHY VOICED" :  {
+            "IPA" :  " ̤",
+            "code" :  "0324"
+        },
+
+        "CREAKY VOICED" :  {
+            "IPA" :  " ̰",
+            "code" :  "0330"
+        },
+
+
+        "LINGUOLABIAL" :  {
+            "IPA" :  " ̼",
+            "code" :  "033c"
+        },
+
+        "LABIALIZED" :  {
+            "IPA" :  "ʷ",
+            "code" :  "02b7"
+        },
+
+        "PALATALIZED" :  {
+            "IPA" :  "ʲ",
+            "code" :  "02b2"
+        },
+
+        "VELARIZED" :  {
+            "IPA" :  "ˠ",
+            "code" :  "02e0"
+        },
+
+        "PHARYNGEALIZED" :  {
+            "IPA" :  "ˤ",
+            "code" :  "02e4"
+        },
+
+        "VELARIZED OR PHARYNGEALIZED" :  {
+            "IPA" :  " ̴",
+            "code" :  "0334"
+        },
+
+        "RAISED" :  {
+            "IPA" :  " ̝",
+            "code" :  "031d"
+        },
+        "LOWERED" :  {
+            "IPA" :  " ̞",
+            "code" :  "031e"
+        },
+
+        "ADVANCED TONGUE ROOT" :  {
+            "IPA" :  " ̘",
+            "code" :  "0318"
+        },
+
+        "RETRACTED TONGUE ROOT" :  {
+            "IPA" :  " ̙",
+            "code" :  "0319"
+        },
+
+        "DENTAL" :  {
+            "IPA" :  " ̪",
+            "code" :  "032a"
+        },
+
+        "APICAL" :  {
+            "IPA" :  " ̺",
+            "code" :  "033a"
+        },
+
+        "LAMINAL" :  {
+            "IPA" :  " ̻",
+            "code" :  "033b"
+        },
+
+        "NASALIZED" :  {
+            "IPA" :  " ̃",
+            "code" :  "0303"
+        },
+
+        "NASAL RELEASE" :  {
+            "IPA" :  "ⁿ",
+            "code" :  "207f"
+        },
+
+        "LATERAL RELEASE" :  {
+            "IPA" :  "ˡ",
+            "code" :  "02e1"
+        },
+
+        "NO AUDIBLE RELEASE" :  {
+            "IPA" :  " ̚",
+            "code" :  "031a"
+        },
+
+        "EJECTIVE" :   {
+            "IPA" :  "ʼ",
+            "code" :  "02bc"
+        },
+
+        "TIE BAR BELOW" :  {
+            "IPA" :  "‿",
+            "code" :  "035c"
+        },
+
+        "TIE BAR ABOVE" :  {
+            "IPA" :   " ͡ ",
+            "code" :  "0361"
+        },
+
+        "DIACRITIC VOICED GLOTTAL FRICATIVE" :  {
+            "IPA" :  "ʱ",
+            "code" :  "02b1"
+        }, 
+
+        "DIACRITIC ALVEOLAR TRILL" :  {
+            "IPA" :  "ʳ",
+            "code" :  "02b3"
+        },
+
+        "DIACRITIC ALVEOLAR APPROXIMANT" :  {
+            "IPA" :  "ʴ",
+            "code" :  "02b4"
+        },
+
+        "DIACRITIC RETROFLEX APPROXIMANT" :  {
+            "IPA" :  "ʵ",
+            "code" :  "02b5"
+        },
+
+
+        "DIACRITIC UVULAR APPROXIMANT" :  {
+            "IPA" :  "ʶ",
+            "code" :  "02b6"
+        },
+
+        "DIACRITIC GLOTTAL STOP" :  {
+            "IPA" :  "ˀ",
+            "code" :  "02c0"
+        },
+
+        "DIACRITIC RETROFLEXION" :  {
+            "IPA" : " ̢",
+            "code" :  "0322"
+        }
+
+        },
+
+
+
+"SUPRASEGMENTAL" :  
+        {
+
+        "PRIMARY STRESS" :  
+            {
+                "IPA" :  "ˈ",
+                "code" :  "02c8"
+            },
+
+        "SECONDARY STRESS" :  
+            {
+                "IPA" :  "ˌ",
+                "code" :  "02cc"
+            },
+
+        "LONG" :  
+            {
+                "IPA" :  "ː",
+                "code" :  "02d0"
+            },
+
+        "HALF LONG" :  
+            {
+                "IPA" :  "ˑ",
+                "code" :  "02d1"
+            },
+
+        "EXTRA SHORT" :  
+            {
+                "IPA" :  "˘",
+                "code" :  "02d8"
+            },
+
+        "SYLLABLE BREAK" :  
+            {
+                "IPA" :  ".",
+                "code" :  "002e"
+            },
+
+        "MINOR GROUP" :  
+            {
+                "IPA" :  "|",
+                "code" :  "007c"
+            },
+
+        "MAJOR GROUP" : 
+            {
+                "IPA" :  "‖",
+                "code" :  "2016"
+            },
+
+        "LINKING" :  
+            {
+                "IPA" :  "͜",
+                "code" :  "203f"
+            }
+
+
+        },
+
+
+"TONE-ACCENT" :  
+        {
+            "EXTRA HIGH LEVEL TONE" :  
+                {
+                "IPA" :  " ̋",
+                "code" :  "030b"
+                },
+
+            "HIGH LEVEL TONE" :  
+                {
+                "IPA" :  " ́",
+                "code" :  "0301"
+                },
+
+            "MID LEVEL TONE" : 
+                {
+                "IPA" :  " ̄",
+                "code" :  "0304"
+                },
+
+            "LOW LEVEL TONE" :  
+                {
+                "IPA" :  " ̀",
+                "code" :  "0300"
+            },
+
+            "EXTRA LOW LEVEL TONE" :  
+                {
+                "IPA" :  " ̏",
+                "code" :  "030f"
+                },
+
+            "COMBINING MACRON BELOW" :  
+                {
+                "IPA" :  " ̱",
+                "code" :  "0331"
+                }
+
+        }
+
+}
