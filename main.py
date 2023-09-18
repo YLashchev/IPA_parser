@@ -7,7 +7,7 @@ from ipa_classes import IPA_CHAR, IPAString
 json_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data', 'IPA_Table.json')
 IPA_CHAR.load_data(json_path)
 
-
+#test
 
 # Example usage
 IPAString.add_custom_char('ai', 'VOWEL')
