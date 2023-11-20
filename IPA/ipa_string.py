@@ -5,9 +5,11 @@ import re
 
 
 class IPAString:
-    def __init__(self, string):
+    def __init__(self, string, geminate=True):
         self.string = string.strip()
-        self.segments = self._maximal_munch(self.string)
+        self.geminate = geminate
+        processed_string = self.process_string()
+        self.segments = self.segments = self._maximal_munch(processed_string)
         self._validate_string()
 
     @property
@@ -34,13 +36,13 @@ class IPAString:
         syllable_break = "."  # IPA symbol for syllable break
         return self.string.split(syllable_break)
 
-    @property
-    def stress(self):
-        return [("STRESSED" if self.is_stressed(syllable) else "UNSTRESSED") for syllable in self.syllables]
-
+    
     @property
     def coda(self):
         ultimate = self.syllables[-1][-1]  # Get the last character of the last syllable.
+
+        # If the length of the last syllable is 1, set penultimate to None
+        penultimate = self.syllables[-1][-2] if len(self.syllables[-1]) > 1 else None
 
         if IPA_CHAR.is_valid_char(ultimate):
             phone_type = IPA_CHAR.category(ultimate)
@@ -52,17 +54,31 @@ class IPAString:
 
         if phone_type == 'CONSONANT':
             return 1
-        return 0
+        elif phone_type == 'PAUSE':
+            # Only check penultimate if it's not None
+            return 'OP' if penultimate and penultimate == 'O' else 'SP'
+        else:
+            return 0
+    
 
-    def is_stressed(self, syllable):
+    #def remove_diacritics(self):
+        
+
+    def stress(self):
+        syllable = self.string
         stress = "ˈ"  # IPA symbol for primary stress
         secondary_stress = "ˌ"  # IPA symbol for secondary stress
-        return stress in syllable or secondary_stress in syllable
+        if stress in syllable:
+            return "STRESSED"
+        elif secondary_stress in syllable:
+            return "STRESSED_2"
+        else:
+            return "UNSTRESSED"
 
-    def process_string(self, geminate=True):
+    def process_string(self):
         processed_string = self.string
 
-        if geminate:
+        if self.geminate:
             def replace_geminate_if_consonant(match):
                 char = match.group(1)
                 if IPA_CHAR.category(char) == "CONSONANT":
@@ -72,8 +88,8 @@ class IPAString:
 
         return processed_string
 
-    def total_length(self, geminate=True):
-        processed_str = self.process_string(geminate=geminate)
+    def total_length(self):
+        processed_str = self.process_string()
         self.segments = self._maximal_munch(processed_str)
 
         total = 0
@@ -114,4 +130,22 @@ class IPAString:
             raise ValidationError("INVALID_SEGMENT", segment=", ".join(invalid_segments), string=self.string)
 
         
+    def char_only(self):
+        categories_to_remove = {'DIACRITIC', 'SUPRASEGMENTAL', 'TONE-ACCENT'}
         
+        def is_valid_and_retainable(segment):
+            if IPA_CHAR.is_valid_char(segment):
+                return IPA_CHAR.category(segment) not in categories_to_remove
+            elif CustomCharacter.is_valid_char(segment):
+                return True
+            raise ValidationError("INVALID_SEGMENT", segment=segment, string=self.string)
+            
+        cleaned_string = ''.join(segment for segment in self.segments if is_valid_and_retainable(segment))
+        
+        self.string = cleaned_string
+        self.segments = self._maximal_munch(cleaned_string)
+
+        return cleaned_string  # returning the cleaned string
+
+
+

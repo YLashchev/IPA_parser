@@ -8,7 +8,7 @@ class IPA_CHAR:
 
     ranking_dictionary = {
         'AFFRICATE': 1, 'DIPHTONG': 1, 'CONSONANT': 1,
-        'VOWEL': 1, 'DIACRITIC': 0, 'SUPRASEGMENTAL': 0, 'TONE-ACCENT': 0
+        'VOWEL': 1, 'DIACRITIC': 0, 'SUPRASEGMENTAL': 0, 'TONE-ACCENT': 0, 'PAUSE': 0
     }
 
     @classmethod
@@ -16,13 +16,18 @@ class IPA_CHAR:
         char = char.strip()
         if not char:
             raise ValidationError("EMPTY_INPUT_CHARACTER")
-        
-        char_code = format(ord(char), '04x')
+
+        # Handle multi-codepoint characters
+        char_codes = [format(ord(c), '04x') for c in char]
+        char_code = ''.join(char_codes)
+
         for category, symbols in cls._data.items():
             for name, value in symbols.items():
                 if value["code"] == char_code:
                     return category, name, value["code"]
+
         raise ValidationError("SYMBOL_NOT_FOUND", char=char)
+
 
     @classmethod
     def rank(cls, char):
@@ -75,3 +80,4 @@ class CustomCharacter:
     @classmethod
     def is_valid_char(cls, char):
         return char in cls._custom_chars
+    

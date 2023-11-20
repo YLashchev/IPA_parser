@@ -1,5 +1,6 @@
 {
 
+
 "CONSONANT" :  
         { 
             "VOICELESS BILABIAL PLOSIVE" : 
@@ -83,6 +84,11 @@
             {
                 "IPA" :  "ʔ",
                 "code" : "0294"
+            },
+            "GLOTTAL PLOSIVE 2" :
+            {
+                "IPA" :  "Ɂ",
+                "code" : "0241"
             },
 
             "VOICELESS BILABIAL NASAL" :
@@ -531,11 +537,13 @@
             "code" :  "02a5"
         },
 
-        "SMALL LETTER S" : 
-        {
-            "IPA" :  "ˢ",
-            "code" :  "02e2"
-        }
+
+        "CAPITAL C":
+
+            {
+                "IPA" :  "C",
+                "code" :  "0043"
+            }
 
 
         },
@@ -544,7 +552,30 @@
 
 
 "VOWEL" : 
-     {
+    {
+     "SMALL A WITH ACUTE" : 
+        {
+            "IPA" :  "á",
+            "code" :  "00e1"
+        },
+
+        "SMALL I WITH ACUTE" : 
+        {
+            "IPA" :  "í",
+            "code" :  "00ed"
+        },
+
+        "SMALL O WITH ACUTE" : 
+        {
+            "IPA" :  "ó",
+            "code" :  "00f3"
+        },
+
+        "SMALL I WITH TILDE" : 
+        {
+            "IPA" :  "ĩ",
+            "code" :  "0129"
+        },
 
         "CLOSE FRONT UNROUNDED VOWEL" :  
         {
@@ -706,7 +737,16 @@
         "R-COLOROURED VOWEL" :  {
             "IPA" :  "ɝ",
             "code" :  "025d"
-        }
+        },
+
+        "CAPITAL V":
+
+            {
+                "IPA" :  "V",
+                "code" :  "0056"
+            }
+            
+        
 
             },
 
@@ -922,6 +962,12 @@
         "DIACRITIC RETROFLEXION" :  {
             "IPA" : " ̢",
             "code" :  "0322"
+        },
+
+        "SMALL LETTER S" : 
+        {
+            "IPA" :  "ˢ",
+            "code" :  "02e2"
         }
 
         },
@@ -1027,6 +1073,29 @@
                 "code" :  "0331"
                 }
 
-        }
+        },
 
-}
+        "PAUSE":
+        {
+            "PAUSE CHAR 1":
+            {
+                "IPA" :  "O",
+                "code" :  "004f"
+            },
+            "PAUSE CHAR 2":
+            {
+                "IPA" :  "S",
+                "code" :  "0053"
+            },
+
+            "PAUSE CHAR 3":
+            {
+                "IPA" :  "P",
+                "code" :  "0050"
+            }
+            
+
+
+         }
+    
+        }
