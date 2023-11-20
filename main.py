@@ -22,7 +22,12 @@ CustomCharacter.add_char('ɛ́i', 'VOWEL',rank=1)
 
 #df = pd.read_excel('/Users/yanlashchev/Desktop/IPA_parser/british_english.xlsx', engine='openpyxl')
 #df = pd.read_excel('/Users/yanlashchev/Desktop/IPA_parser/230512_Japanese_Lily (6).xlsx', engine='openpyxl')
-df = pd.read_excel('/Users/yanlashchev/Desktop/IPA_parser/Sheets/230602_Northern Tepehuan_Lily (5).xlsx', engine='openpyxl')
+
+# Prompt the user to enter the file path
+file_path = input("Enter the path to your Excel file: ")
+
+# Read the Excel file using the provided path
+df = pd.read_excel(file_path, engine='openpyxl')
 new_columns = ['Filename', 'Sentence', 'Word', 'Phoneme', 'Begin', 'End', 'Duration (ms.)']
 df.columns = new_columns 
 
@@ -582,6 +587,8 @@ def remove_pause_rows(df):
     return df_cleaned
 
 
+
+
 ######################## PRE-PROCESSING ########################
 df = insert_sp(df)
 assign_pauses(df)
@@ -601,14 +608,6 @@ repeated_word_list, word_labels, unique_word_idx = word_columns(original_word_li
 print('repeated_word_list',len(repeated_word_list))
 print('word_labels',len(word_labels))
 print('unique_word_idx',len(unique_word_idx))
-
-
-# test_word_1 = ''.join(test_word_1)
-# test_phoneme_1 = ''.join(test_phoneme)
-# test_word_1=test_word_1.strip()
-# test_phoneme_1=test_phoneme_1.strip()
-# test_word_2 = IPAString(test_word_1).char_only()
-# test_phoneme_2 = IPAString(test_phoneme_1).char_only()
 
 
 
