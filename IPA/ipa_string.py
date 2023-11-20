@@ -39,27 +39,25 @@ class IPAString:
     
     @property
     def coda(self):
-        ultimate = self.syllables[-1][-1]  # Get the last character of the last syllable.
+        last_syllable = self.syllables[-1]  # Get the last syllable
+        consonant_count = 0
 
-        # If the length of the last syllable is 1, set penultimate to None
-        penultimate = self.syllables[-1][-2] if len(self.syllables[-1]) > 1 else None
+        # Iterate backwards through the characters in the last syllable
+        for char in reversed(last_syllable):
+            if IPA_CHAR.is_valid_char(char):
+                phone_type = IPA_CHAR.category(char)
+            elif CustomCharacter.is_valid_char(char):
+                phone_type = CustomCharacter.get_char(char)['category']
+            else:
+                print(f"Undefined segment: {char}")
+                break
 
-        if IPA_CHAR.is_valid_char(ultimate):
-            phone_type = IPA_CHAR.category(ultimate)
-        elif CustomCharacter.is_valid_char(ultimate):
-            phone_type = CustomCharacter.get_char(ultimate)['category']
-        else:
-            print(f"Undefined segment: {ultimate}")
-            return None
+            if phone_type == 'CONSONANT':
+                consonant_count += 1
+            else:
+                break  # Stop counting when a non-consonant is encountered
 
-        if phone_type == 'CONSONANT':
-            return 1
-        elif phone_type == 'PAUSE':
-            # Only check penultimate if it's not None
-            return 'OP' if penultimate and penultimate == 'O' else 'SP'
-        else:
-            return 0
-    
+        return consonant_count
 
     #def remove_diacritics(self):
         
