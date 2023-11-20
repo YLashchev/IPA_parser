@@ -54,8 +54,12 @@ class IPAString:
 
             if phone_type == 'CONSONANT':
                 consonant_count += 1
+            elif phone_type == 'PAUSE':
+                # If a pause is found, return a special value or handle it as needed
+                return 'OP' if consonant_count == 0 and char == 'O' else 'SP'
             else:
-                break  # Stop counting when a non-consonant is encountered
+                # Stop counting when a non-consonant and non-pause is encountered
+                break
 
         return consonant_count
 
