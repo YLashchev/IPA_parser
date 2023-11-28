@@ -1,6 +1,17 @@
 from IPA import CustomCharacter, IPAString
 import pandas as pd
 
+file_path = input("Enter the path to your Excel file: ")
+
+# Read the Excel file using the provided path
+df = pd.read_excel(file_path, engine='openpyxl')
+#df = pd.read_excel('/Users/yanlashchev/Desktop/IPA_parser/british_english.xlsx', engine='openpyxl')
+#df = pd.read_excel('/Users/yanlashchev/Desktop/IPA_parser/230512_Japanese_Lily (6).xlsx', engine='openpyxl')
+
+
+new_columns = ['Filename', 'Sentence', 'Word', 'Phoneme', 'Begin', 'End', 'Duration (ms.)']
+df.columns = new_columns
+
 
 GEMINATE = True 
 CustomCharacter.clear_all_chars()
@@ -17,19 +28,6 @@ CustomCharacter.add_char('ió', 'VOWEL',rank=1)
 CustomCharacter.add_char('oi', 'VOWEL',rank=1)
 CustomCharacter.add_char('ɛ́i', 'VOWEL',rank=1)
 
-
-
-
-#df = pd.read_excel('/Users/yanlashchev/Desktop/IPA_parser/british_english.xlsx', engine='openpyxl')
-#df = pd.read_excel('/Users/yanlashchev/Desktop/IPA_parser/230512_Japanese_Lily (6).xlsx', engine='openpyxl')
-
-# Prompt the user to enter the file path
-file_path = input("Enter the path to your Excel file: ")
-
-# Read the Excel file using the provided path
-df = pd.read_excel(file_path, engine='openpyxl')
-new_columns = ['Filename', 'Sentence', 'Word', 'Phoneme', 'Begin', 'End', 'Duration (ms.)']
-df.columns = new_columns 
 
 
 def insert_sp(df):
