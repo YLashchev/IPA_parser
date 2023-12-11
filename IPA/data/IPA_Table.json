@@ -1012,6 +1012,12 @@
                 "IPA" :  ".",
                 "code" :  "002e"
             },
+        "GEMINATE MARK":
+          {
+            "IPA": "'",
+            "code": "0027"
+
+          },
 
         "MINOR GROUP" :  
             {
