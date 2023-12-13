@@ -8,9 +8,12 @@ Parses UTF-8/ASCII character strings phonologically not character-wise based on 
 
 
 ```python
-unicode_string = 'bə.ˈnæ.nə'
-ipa_parsed = IPAString(unicode_string)
+word = 'bə.ˈnæ.nə'
+phoneme_string = IPAString(unicode_string)
 
-print(len(unicode_string)) #9
-print(ipa_parsed.total_length()) #6 
+print(len(word)) 
+print(phoneme_string.total_length()) 
 ```
+`9` (Counting every Unicode character)
+
+`6` (Counting characters that only contribute to the length phonologically)
