@@ -14,6 +14,6 @@ phoneme_string = IPAString(unicode_string)
 print(len(word)) 
 print(phoneme_string.total_length()) 
 ```
-`9` (Counting every Unicode character)
-
-`6` (Counting characters that only contribute to the length phonologically)
+  `9` (Counting every Unicode character)
+  
+  `6` (Counting characters that only contribute to the length phonologically)
