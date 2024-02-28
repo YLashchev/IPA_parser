@@ -1,0 +1,9 @@
+GEMINATE = False
+
+CustomCharacter.clear_all_chars()
+CustomCharacter.add_char('t͡s', 'CONSONANT',rank=1)
+CustomCharacter.add_char('t͡s’', 'CONSONANT',rank=1)
+CustomCharacter.add_char('t͡ʃ’', 'CONSONANT',rank=1)
+CustomCharacter.add_char('t͡ʃ', 'CONSONANT',rank=1)
+CustomCharacter.add_char('q’', 'CONSONANT',rank=1)
+
