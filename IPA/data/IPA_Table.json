@@ -970,6 +970,11 @@
             "code" :  "02e2"
         }
 
+        "NO AUDIBLE RELEASE" :
+                {
+                "IPA" : "˺",
+                "code" : "02FA"
+                }
         },
 
 
