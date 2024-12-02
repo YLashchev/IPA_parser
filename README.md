@@ -30,7 +30,7 @@ Calculate various linguistic metrics, including:
 
 ```python
 word = 'bə.ˈnæ.nə'
-phoneme_string = IPAString(unicode_string)
+phoneme_string = IPAString(word)
 ```
 ### Phonological Length
 ```
