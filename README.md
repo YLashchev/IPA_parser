@@ -68,8 +68,7 @@ MID CENTRAL VOWEL`
 ```
 GEMINATE = False 
 CustomCharacter.clear_all_chars()
-CustomCharacter.add_char('t͡s', 'CONSONANT', rank=1)
-CustomCharacter.add_char('d͡ʒ', 'CONSONANT', rank=1)
+CustomCharacter.add_char('oʊ', 'VOWEL', rank=1)
 ```
 
 ### Example 
