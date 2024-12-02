@@ -7,6 +7,24 @@ Created for easier analysis of PRAAT TextGrids.
 Parses UTF-8/ASCII character strings phonologically not character-wise based on JSON dictionary covering up-to-date IPA symbols.
 
 
+### Features
+Parse IPA strings into individual phonemes
+Identify and categorize linguistic features 
+  - consonants/vowels
+  - diacritics
+  - stress
+  - Coda Complexity
+  - Lengths (word, syllable)
+Convert IPA transcriptions to simplified phonetic representations
+Support for multiple languages and dialects with custom methods.
+
+### Uses
+Analyze syllable structure and stress patterns
+Calculate various linguistic metrics, including:
+Word and syllable durations
+Sentence-level phoneme and syllable counts
+Inter-stress intervals
+
 ```python
 word = 'bə.ˈnæ.nə'
 phoneme_string = IPAString(unicode_string)
