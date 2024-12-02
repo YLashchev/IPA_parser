@@ -1,10 +1,10 @@
 # IPA_parser
 UTF-8 Unicode Parser
 
-Created for easier analysis of PRAAT TextGrids.
+Created for easier analysis of PRAAT TextGrids for Rhythm Typology Research. 
 
 
-Parses UTF-8/ASCII character strings phonologically not character-wise based on JSON dictionary covering up-to-date IPA symbols.
+Parses UTF-8/ASCII character strings phonetically, not character-wise, based on JSON dictionary covering up-to-date IPA symbols.
 
 
 ### Features
@@ -15,15 +15,18 @@ Identify and categorize linguistic features
   - stress
   - Coda Complexity
   - Lengths (word, syllable)
-Convert IPA transcriptions to simplified phonetic representations
+    
+Convert IPA transcriptions to simplified phonetic representations.
+
 Support for multiple languages and dialects with custom methods.
 
 ### Uses
 Analyze syllable structure and stress patterns
+
 Calculate various linguistic metrics, including:
-Word and syllable durations
-Sentence-level phoneme and syllable counts
-Inter-stress intervals
+- Word and syllable durations
+- Sentence-level phoneme and syllable counts
+- Stress/Inter-stress intervals
 
 ```python
 word = 'bə.ˈnæ.nə'
@@ -59,4 +62,23 @@ NEAR-OPEN FRONT UNROUNDED VOWEL,
 SYLLABLE BREAK,
 VOICELESS DENTAL/ALVEOLAR NASAL,
 MID CENTRAL VOWEL`
+
+
+### Configure language-specific settings
+```
+GEMINATE = False 
+CustomCharacter.clear_all_chars()
+CustomCharacter.add_char('t͡s', 'CONSONANT', rank=1)
+CustomCharacter.add_char('d͡ʒ', 'CONSONANT', rank=1)
+```
+
+### Example 
+```
+word = "həˈloʊ"  #hello
+result = IPAString("həˈloʊ")
+
+print(result.phonemes)  # ['h', 'ə', 'l', 'oʊ']
+print(result.syllables)  # ['hə', 'loʊ']
+print(result.stress)  # [False, True]
+```
 
