@@ -43,21 +43,27 @@ class IPAString:
         last_syllable = self.syllables[-1]
         consonant_count = 0
         
-        # First normalize the diacritics
-        normalized_syllable = unicodedata.normalize('NFD', last_syllable)
-        base_chars = []
+        # Convert string to list of characters to handle combining marks
+        chars = []
+        current_char = ''
         
-        # Separate base characters from diacritics
-        for char in normalized_syllable:
+        # Group base character with its diacritics
+        for char in last_syllable:
             if not unicodedata.combining(char):
-                base_chars.append(char)
+                if current_char:
+                    chars.append(current_char)
+                current_char = char
+            else:
+                current_char += char
+        if current_char:
+            chars.append(current_char)
         
-        # Now process the base characters in reverse
-        for char in reversed(base_chars):
-            if IPA_CHAR.is_valid_char(char):
-                phone_type = IPA_CHAR.category(char)
-            elif CustomCharacter.is_valid_char(char):
-                phone_type = CustomCharacter.get_char(char)['category']
+        # Process characters in reverse
+        for char in reversed(chars):
+            if IPA_CHAR.is_valid_char(char[0]):  # Check base character
+                phone_type = IPA_CHAR.category(char[0])
+            elif CustomCharacter.is_valid_char(char[0]):
+                phone_type = CustomCharacter.get_char(char[0])['category']
             else:
                 print(f"Undefined segment: {char}")
                 break
@@ -65,7 +71,7 @@ class IPAString:
             if phone_type == 'CONSONANT':
                 consonant_count += 1
             elif phone_type == 'PAUSE':
-                return 'OP' if consonant_count == 0 and char == 'O' else 'SP'
+                return 'OP' if consonant_count == 0 and char[0] == 'O' else 'SP'
             else:
                 break
                 
