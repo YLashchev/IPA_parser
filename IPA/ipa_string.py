@@ -2,6 +2,7 @@
 from .ipa_char import IPA_CHAR, CustomCharacter
 from .debug import ValidationError
 import re
+import unicodedata
 
 
 class IPAString:
