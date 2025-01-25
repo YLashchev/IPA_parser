@@ -40,11 +40,20 @@ class IPAString:
     
     @property
     def coda(self):
-        last_syllable = self.syllables[-1]  # Get the last syllable
+        last_syllable = self.syllables[-1]
         consonant_count = 0
-
-        # Iterate backwards through the characters in the last syllable
-        for char in reversed(last_syllable):
+        
+        # First normalize the diacritics
+        normalized_syllable = unicodedata.normalize('NFD', last_syllable)
+        base_chars = []
+        
+        # Separate base characters from diacritics
+        for char in normalized_syllable:
+            if not unicodedata.combining(char):
+                base_chars.append(char)
+        
+        # Now process the base characters in reverse
+        for char in reversed(base_chars):
             if IPA_CHAR.is_valid_char(char):
                 phone_type = IPA_CHAR.category(char)
             elif CustomCharacter.is_valid_char(char):
@@ -52,16 +61,14 @@ class IPAString:
             else:
                 print(f"Undefined segment: {char}")
                 break
-
+    
             if phone_type == 'CONSONANT':
                 consonant_count += 1
             elif phone_type == 'PAUSE':
-                # If a pause is found, return a special value or handle it as needed
                 return 'OP' if consonant_count == 0 and char == 'O' else 'SP'
             else:
-                # Stop counting when a non-consonant and non-pause is encountered
                 break
-
+                
         return consonant_count
 
     #def remove_diacritics(self):
