@@ -47,27 +47,28 @@ class IPAString:
         temp_ipa = IPAString(last_syllable, geminate=self.geminate)
         # Apply char_only to clean the syllable
         temp_ipa.char_only()
-        # Get the cleaned syllable
-        cleaned_syllable = temp_ipa.string
+        # Get the cleaned segments instead of string
+        cleaned_segments = temp_ipa.segments
         
-        # Now process the cleaned syllable
-        for char in reversed(cleaned_syllable):
-            if IPA_CHAR.is_valid_char(char):
-                phone_type = IPA_CHAR.category(char)
-            elif CustomCharacter.is_valid_char(char):
-                phone_type = CustomCharacter.get_char(char)['category']
+        # Now process the cleaned segments in reverse
+        for segment in reversed(cleaned_segments):
+            if IPA_CHAR.is_valid_char(segment):
+                phone_type = IPA_CHAR.category(segment)
+            elif CustomCharacter.is_valid_char(segment):
+                phone_type = CustomCharacter.get_char(segment)['category']
             else:
-                print(f"Undefined segment: {char}")
+                print(f"Undefined segment: {segment}")
                 break
     
             if phone_type == 'CONSONANT':
                 consonant_count += 1
             elif phone_type == 'PAUSE':
-                return 'OP' if consonant_count == 0 and char == 'O' else 'SP'
+                return 'OP' if consonant_count == 0 and segment == 'O' else 'SP'
             else:
                 break
                 
         return consonant_count
+    
 
 
     #def remove_diacritics(self):
