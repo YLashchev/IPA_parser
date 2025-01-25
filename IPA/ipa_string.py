@@ -43,27 +43,19 @@ class IPAString:
         last_syllable = self.syllables[-1]
         consonant_count = 0
         
-        # Convert string to list of characters to handle combining marks
-        chars = []
-        current_char = ''
+        # Create a temporary IPAString object with just the last syllable
+        temp_ipa = IPAString(last_syllable, geminate=self.geminate)
+        # Apply char_only to clean the syllable
+        temp_ipa.char_only()
+        # Get the cleaned syllable
+        cleaned_syllable = temp_ipa.string
         
-        # Group base character with its diacritics
-        for char in last_syllable:
-            if not unicodedata.combining(char):
-                if current_char:
-                    chars.append(current_char)
-                current_char = char
-            else:
-                current_char += char
-        if current_char:
-            chars.append(current_char)
-        
-        # Process characters in reverse
-        for char in reversed(chars):
-            if IPA_CHAR.is_valid_char(char[0]):  # Check base character
-                phone_type = IPA_CHAR.category(char[0])
-            elif CustomCharacter.is_valid_char(char[0]):
-                phone_type = CustomCharacter.get_char(char[0])['category']
+        # Now process the cleaned syllable
+        for char in reversed(cleaned_syllable):
+            if IPA_CHAR.is_valid_char(char):
+                phone_type = IPA_CHAR.category(char)
+            elif CustomCharacter.is_valid_char(char):
+                phone_type = CustomCharacter.get_char(char)['category']
             else:
                 print(f"Undefined segment: {char}")
                 break
@@ -71,11 +63,12 @@ class IPAString:
             if phone_type == 'CONSONANT':
                 consonant_count += 1
             elif phone_type == 'PAUSE':
-                return 'OP' if consonant_count == 0 and char[0] == 'O' else 'SP'
+                return 'OP' if consonant_count == 0 and char == 'O' else 'SP'
             else:
                 break
                 
         return consonant_count
+
 
     #def remove_diacritics(self):
         
