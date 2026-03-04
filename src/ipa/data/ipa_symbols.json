@@ -1,0 +1,1545 @@
+{
+  "consonants": {
+    "weight": 1,
+    "pulmonic": {
+      "plosive": [
+        {
+          "symbol": "p",
+          "name": "voiceless bilabial plosive",
+          "unicode": "\\u0070",
+          "hex": "0x0070",
+          "alternates": []
+        },
+        {
+          "symbol": "b",
+          "name": "voiced bilabial plosive",
+          "unicode": "\\u0062",
+          "hex": "0x0062",
+          "alternates": []
+        },
+        {
+          "symbol": "t",
+          "name": "voiceless alveolar plosive",
+          "unicode": "\\u0074",
+          "hex": "0x0074",
+          "alternates": []
+        },
+        {
+          "symbol": "d",
+          "name": "voiced alveolar plosive",
+          "unicode": "\\u0064",
+          "hex": "0x0064",
+          "alternates": []
+        },
+        {
+          "symbol": "ʈ",
+          "name": "voiceless retroflex plosive",
+          "unicode": "\\u0288",
+          "hex": "0x0288",
+          "alternates": []
+        },
+        {
+          "symbol": "ɖ",
+          "name": "voiced retroflex plosive",
+          "unicode": "\\u0256",
+          "hex": "0x0256",
+          "alternates": []
+        },
+        {
+          "symbol": "c",
+          "name": "voiceless palatal plosive",
+          "unicode": "\\u0063",
+          "hex": "0x0063",
+          "alternates": []
+        },
+        {
+          "symbol": "ɟ",
+          "name": "voiced palatal plosive",
+          "unicode": "\\u025f",
+          "hex": "0x025F",
+          "alternates": []
+        },
+        {
+          "symbol": "k",
+          "name": "voiceless velar plosive",
+          "unicode": "\\u006b",
+          "hex": "0x006B",
+          "alternates": []
+        },
+        {
+          "symbol": "g",
+          "name": "voiced velar plosive",
+          "unicode": "\\u0067",
+          "hex": "0x0067",
+          "alternates": [
+            "ɡ"
+          ]
+        },
+        {
+          "symbol": "q",
+          "name": "voiceless uvular plosive",
+          "unicode": "\\u0071",
+          "hex": "0x0071",
+          "alternates": []
+        },
+        {
+          "symbol": "ɢ",
+          "name": "voiced uvular plosive",
+          "unicode": "\\u0262",
+          "hex": "0x0262",
+          "alternates": []
+        },
+        {
+          "symbol": "ʔ",
+          "name": "glottal stop",
+          "unicode": "\\u0294",
+          "hex": "0x0294",
+          "alternates": []
+        }
+      ],
+      "nasal": [
+        {
+          "symbol": "m",
+          "name": "bilabial nasal",
+          "unicode": "\\u006d",
+          "hex": "0x006D",
+          "alternates": []
+        },
+        {
+          "symbol": "ɱ",
+          "name": "labiodental nasal",
+          "unicode": "\\u0271",
+          "hex": "0x0271",
+          "alternates": []
+        },
+        {
+          "symbol": "n",
+          "name": "alveolar nasal",
+          "unicode": "\\u006e",
+          "hex": "0x006E",
+          "alternates": []
+        },
+        {
+          "symbol": "ɳ",
+          "name": "retroflex nasal",
+          "unicode": "\\u0273",
+          "hex": "0x0273",
+          "alternates": []
+        },
+        {
+          "symbol": "ɲ",
+          "name": "palatal nasal",
+          "unicode": "\\u0272",
+          "hex": "0x0272",
+          "alternates": [
+            "ñ"
+          ]
+        },
+        {
+          "symbol": "ŋ",
+          "name": "velar nasal",
+          "unicode": "\\u014b",
+          "hex": "0x014B",
+          "alternates": []
+        },
+        {
+          "symbol": "ɴ",
+          "name": "uvular nasal",
+          "unicode": "\\u0274",
+          "hex": "0x0274",
+          "alternates": []
+        }
+      ],
+      "trill": [
+        {
+          "symbol": "ʙ",
+          "name": "bilabial trill",
+          "unicode": "\\u0299",
+          "hex": "0x0299",
+          "alternates": []
+        },
+        {
+          "symbol": "r",
+          "name": "alveolar trill",
+          "unicode": "\\u0072",
+          "hex": "0x0072",
+          "alternates": []
+        },
+        {
+          "symbol": "ʀ",
+          "name": "uvular trill",
+          "unicode": "\\u0280",
+          "hex": "0x0280",
+          "alternates": []
+        }
+      ],
+      "tap_or_flap": [
+        {
+          "symbol": "ⱱ",
+          "name": "labiodental flap",
+          "unicode": "\\u2c71",
+          "hex": "0x2C71",
+          "alternates": []
+        },
+        {
+          "symbol": "ɾ",
+          "name": "alveolar tap",
+          "unicode": "\\u027e",
+          "hex": "0x027E",
+          "alternates": []
+        },
+        {
+          "symbol": "ɽ",
+          "name": "retroflex flap",
+          "unicode": "\\u027d",
+          "hex": "0x027D",
+          "alternates": []
+        }
+      ],
+      "fricative": [
+        {
+          "symbol": "ɸ",
+          "name": "voiceless bilabial fricative",
+          "unicode": "\\u0278",
+          "hex": "0x0278",
+          "alternates": []
+        },
+        {
+          "symbol": "β",
+          "name": "voiced bilabial fricative",
+          "unicode": "\\u03b2",
+          "hex": "0x03B2",
+          "alternates": []
+        },
+        {
+          "symbol": "f",
+          "name": "voiceless labiodental fricative",
+          "unicode": "\\u0066",
+          "hex": "0x0066",
+          "alternates": []
+        },
+        {
+          "symbol": "v",
+          "name": "voiced labiodental fricative",
+          "unicode": "\\u0076",
+          "hex": "0x0076",
+          "alternates": []
+        },
+        {
+          "symbol": "θ",
+          "name": "voiceless dental fricative",
+          "unicode": "\\u03b8",
+          "hex": "0x03B8",
+          "alternates": []
+        },
+        {
+          "symbol": "ð",
+          "name": "voiced dental fricative",
+          "unicode": "\\u00f0",
+          "hex": "0x00F0",
+          "alternates": []
+        },
+        {
+          "symbol": "s",
+          "name": "voiceless alveolar fricative",
+          "unicode": "\\u0073",
+          "hex": "0x0073",
+          "alternates": []
+        },
+        {
+          "symbol": "z",
+          "name": "voiced alveolar fricative",
+          "unicode": "\\u007a",
+          "hex": "0x007A",
+          "alternates": []
+        },
+        {
+          "symbol": "ʃ",
+          "name": "voiceless postalveolar fricative",
+          "unicode": "\\u0283",
+          "hex": "0x0283",
+          "alternates": []
+        },
+        {
+          "symbol": "ʒ",
+          "name": "voiced postalveolar fricative",
+          "unicode": "\\u0292",
+          "hex": "0x0292",
+          "alternates": []
+        },
+        {
+          "symbol": "ʂ",
+          "name": "voiceless retroflex fricative",
+          "unicode": "\\u0282",
+          "hex": "0x0282",
+          "alternates": []
+        },
+        {
+          "symbol": "ʐ",
+          "name": "voiced retroflex fricative",
+          "unicode": "\\u0290",
+          "hex": "0x0290",
+          "alternates": []
+        },
+        {
+          "symbol": "ç",
+          "name": "voiceless palatal fricative",
+          "unicode": "\\u00e7",
+          "hex": "0x00E7",
+          "alternates": []
+        },
+        {
+          "symbol": "ʝ",
+          "name": "voiced palatal fricative",
+          "unicode": "\\u029d",
+          "hex": "0x029D",
+          "alternates": []
+        },
+        {
+          "symbol": "x",
+          "name": "voiceless velar fricative",
+          "unicode": "\\u0078",
+          "hex": "0x0078",
+          "alternates": []
+        },
+        {
+          "symbol": "ɣ",
+          "name": "voiced velar fricative",
+          "unicode": "\\u0263",
+          "hex": "0x0263",
+          "alternates": []
+        },
+        {
+          "symbol": "χ",
+          "name": "voiceless uvular fricative",
+          "unicode": "\\u03c7",
+          "hex": "0x03C7",
+          "alternates": []
+        },
+        {
+          "symbol": "ʁ",
+          "name": "voiced uvular fricative",
+          "unicode": "\\u0281",
+          "hex": "0x0281",
+          "alternates": []
+        },
+        {
+          "symbol": "ħ",
+          "name": "voiceless pharyngeal fricative",
+          "unicode": "\\u0127",
+          "hex": "0x0127",
+          "alternates": []
+        },
+        {
+          "symbol": "ʕ",
+          "name": "voiced pharyngeal fricative",
+          "unicode": "\\u0295",
+          "hex": "0x0295",
+          "alternates": []
+        },
+        {
+          "symbol": "h",
+          "name": "voiceless glottal fricative",
+          "unicode": "\\u0068",
+          "hex": "0x0068",
+          "alternates": []
+        },
+        {
+          "symbol": "ɦ",
+          "name": "voiced glottal fricative",
+          "unicode": "\\u0266",
+          "hex": "0x0266",
+          "alternates": []
+        }
+      ],
+      "lateral_fricative": [
+        {
+          "symbol": "ɬ",
+          "name": "voiceless alveolar lateral fricative",
+          "unicode": "\\u026c",
+          "hex": "0x026C",
+          "alternates": []
+        },
+        {
+          "symbol": "ɮ",
+          "name": "voiced alveolar lateral fricative",
+          "unicode": "\\u026e",
+          "hex": "0x026E",
+          "alternates": []
+        }
+      ],
+      "approximant": [
+        {
+          "symbol": "ʋ",
+          "name": "labiodental approximant",
+          "unicode": "\\u028b",
+          "hex": "0x028B",
+          "alternates": []
+        },
+        {
+          "symbol": "ɹ",
+          "name": "alveolar approximant",
+          "unicode": "\\u0279",
+          "hex": "0x0279",
+          "alternates": []
+        },
+        {
+          "symbol": "ɻ",
+          "name": "retroflex approximant",
+          "unicode": "\\u027b",
+          "hex": "0x027B",
+          "alternates": []
+        },
+        {
+          "symbol": "j",
+          "name": "palatal approximant",
+          "unicode": "\\u006a",
+          "hex": "0x006A",
+          "alternates": []
+        },
+        {
+          "symbol": "ɰ",
+          "name": "velar approximant",
+          "unicode": "\\u0270",
+          "hex": "0x0270",
+          "alternates": []
+        }
+      ],
+      "lateral_approximant": [
+        {
+          "symbol": "l",
+          "name": "alveolar lateral approximant",
+          "unicode": "\\u006c",
+          "hex": "0x006C",
+          "alternates": []
+        },
+        {
+          "symbol": "ɭ",
+          "name": "retroflex lateral approximant",
+          "unicode": "\\u026d",
+          "hex": "0x026D",
+          "alternates": []
+        },
+        {
+          "symbol": "ʎ",
+          "name": "palatal lateral approximant",
+          "unicode": "\\u028e",
+          "hex": "0x028E",
+          "alternates": []
+        },
+        {
+          "symbol": "ʟ",
+          "name": "velar lateral approximant",
+          "unicode": "\\u029f",
+          "hex": "0x029F",
+          "alternates": []
+        }
+      ]
+    },
+    "non-pulmonic": {
+      "clicks": [
+        {
+          "symbol": "ʘ",
+          "name": "bilabial click",
+          "unicode": "\\u0298",
+          "hex": "0x0298",
+          "alternates": []
+        },
+        {
+          "symbol": "ǀ",
+          "name": "dental click",
+          "unicode": "\\u01c0",
+          "hex": "0x01C0",
+          "alternates": []
+        },
+        {
+          "symbol": "ǃ",
+          "name": "alveolar click",
+          "unicode": "\\u01c3",
+          "hex": "0x01C3",
+          "alternates": [
+            "!"
+          ]
+        },
+        {
+          "symbol": "ǂ",
+          "name": "palatoalveolar click",
+          "unicode": "\\u01c2",
+          "hex": "0x01C2",
+          "alternates": []
+        },
+        {
+          "symbol": "ǁ",
+          "name": "alveolar lateral click",
+          "unicode": "\\u01c1",
+          "hex": "0x01C1",
+          "alternates": []
+        }
+      ],
+      "implosives": [
+        {
+          "symbol": "ɓ",
+          "name": "voiced bilabial implosive",
+          "unicode": "\\u0253",
+          "hex": "0x0253",
+          "alternates": []
+        },
+        {
+          "symbol": "ɗ",
+          "name": "voiced alveolar implosive",
+          "unicode": "\\u0257",
+          "hex": "0x0257",
+          "alternates": []
+        },
+        {
+          "symbol": "ʄ",
+          "name": "voiced palatal implosive",
+          "unicode": "\\u0284",
+          "hex": "0x0284",
+          "alternates": []
+        },
+        {
+          "symbol": "ɠ",
+          "name": "voiced velar implosive",
+          "unicode": "\\u0260",
+          "hex": "0x0260",
+          "alternates": []
+        },
+        {
+          "symbol": "ʛ",
+          "name": "voiced uvular implosive",
+          "unicode": "\\u029b",
+          "hex": "0x029B",
+          "alternates": []
+        }
+      ],
+      "ejectives": [
+        {
+          "symbol": "ʼ",
+          "name": "ejective",
+          "unicode": "\\u02bc",
+          "hex": "0x02BC",
+          "alternates": [
+            "'"
+          ],
+          "example": "kʼ, pʼ, tʼ, sʼ"
+        }
+      ]
+    },
+    "co-articulated": [
+      {
+        "symbol": "w",
+        "name": "voiced labial-velar approximant",
+        "unicode": "\\u0077",
+        "hex": "0x0077",
+        "alternates": []
+      },
+      {
+        "symbol": "ʍ",
+        "name": "voiceless labial-velar fricative",
+        "unicode": "\\u028d",
+        "hex": "0x028D",
+        "alternates": []
+      },
+      {
+        "symbol": "ɥ",
+        "name": "voiced labial-palatal approximant",
+        "unicode": "\\u0265",
+        "hex": "0x0265",
+        "alternates": []
+      },
+      {
+        "symbol": "ʜ",
+        "name": "voiceless epiglottal fricative",
+        "unicode": "\\u029c",
+        "hex": "0x029C",
+        "alternates": []
+      },
+      {
+        "symbol": "ʢ",
+        "name": "voiced epiglottal fricative",
+        "unicode": "\\u02a2",
+        "hex": "0x02A2",
+        "alternates": []
+      },
+      {
+        "symbol": "ʡ",
+        "name": "epiglottal plosive",
+        "unicode": "\\u02a1",
+        "hex": "0x02A1",
+        "alternates": []
+      },
+      {
+        "symbol": "ɕ",
+        "name": "voiceless alveolo-palatal fricative",
+        "unicode": "\\u0255",
+        "hex": "0x0255",
+        "alternates": []
+      },
+      {
+        "symbol": "ʑ",
+        "name": "voiced alveolo-palatal fricative",
+        "unicode": "\\u0291",
+        "hex": "0x0291",
+        "alternates": []
+      },
+      {
+        "symbol": "ɧ",
+        "name": "voiceless postalveolar-velar fricative",
+        "unicode": "\\u0267",
+        "hex": "0x0267",
+        "alternates": []
+      }
+    ]
+  },
+  "vowels": {
+    "weight": 1,
+    "close": [
+      {
+        "symbol": "i",
+        "name": "close front unrounded vowel",
+        "unicode": "\\u0069",
+        "hex": "0x0069",
+        "alternates": []
+      },
+      {
+        "symbol": "y",
+        "name": "close front rounded vowel",
+        "unicode": "\\u0079",
+        "hex": "0x0079",
+        "alternates": []
+      },
+      {
+        "symbol": "ɨ",
+        "name": "close central unrounded vowel",
+        "unicode": "\\u0268",
+        "hex": "0x0268",
+        "alternates": []
+      },
+      {
+        "symbol": "ʉ",
+        "name": "close central rounded vowel",
+        "unicode": "\\u0289",
+        "hex": "0x0289",
+        "alternates": []
+      },
+      {
+        "symbol": "ɯ",
+        "name": "close back unrounded vowel",
+        "unicode": "\\u026f",
+        "hex": "0x026F",
+        "alternates": []
+      },
+      {
+        "symbol": "u",
+        "name": "close back rounded vowel",
+        "unicode": "\\u0075",
+        "hex": "0x0075",
+        "alternates": []
+      }
+    ],
+    "near_close": [
+      {
+        "symbol": "ɪ",
+        "name": "near-close near-front unrounded vowel",
+        "unicode": "\\u026a",
+        "hex": "0x026A",
+        "alternates": []
+      },
+      {
+        "symbol": "ʏ",
+        "name": "near-close near-front rounded vowel",
+        "unicode": "\\u028f",
+        "hex": "0x028F",
+        "alternates": []
+      },
+      {
+        "symbol": "ʊ",
+        "name": "near-close near-back rounded vowel",
+        "unicode": "\\u028a",
+        "hex": "0x028A",
+        "alternates": []
+      }
+    ],
+    "close_mid": [
+      {
+        "symbol": "e",
+        "name": "close-mid front unrounded vowel",
+        "unicode": "\\u0065",
+        "hex": "0x0065",
+        "alternates": []
+      },
+      {
+        "symbol": "ø",
+        "name": "close-mid front rounded vowel",
+        "unicode": "\\u00f8",
+        "hex": "0x00F8",
+        "alternates": [
+          "ö"
+        ]
+      },
+      {
+        "symbol": "ɘ",
+        "name": "close-mid central unrounded vowel",
+        "unicode": "\\u0258",
+        "hex": "0x0258",
+        "alternates": []
+      },
+      {
+        "symbol": "ɵ",
+        "name": "close-mid central rounded vowel",
+        "unicode": "\\u0275",
+        "hex": "0x0275",
+        "alternates": []
+      },
+      {
+        "symbol": "ɤ",
+        "name": "close-mid back unrounded vowel",
+        "unicode": "\\u0264",
+        "hex": "0x0264",
+        "alternates": []
+      },
+      {
+        "symbol": "o",
+        "name": "close-mid back rounded vowel",
+        "unicode": "\\u006f",
+        "hex": "0x006F",
+        "alternates": []
+      }
+    ],
+    "mid": [
+      {
+        "symbol": "ə",
+        "name": "mid central vowel (schwa)",
+        "unicode": "\\u0259",
+        "hex": "0x0259",
+        "alternates": []
+      },
+      {
+        "symbol": "ɚ",
+        "name": "r-colored mid central vowel (r-colored schwa)",
+        "unicode": "\\u025a",
+        "hex": "0x025A",
+        "alternates": [
+          "ə˞"
+        ],
+        "description": "Can be represented as ə + rhoticity diacritic (˞)"
+      }
+    ],
+    "open_mid": [
+      {
+        "symbol": "ɛ",
+        "name": "open-mid front unrounded vowel",
+        "unicode": "\\u025b",
+        "hex": "0x025B",
+        "alternates": []
+      },
+      {
+        "symbol": "œ",
+        "name": "open-mid front rounded vowel",
+        "unicode": "\\u0153",
+        "hex": "0x0153",
+        "alternates": []
+      },
+      {
+        "symbol": "ɜ",
+        "name": "open-mid central unrounded vowel",
+        "unicode": "\\u025c",
+        "hex": "0x025C",
+        "alternates": []
+      },
+      {
+        "symbol": "ɝ",
+        "name": "r-colored open-mid central unrounded vowel",
+        "unicode": "\\u025d",
+        "hex": "0x025D",
+        "alternates": [
+          "ɜ˞"
+        ],
+        "description": "Can be represented as ɜ + rhoticity diacritic (˞)"
+      },
+      {
+        "symbol": "ɞ",
+        "name": "open-mid central rounded vowel",
+        "unicode": "\\u025e",
+        "hex": "0x025E",
+        "alternates": []
+      },
+      {
+        "symbol": "ʌ",
+        "name": "open-mid back unrounded vowel",
+        "unicode": "\\u028c",
+        "hex": "0x028C",
+        "alternates": []
+      },
+      {
+        "symbol": "ɔ",
+        "name": "open-mid back rounded vowel",
+        "unicode": "\\u0254",
+        "hex": "0x0254",
+        "alternates": []
+      }
+    ],
+    "near_open": [
+      {
+        "symbol": "æ",
+        "name": "near-open front unrounded vowel",
+        "unicode": "\\u00e6",
+        "hex": "0x00E6",
+        "alternates": []
+      },
+      {
+        "symbol": "ɐ",
+        "name": "near-open central vowel",
+        "unicode": "\\u0250",
+        "hex": "0x0250",
+        "alternates": []
+      }
+    ],
+    "open": [
+      {
+        "symbol": "a",
+        "name": "open front unrounded vowel",
+        "unicode": "\\u0061",
+        "hex": "0x0061",
+        "alternates": []
+      },
+      {
+        "symbol": "ɶ",
+        "name": "open front rounded vowel",
+        "unicode": "\\u0276",
+        "hex": "0x0276",
+        "alternates": []
+      },
+      {
+        "symbol": "ɑ",
+        "name": "open back unrounded vowel",
+        "unicode": "\\u0251",
+        "hex": "0x0251",
+        "alternates": []
+      },
+      {
+        "symbol": "ɒ",
+        "name": "open back rounded vowel",
+        "unicode": "\\u0252",
+        "hex": "0x0252",
+        "alternates": []
+      }
+    ]
+  },
+  "diacritics": {
+    "weight": 0,
+    "symbols": [
+      {
+        "symbol": "̥",
+        "name": "voiceless",
+        "unicode": "\\u0325",
+        "hex": "0x0325",
+        "alternates": [
+          "̊"
+        ],
+        "example": "n̥, d̥"
+      },
+      {
+        "symbol": "̬",
+        "name": "voiced",
+        "unicode": "\\u032c",
+        "hex": "0x032C",
+        "alternates": [],
+        "example": "s̬, t̬"
+      },
+      {
+        "symbol": "ʰ",
+        "name": "aspirated",
+        "unicode": "\\u02b0",
+        "hex": "0x02B0",
+        "alternates": [],
+        "example": "tʰ, pʰ"
+      },
+      {
+        "symbol": "̹",
+        "name": "more rounded",
+        "unicode": "\\u0339",
+        "hex": "0x0339",
+        "alternates": [],
+        "example": "ɔ̹"
+      },
+      {
+        "symbol": "̜",
+        "name": "less rounded",
+        "unicode": "\\u031c",
+        "hex": "0x031C",
+        "alternates": [],
+        "example": "ɔ̜"
+      },
+      {
+        "symbol": "̟",
+        "name": "advanced",
+        "unicode": "\\u031f",
+        "hex": "0x031F",
+        "alternates": [],
+        "example": "u̟"
+      },
+      {
+        "symbol": "̠",
+        "name": "retracted",
+        "unicode": "\\u0320",
+        "hex": "0x0320",
+        "alternates": [],
+        "example": "i̠"
+      },
+      {
+        "symbol": "̈",
+        "name": "centralized",
+        "unicode": "\\u0308",
+        "hex": "0x0308",
+        "alternates": [],
+        "example": "ü, ö"
+      },
+      {
+        "symbol": "̽",
+        "name": "mid-centralized",
+        "unicode": "\\u033d",
+        "hex": "0x033D",
+        "alternates": [],
+        "example": "e̽"
+      },
+      {
+        "symbol": "̩",
+        "name": "syllabic",
+        "unicode": "\\u0329",
+        "hex": "0x0329",
+        "alternates": [],
+        "example": "n̩, l̩"
+      },
+      {
+        "symbol": "̯",
+        "name": "non-syllabic",
+        "unicode": "\\u032f",
+        "hex": "0x032F",
+        "alternates": [],
+        "example": "e̯"
+      },
+      {
+        "symbol": "˞",
+        "name": "rhoticity",
+        "unicode": "\\u02de",
+        "hex": "0x02DE",
+        "alternates": [],
+        "example": "ə˞, ɜ˞",
+        "description": "Used to create r-colored vowels. Dedicated code points also exist: ɚ (0x025A), ɝ (0x025D)"
+      },
+      {
+        "symbol": "̤",
+        "name": "breathy voiced",
+        "unicode": "\\u0324",
+        "hex": "0x0324",
+        "alternates": [],
+        "example": "b̤, a̤"
+      },
+      {
+        "symbol": "̰",
+        "name": "creaky voiced",
+        "unicode": "\\u0330",
+        "hex": "0x0330",
+        "alternates": [],
+        "example": "b̰, a̰"
+      },
+      {
+        "symbol": "̼",
+        "name": "linguolabial",
+        "unicode": "\\u033c",
+        "hex": "0x033C",
+        "alternates": [],
+        "example": "t̼, d̼"
+      },
+      {
+        "symbol": "̪",
+        "name": "dental",
+        "unicode": "\\u032a",
+        "hex": "0x032A",
+        "alternates": [],
+        "example": "t̪, d̪"
+      },
+      {
+        "symbol": "̺",
+        "name": "apical",
+        "unicode": "\\u033a",
+        "hex": "0x033A",
+        "alternates": [],
+        "example": "t̺, d̺"
+      },
+      {
+        "symbol": "̻",
+        "name": "laminal",
+        "unicode": "\\u033b",
+        "hex": "0x033B",
+        "alternates": [],
+        "example": "t̻, d̻"
+      },
+      {
+        "symbol": "̚",
+        "name": "no audible release",
+        "unicode": "\\u031a",
+        "hex": "0x031A",
+        "alternates": [],
+        "example": "p̚, t̚, k̚"
+      },
+      {
+        "symbol": "ʷ",
+        "name": "labialized",
+        "unicode": "\\u02b7",
+        "hex": "0x02B7",
+        "alternates": [],
+        "example": "tʷ, dʷ"
+      },
+      {
+        "symbol": "ʲ",
+        "name": "palatalized",
+        "unicode": "\\u02b2",
+        "hex": "0x02B2",
+        "alternates": [],
+        "example": "tʲ, dʲ"
+      },
+      {
+        "symbol": "ˠ",
+        "name": "velarized",
+        "unicode": "\\u02e0",
+        "hex": "0x02E0",
+        "alternates": [],
+        "example": "tˠ, dˠ"
+      },
+      {
+        "symbol": "ˤ",
+        "name": "pharyngealized",
+        "unicode": "\\u02e4",
+        "hex": "0x02E4",
+        "alternates": [],
+        "example": "tˤ, dˤ"
+      },
+      {
+        "symbol": "̴",
+        "name": "velarized or pharyngealized",
+        "unicode": "\\u0334",
+        "hex": "0x0334",
+        "alternates": [],
+        "example": "ɫ (dark l)"
+      },
+      {
+        "symbol": "̝",
+        "name": "raised",
+        "unicode": "\\u031d",
+        "hex": "0x031D",
+        "alternates": [
+          "˔"
+        ],
+        "example": "e̝, ɹ̝"
+      },
+      {
+        "symbol": "̞",
+        "name": "lowered",
+        "unicode": "\\u031e",
+        "hex": "0x031E",
+        "alternates": [
+          "˕"
+        ],
+        "example": "e̞, β̞"
+      },
+      {
+        "symbol": "̘",
+        "name": "advanced tongue root",
+        "unicode": "\\u0318",
+        "hex": "0x0318",
+        "alternates": [],
+        "example": "e̘, o̘"
+      },
+      {
+        "symbol": "̙",
+        "name": "retracted tongue root",
+        "unicode": "\\u0319",
+        "hex": "0x0319",
+        "alternates": [],
+        "example": "e̙, o̙"
+      },
+      {
+        "symbol": "̃",
+        "name": "nasalized",
+        "unicode": "\\u0303",
+        "hex": "0x0303",
+        "alternates": [],
+        "example": "ã, õ"
+      },
+      {
+        "symbol": "ⁿ",
+        "name": "nasal release",
+        "unicode": "\\u207f",
+        "hex": "0x207F",
+        "alternates": [],
+        "example": "dⁿ"
+      },
+      {
+        "symbol": "ˡ",
+        "name": "lateral release",
+        "unicode": "\\u02e1",
+        "hex": "0x02E1",
+        "alternates": [],
+        "example": "dˡ"
+      },
+      {
+        "symbol": "ᵊ",
+        "name": "mid central vowel release",
+        "unicode": "\\u1d4a",
+        "hex": "0x1D4A",
+        "alternates": [],
+        "example": "dᵊ"
+      },
+      {
+        "symbol": "͡",
+        "name": "tie bar above",
+        "unicode": "\\u0361",
+        "hex": "0x0361",
+        "alternates": [
+          "͜"
+        ],
+        "example": "t͡s, d͡z"
+      },
+      {
+        "symbol": "͜",
+        "name": "tie bar below",
+        "unicode": "\\u035c",
+        "hex": "0x035C",
+        "alternates": [],
+        "example": "t͜s, d͜z"
+      },
+      {
+        "symbol": "̫",
+        "name": "labial spreading",
+        "unicode": "\\u032b",
+        "hex": "0x032B",
+        "alternates": [],
+        "example": "u̫"
+      },
+      {
+        "symbol": "̨",
+        "name": "ogonek (nasalization)",
+        "unicode": "\\u0328",
+        "hex": "0x0328",
+        "alternates": [],
+        "example": "ą, ę"
+      },
+      {
+        "symbol": "̃",
+        "name": "tilde (nasalization)",
+        "unicode": "\\u0303",
+        "hex": "0x0303",
+        "alternates": [],
+        "example": "ã, õ"
+      }
+    ]
+  },
+  "suprasegmentals": {
+    "weight": 0,
+    "symbols": [
+      {
+        "symbol": "ˈ",
+        "name": "primary stress",
+        "unicode": "\\u02c8",
+        "hex": "0x02C8",
+        "alternates": []
+      },
+      {
+        "symbol": "ˌ",
+        "name": "secondary stress",
+        "unicode": "\\u02cc",
+        "hex": "0x02CC",
+        "alternates": []
+      },
+      {
+        "symbol": "ː",
+        "name": "long",
+        "unicode": "\\u02d0",
+        "hex": "0x02D0",
+        "alternates": [
+          ":"
+        ]
+      },
+      {
+        "symbol": "ˑ",
+        "name": "half-long",
+        "unicode": "\\u02d1",
+        "hex": "0x02D1",
+        "alternates": []
+      },
+      {
+        "symbol": "̆",
+        "name": "extra-short",
+        "unicode": "\\u0306",
+        "hex": "0x0306",
+        "alternates": [],
+        "example": "ĕ"
+      },
+      {
+        "symbol": "|",
+        "name": "minor (foot) group",
+        "unicode": "\\u007c",
+        "hex": "0x007C",
+        "alternates": []
+      },
+      {
+        "symbol": "‖",
+        "name": "major (intonation) group",
+        "unicode": "\\u2016",
+        "hex": "0x2016",
+        "alternates": [
+          "||"
+        ]
+      },
+      {
+        "symbol": ".",
+        "name": "syllable break",
+        "unicode": "\\u002e",
+        "hex": "0x002E",
+        "alternates": []
+      },
+      {
+        "symbol": "‿",
+        "name": "linking mark",
+        "unicode": "\\u203f",
+        "hex": "0x203F",
+        "alternates": []
+      },
+      {
+        "symbol": "͡",
+        "name": "double articulation",
+        "unicode": "\\u0361",
+        "hex": "0x0361",
+        "alternates": [
+          "͜"
+        ],
+        "example": "k͡p, t͡s"
+      }
+    ]
+  },
+  "tones": {
+    "weight": 0,
+    "symbols": [
+      {
+        "symbol": "˥",
+        "name": "extra high tone (level)",
+        "unicode": "\\u02e5",
+        "hex": "0x02E5",
+        "alternates": [
+          "̋"
+        ]
+      },
+      {
+        "symbol": "˦",
+        "name": "high tone (level)",
+        "unicode": "\\u02e6",
+        "hex": "0x02E6",
+        "alternates": [
+          "́"
+        ]
+      },
+      {
+        "symbol": "˧",
+        "name": "mid tone (level)",
+        "unicode": "\\u02e7",
+        "hex": "0x02E7",
+        "alternates": [
+          "̄"
+        ]
+      },
+      {
+        "symbol": "˨",
+        "name": "low tone (level)",
+        "unicode": "\\u02e8",
+        "hex": "0x02E8",
+        "alternates": [
+          "̀"
+        ]
+      },
+      {
+        "symbol": "˩",
+        "name": "extra low tone (level)",
+        "unicode": "\\u02e9",
+        "hex": "0x02E9",
+        "alternates": [
+          "̏"
+        ]
+      },
+      {
+        "symbol": "̋",
+        "name": "extra high tone diacritic",
+        "unicode": "\\u030b",
+        "hex": "0x030B",
+        "alternates": [],
+        "example": "ő, ű"
+      },
+      {
+        "symbol": "́",
+        "name": "high tone diacritic",
+        "unicode": "\\u0301",
+        "hex": "0x0301",
+        "alternates": [],
+        "example": "á, é"
+      },
+      {
+        "symbol": "̄",
+        "name": "mid tone diacritic",
+        "unicode": "\\u0304",
+        "hex": "0x0304",
+        "alternates": [],
+        "example": "ā, ē"
+      },
+      {
+        "symbol": "̀",
+        "name": "low tone diacritic",
+        "unicode": "\\u0300",
+        "hex": "0x0300",
+        "alternates": [],
+        "example": "à, è"
+      },
+      {
+        "symbol": "̏",
+        "name": "extra low tone diacritic",
+        "unicode": "\\u030f",
+        "hex": "0x030F",
+        "alternates": [],
+        "example": "ȁ, ȅ"
+      },
+      {
+        "symbol": "ꜛ",
+        "name": "upstep",
+        "unicode": "\\ua71b",
+        "hex": "0xA71B",
+        "alternates": [
+          "↑"
+        ]
+      },
+      {
+        "symbol": "ꜜ",
+        "name": "downstep",
+        "unicode": "\\ua71c",
+        "hex": "0xA71C",
+        "alternates": [
+          "↓"
+        ]
+      },
+      {
+        "symbol": "↑",
+        "name": "upstep (alternative)",
+        "unicode": "\\u2191",
+        "hex": "0x2191",
+        "alternates": []
+      },
+      {
+        "symbol": "↓",
+        "name": "downstep (alternative)",
+        "unicode": "\\u2193",
+        "hex": "0x2193",
+        "alternates": []
+      },
+      {
+        "symbol": "↗",
+        "name": "global rise",
+        "unicode": "\\u2197",
+        "hex": "0x2197",
+        "alternates": []
+      },
+      {
+        "symbol": "↘",
+        "name": "global fall",
+        "unicode": "\\u2198",
+        "hex": "0x2198",
+        "alternates": []
+      },
+      {
+        "symbol": "˩˥",
+        "name": "rising tone (contour)",
+        "unicode": "\\u02e9\\u02e5",
+        "hex": "0x02E9 0x02E5",
+        "alternates": [
+          "ˇ"
+        ]
+      },
+      {
+        "symbol": "˥˩",
+        "name": "falling tone (contour)",
+        "unicode": "\\u02e5\\u02e9",
+        "hex": "0x02E5 0x02E9",
+        "alternates": [
+          "ˆ"
+        ]
+      },
+      {
+        "symbol": "ˇ",
+        "name": "rising tone (caron)",
+        "unicode": "\\u02c7",
+        "hex": "0x02C7",
+        "alternates": [],
+        "example": "ǎ, ě"
+      },
+      {
+        "symbol": "ˆ",
+        "name": "falling tone (circumflex)",
+        "unicode": "\\u02c6",
+        "hex": "0x02C6",
+        "alternates": [],
+        "example": "â, ê"
+      },
+      {
+        "symbol": "᷄",
+        "name": "high rising contour tone",
+        "unicode": "\\u1dc4",
+        "hex": "0x1DC4",
+        "alternates": []
+      },
+      {
+        "symbol": "᷅",
+        "name": "low rising contour tone",
+        "unicode": "\\u1dc5",
+        "hex": "0x1DC5",
+        "alternates": []
+      },
+      {
+        "symbol": "᷈",
+        "name": "rising-falling contour tone",
+        "unicode": "\\u1dc8",
+        "hex": "0x1DC8",
+        "alternates": []
+      },
+      {
+        "symbol": "᷇",
+        "name": "high falling tone",
+        "unicode": "\\u1dc7",
+        "hex": "0x1DC7",
+        "alternates": []
+      },
+      {
+        "symbol": "᷆",
+        "name": "low falling tone",
+        "unicode": "\\u1dc6",
+        "hex": "0x1DC6",
+        "alternates": []
+      },
+      {
+        "symbol": "̌",
+        "name": "rising tone diacritic",
+        "unicode": "\\u030c",
+        "hex": "0x030C",
+        "alternates": [],
+        "example": "ǎ, ě"
+      },
+      {
+        "symbol": "̂",
+        "name": "falling tone diacritic",
+        "unicode": "\\u0302",
+        "hex": "0x0302",
+        "alternates": [],
+        "example": "â, ê"
+      }
+    ]
+  },
+  "accent_marks": {
+    "weight": 0,
+    "symbols": [
+      {
+        "symbol": "̆",
+        "name": "breve (short)",
+        "unicode": "\\u0306",
+        "hex": "0x0306",
+        "alternates": [],
+        "example": "ă, ĕ"
+      },
+      {
+        "symbol": "̄",
+        "name": "macron (long)",
+        "unicode": "\\u0304",
+        "hex": "0x0304",
+        "alternates": [],
+        "example": "ā, ē"
+      },
+      {
+        "symbol": "̇",
+        "name": "dot above",
+        "unicode": "\\u0307",
+        "hex": "0x0307",
+        "alternates": [],
+        "example": "ċ, ż"
+      },
+      {
+        "symbol": "̣",
+        "name": "dot below",
+        "unicode": "\\u0323",
+        "hex": "0x0323",
+        "alternates": [],
+        "example": "ḍ, ṭ"
+      },
+      {
+        "symbol": "̈",
+        "name": "diaeresis/umlaut",
+        "unicode": "\\u0308",
+        "hex": "0x0308",
+        "alternates": [],
+        "example": "ä, ö, ü"
+      },
+      {
+        "symbol": "̱",
+        "name": "underline/macron below",
+        "unicode": "\\u0331",
+        "hex": "0x0331",
+        "alternates": [],
+        "example": "a̱, e̱"
+      },
+      {
+        "symbol": "̸",
+        "name": "overlay stroke",
+        "unicode": "\\u0338",
+        "hex": "0x0338",
+        "alternates": [],
+        "example": "ø, ɨ̸"
+      },
+      {
+        "symbol": "̵",
+        "name": "strike-through",
+        "unicode": "\\u0335",
+        "hex": "0x0335",
+        "alternates": [],
+        "example": "ɨ̵, ł"
+      },
+      {
+        "symbol": "̉",
+        "name": "hook above",
+        "unicode": "\\u0309",
+        "hex": "0x0309",
+        "alternates": [],
+        "example": "ả, ẻ"
+      },
+      {
+        "symbol": "̦",
+        "name": "comma below",
+        "unicode": "\\u0326",
+        "hex": "0x0326",
+        "alternates": [],
+        "example": "ș, ț"
+      },
+      {
+        "symbol": "̧",
+        "name": "cedilla",
+        "unicode": "\\u0327",
+        "hex": "0x0327",
+        "alternates": [],
+        "example": "ç, ş"
+      },
+      {
+        "symbol": "̨",
+        "name": "ogonek",
+        "unicode": "\\u0328",
+        "hex": "0x0328",
+        "alternates": [],
+        "example": "ą, ę"
+      }
+    ]
+  }
+}
