@@ -172,6 +172,42 @@ def append_custom_char(
     return geminate, custom_chars
 
 
+def remove_custom_char(config_path: str, sequence: str) -> tuple[bool, list[tuple[str, str, int]]]:
+    """Remove a single custom character entry from an existing TOML config.
+
+    Loads the current configuration from ``config_path``, filters out the entry
+    whose ``sequence`` matches the provided value, and writes the updated
+    configuration back to the same file via ``save_language_config``.
+
+    Args:
+        config_path: Filesystem path to the existing ``.toml`` configuration
+            file. The file must already exist and be valid TOML.
+        sequence: The character sequence to remove (e.g., ``"ts"``).
+
+    Returns:
+        A two-element tuple ``(geminate, custom_chars)`` reflecting the state
+        of the configuration after removal, in the same format as
+        ``load_language_config``.
+
+    Raises:
+        ValueError: If ``sequence`` is not found in the current custom_chars
+            list, or propagated from ``load_language_config`` if the existing
+            config file is structurally invalid.
+        OSError: Propagated from ``save_language_config`` if the file cannot
+            be written.
+        tomllib.TOMLDecodeError: If the existing file is not valid TOML.
+    """
+    geminate, custom_chars = load_language_config(config_path)
+
+    filtered_chars = [(seq, cat, rank) for seq, cat, rank in custom_chars if seq != sequence]
+
+    if len(filtered_chars) == len(custom_chars):
+        raise ValueError(f"Sequence '{sequence}' not found in custom_chars")
+
+    save_language_config(config_path, geminate, filtered_chars)
+    return geminate, filtered_chars
+
+
 def _escape_toml_string(value: str) -> str:
     """Escape a string value for safe embedding in a TOML basic string.
 
@@ -186,4 +222,4 @@ def _escape_toml_string(value: str) -> str:
         A new string with ``\\`` replaced by ``\\\\`` and ``"`` replaced by
         ``\\"``.
     """
-    return value.replace("\\", "\\\\").replace("\"", "\\\"")
+    return value.replace("\\", "\\\\").replace('"', '\\"')

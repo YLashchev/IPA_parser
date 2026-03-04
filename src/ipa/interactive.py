@@ -27,7 +27,7 @@ from typing import Iterable
 
 import pandas as pd
 
-from .config import append_custom_char
+from .config import append_custom_char, remove_custom_char
 from .debug import ValidationError
 from .ipa_char import IPA_CHAR, CustomCharacter
 from .ipa_string import IPAString
@@ -65,9 +65,11 @@ def run_interactive(
        entries with their categories and ranks.
     7. Add custom character -- interactive prompt to register a new custom
        character and optionally persist it to the TOML config file.
-    8. Run pipeline and export -- executes ``build_final_dataframe`` and
+    8. Remove custom character -- interactive prompt to remove an existing
+       custom character from both the in-memory registry and the TOML config.
+    9. Run pipeline and export -- executes ``build_final_dataframe`` and
        writes results in the format(s) specified by ``output_format``.
-    9. Quit -- exits the loop.
+    10. Quit -- exits the loop.
 
     Args:
         df: Input ``DataFrame`` loaded from the Excel source file. Must
@@ -96,8 +98,9 @@ def run_interactive(
         print("5) Show unrecognized symbols")
         print("6) Show custom characters")
         print("7) Add custom character")
-        print("8) Run pipeline and export")
-        print("9) Quit")
+        print("8) Remove custom character")
+        print("9) Run pipeline and export")
+        print("10) Quit")
 
         choice = input("Select option: ").strip()
 
@@ -141,17 +144,27 @@ def run_interactive(
             else:
                 print("\nNo unrecognized symbols found after update.")
         elif choice == "8":
+            _remove_custom_character(config_path)
+            words_cache = None
+            unrecognized = _unrecognized_symbols(df, geminate)
+            if unrecognized:
+                print("\nUnrecognized symbols after update:")
+                print(sorted(unrecognized))
+            else:
+                print("\nNo unrecognized symbols found after update.")
+        elif choice == "9":
             from .cli import _export
+
             final_df, mismatches = build_final_dataframe(df, geminate=geminate, fill_na=True)
             if mismatches:
                 print(mismatches)
             print(final_df)
             exported = _export(final_df, output_csv, output_xlsx, output_format)
             print(f"\nExported {', '.join(exported)}")
-        elif choice == "9":
+        elif choice == "10":
             return
         else:
-            print("Invalid choice. Please select 1-9.")
+            print("Invalid choice. Please select 1-10.")
 
 
 def _build_word_list(df: pd.DataFrame) -> list[str]:
@@ -286,8 +299,7 @@ def _inspect_word(words: list[str], geminate: bool) -> None:
     processed = ipa.process_string()
     segment_types = ipa.segment_type
     cv_types = [
-        "C" if item == "CONSONANT" else "V" if item == "VOWEL" else item
-        for item in segment_types
+        "C" if item == "CONSONANT" else "V" if item == "VOWEL" else item for item in segment_types
     ]
 
     print(f"\nWord: {word}")
@@ -356,9 +368,7 @@ def _unique_graphemes(df: pd.DataFrame, geminate: bool) -> Counter[str]:
     return Counter(_iter_phoneme_segments(df, geminate))
 
 
-def _non_phoneme_symbols_by_category(
-    df: pd.DataFrame, geminate: bool
-) -> dict[str, list[str]]:
+def _non_phoneme_symbols_by_category(df: pd.DataFrame, geminate: bool) -> dict[str, list[str]]:
     """Collect all weight-0 (non-phoneme) symbols grouped by their category.
 
     Iterates over every unique segment in the corpus and retains only those
@@ -493,6 +503,47 @@ def _add_custom_character(config_path: str | None) -> None:
             append_custom_char(config_path, sequence, category, rank)
             print(f"Saved to {config_path}")
         except (OSError, ValueError) as exc:
+            print(f"Failed to update config: {exc}")
+    else:
+        print("No config path provided; change is session-only.")
+
+
+def _remove_custom_character(config_path: str | None) -> None:
+    """Interactively prompt the user to remove an existing custom character.
+
+    Collects the character sequence from standard input, removes the entry from
+    the in-memory registry via ``CustomCharacter.remove_char``, and -- if a
+    config path is available -- removes the entry from the TOML file via
+    ``remove_custom_char``. If no config path is provided, the removal applies
+    only for the current session and the TOML file remains unchanged.
+
+    Input prompts:
+
+    - **Sequence**: Non-empty string (e.g., ``"ts"``). Required; returns early
+      if empty.
+
+    Args:
+        config_path: Filesystem path to the active TOML language config, or
+            ``None`` if no config was supplied at startup. When ``None``, the
+            character is removed from memory only.
+
+    Returns:
+        None
+    """
+    sequence = input("Sequence to remove: ").strip()
+    if not sequence:
+        print("Sequence is required.")
+        return
+
+    CustomCharacter.remove_char(sequence)
+
+    if config_path:
+        try:
+            remove_custom_char(config_path, sequence)
+            print(f"Removed '{sequence}' from {config_path}")
+        except ValueError as exc:
+            print(f"Sequence not found in config: {exc}")
+        except (OSError, Exception) as exc:
             print(f"Failed to update config: {exc}")
     else:
         print("No config path provided; change is session-only.")
