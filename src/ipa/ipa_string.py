@@ -1,4 +1,3 @@
-
 from .ipa_char import IPA_CHAR, CustomCharacter
 from .debug import ValidationError
 import re
@@ -19,7 +18,7 @@ class IPAString:
             if CustomCharacter.is_valid_char(segment):
                 custom_char = CustomCharacter.get_char(segment)
                 if custom_char is not None:
-                    types.append(custom_char['category'])
+                    types.append(custom_char["category"])
             else:
                 types.append(IPA_CHAR.category(segment))
         return types
@@ -27,30 +26,38 @@ class IPAString:
     @property
     def segment_count(self):
         categories = self.segment_type
-        return {'V': categories.count('VOWEL'), 'C': categories.count('CONSONANT')}
+        # Normalize AFFRICATE to CONSONANT and DIPHTHONG to VOWEL for counting
+        normalized = [
+            cat
+            if cat not in ("AFFRICATE", "DIPHTHONG")
+            else ("CONSONANT" if cat == "AFFRICATE" else "VOWEL")
+            for cat in categories
+        ]
+        return {"V": normalized.count("VOWEL"), "C": normalized.count("CONSONANT")}
 
     @property
     def unicode_string(self):
-        return ''.join(['\\u{:04x}'.format(ord(char)) for segment in self.segments for char in segment])
+        return "".join(
+            ["\\u{:04x}".format(ord(char)) for segment in self.segments for char in segment]
+        )
 
     @property
     def syllables(self):
         syllable_break = "."  # IPA symbol for syllable break
         return self.string.split(syllable_break)
 
-    
     @property
     def coda(self):
         last_syllable = self.syllables[-1]
         consonant_count = 0
-        
+
         # Create a temporary IPAString object with just the last syllable
         temp_ipa = IPAString(last_syllable, geminate=self.geminate)
         # Apply char_only to clean the syllable
         temp_ipa.char_only()
         # Get the cleaned segments instead of string
         cleaned_segments = temp_ipa.segments
-        
+
         # Now process the cleaned segments in reverse
         for segment in reversed(cleaned_segments):
             if IPA_CHAR.is_valid_char(segment):
@@ -59,21 +66,19 @@ class IPAString:
                 custom_char = CustomCharacter.get_char(segment)
                 if custom_char is None:
                     break
-                phone_type = custom_char['category']
+                phone_type = custom_char["category"]
             else:
                 print(f"Undefined segment: {segment}")
                 break
-    
-            if phone_type == 'CONSONANT':
+
+            if phone_type == "CONSONANT" or phone_type == "AFFRICATE":
                 consonant_count += 1
-            elif phone_type == 'PAUSE':
-                return 'OP' if consonant_count == 0 and segment == 'O' else 'SP'
+            elif phone_type == "PAUSE":
+                return "OP" if consonant_count == 0 and segment == "OP" else "SP"
             else:
                 break
-                
+
         return consonant_count
-    
-        
 
     def stress(self):
         syllable = self.string
@@ -90,12 +95,14 @@ class IPAString:
         processed_string = self.string
 
         if self.geminate:
+
             def replace_geminate_if_consonant(match):
                 char = match.group(1)
                 if IPA_CHAR.category(char) == "CONSONANT":
                     return char
                 return match.group(0)
-            processed_string = re.sub(r'(.)\1+', replace_geminate_if_consonant, processed_string)
+
+            processed_string = re.sub(r"(.)\1+", replace_geminate_if_consonant, processed_string)
 
         return processed_string
 
@@ -108,7 +115,7 @@ class IPAString:
             if CustomCharacter.is_valid_char(segment):
                 custom_char = CustomCharacter.get_char(segment)
                 if custom_char is not None:
-                    total += custom_char['rank']
+                    total += custom_char["rank"]
             else:
                 rank = IPA_CHAR.rank(segment)
                 if rank is not None:
@@ -142,21 +149,24 @@ class IPAString:
             if not CustomCharacter.is_valid_char(segment) and not IPA_CHAR.is_valid_char(segment):
                 invalid_segments.append(segment)
         if invalid_segments:
-            raise ValidationError("INVALID_SEGMENT", segment=", ".join(invalid_segments), string=self.string)
+            raise ValidationError(
+                "INVALID_SEGMENT", segment=", ".join(invalid_segments), string=self.string
+            )
 
-        
     def char_only(self):
-        categories_to_remove = {'DIACRITIC', 'SUPRASEGMENTAL', 'TONE', 'ACCENT_MARK'}
-        
+        categories_to_remove = {"DIACRITIC", "SUPRASEGMENTAL", "TONE", "ACCENT_MARK"}
+
         def is_valid_and_retainable(segment):
             if IPA_CHAR.is_valid_char(segment):
                 return IPA_CHAR.category(segment) not in categories_to_remove
             elif CustomCharacter.is_valid_char(segment):
                 return True
             raise ValidationError("INVALID_SEGMENT", segment=segment, string=self.string)
-            
-        cleaned_string = ''.join(segment for segment in self.segments if is_valid_and_retainable(segment))
-        
+
+        cleaned_string = "".join(
+            segment for segment in self.segments if is_valid_and_retainable(segment)
+        )
+
         self.string = cleaned_string
         self.segments = self._maximal_munch(cleaned_string)
 
