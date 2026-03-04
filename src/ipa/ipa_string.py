@@ -1,6 +1,7 @@
 from .ipa_char import IPA_CHAR, CustomCharacter
 from .debug import ValidationError
 import re
+import unicodedata
 
 
 class IPAString:
@@ -115,7 +116,11 @@ class IPAString:
             if CustomCharacter.is_valid_char(segment):
                 custom_char = CustomCharacter.get_char(segment)
                 if custom_char is not None:
-                    total += custom_char["rank"]
+                    rank = custom_char["rank"]
+                    try:
+                        total += float(rank)
+                    except (TypeError, ValueError):
+                        pass
             else:
                 rank = IPA_CHAR.rank(segment)
                 if rank is not None:
@@ -139,19 +144,63 @@ class IPAString:
                 segments.append(max_match)
                 i += len(max_match)
             else:
-                segments.append(string[i])
-                i += 1
+                end = self._consume_grapheme_cluster(string, i)
+                segments.append(string[i:end])
+                i = end
         return segments
+
+    def _consume_grapheme_cluster(self, string: str, start: int) -> int:
+        if start >= len(string):
+            return start
+
+        i = start + 1
+
+        if i < len(string) and string[i] in {"\u0361", "\u035c"}:
+            i += 1
+            if i < len(string):
+                i += 1
+
+        while i < len(string):
+            if unicodedata.category(string[i]) in {"Mn", "Mc", "Me"}:
+                i += 1
+            else:
+                break
+
+        return i
 
     def _validate_string(self):
         invalid_segments = []
         for segment in self.segments:
-            if not CustomCharacter.is_valid_char(segment) and not IPA_CHAR.is_valid_char(segment):
+            if not self._is_valid_segment(segment):
                 invalid_segments.append(segment)
         if invalid_segments:
             raise ValidationError(
                 "INVALID_SEGMENT", segment=", ".join(invalid_segments), string=self.string
             )
+
+    def _is_valid_segment(self, segment):
+        if CustomCharacter.is_valid_char(segment) or IPA_CHAR.is_valid_char(segment):
+            return True
+
+        if not segment:
+            return False
+
+        i = 0
+        if len(segment) > 2 and segment[1] in {"\u0361", "\u035c"}:
+            if not IPA_CHAR.is_valid_char(segment[0]) or not IPA_CHAR.is_valid_char(segment[2]):
+                return False
+            i = 3
+        else:
+            if not IPA_CHAR.is_valid_char(segment[0]):
+                return False
+            i = 1
+
+        while i < len(segment):
+            if unicodedata.category(segment[i]) not in {"Mn", "Mc", "Me"}:
+                return False
+            i += 1
+
+        return True
 
     def char_only(self):
         categories_to_remove = {"DIACRITIC", "SUPRASEGMENTAL", "TONE", "ACCENT_MARK"}
