@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ipa-parser"
+version = "0.1.0"
+description = "UTF-8 Unicode IPA parser and analysis utilities."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "pandas>=2.2.0",
+  "openpyxl>=3.1.2",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "pytest-cov",
+  "ruff",
+  "mypy",
+]
+
+[project.scripts]
+ipa-parser = "ipa.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+packages = { find = { where = ["src"] } }
+
+[tool.setuptools.package-data]
+ipa = ["data/*.json"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
+
+[tool.ruff]
+src = ["src"]
+line-length = 100
+
+[tool.mypy]
+python_version = "3.11"
+mypy_path = ["src"]
+strict = false
+ignore_missing_imports = true
+warn_return_any = true
+warn_unused_ignores = true
+check_untyped_defs = false
+disallow_untyped_defs = false
