@@ -45,13 +45,17 @@ def parse_args() -> argparse.Namespace:
 
     Arguments defined:
 
-    - ``input`` (positional): Path to the input Excel (``.xlsx``) file.
+    - ``input`` (positional, optional): Path to the input Excel (``.xlsx``) file.
+      When omitted, the user is prompted to select from available files in
+      ``data/unprocessed/``.
     - ``--config``: Optional path to a TOML language configuration file.
-      When omitted, ``geminate=True`` and ``DEFAULT_CUSTOM_CHARS`` are used.
+      When omitted, the user is prompted to select from available configs in
+      ``data/language_settings/``, or falls back to ``geminate=True`` and
+      ``DEFAULT_CUSTOM_CHARS`` if no configs exist.
     - ``--geminate`` / ``--no-geminate``: Boolean flag that overrides the
       ``geminate`` setting from the config file when supplied explicitly.
     - ``--run``: When present, the pipeline executes immediately without
-      entering the interactive menu.
+      entering the interactive menu. Requires an explicit ``input`` file path.
     - ``--output-csv``: Override path for CSV output. When omitted, the
       path is auto-generated as ``data/processed/YYYY-MM-DD_<stem>_auto.csv``.
     - ``--output-xlsx``: Override path for XLSX output. When omitted, the
@@ -65,7 +69,12 @@ def parse_args() -> argparse.Namespace:
         ``run``, ``output_csv``, ``output_xlsx``, ``format``).
     """
     parser = argparse.ArgumentParser(description="Run IPA parsing pipeline")
-    parser.add_argument("input", help="Path to input Excel file")
+    parser.add_argument(
+        "input",
+        nargs="?",
+        default=None,
+        help="Path to input Excel file (optional - will prompt if omitted)",
+    )
     parser.add_argument("--config", help="Path to TOML language config")
     parser.add_argument(
         "--geminate",
@@ -78,14 +87,50 @@ def parse_args() -> argparse.Namespace:
         action="store_true",
         help="Run pipeline directly (skip interactive menu)",
     )
-    parser.add_argument("--output-csv", default=None,
-                        help="Override CSV output path")
-    parser.add_argument("--output-xlsx", default=None,
-                        help="Override XLSX output path")
-    parser.add_argument("--format", default="both",
-                        choices=["csv", "xlsx", "both"],
-                        help="Output format: csv, xlsx, or both (default: both)")
+    parser.add_argument("--output-csv", default=None, help="Override CSV output path")
+    parser.add_argument("--output-xlsx", default=None, help="Override XLSX output path")
+    parser.add_argument(
+        "--format",
+        default="both",
+        choices=["csv", "xlsx", "both"],
+        help="Output format: csv, xlsx, or both (default: both)",
+    )
     return parser.parse_args()
+
+
+def _select_file(directory: str, extension: str, label: str) -> str | None:
+    """Display numbered list of files matching pattern, prompt for selection.
+
+    Args:
+        directory: Path to search (e.g., "data/unprocessed")
+        extension: File extension without dot (e.g., "xlsx")
+        label: Human-readable description (e.g., "input spreadsheet")
+
+    Returns:
+        Selected file path as string, or None if empty/cancelled
+    """
+    files = sorted(Path(directory).glob(f"*.{extension}"))
+
+    if not files:
+        print(f"No .{extension} files found in {directory}/")
+        return None
+
+    print(f"\nAvailable {label} files:")
+    for idx, f in enumerate(files, start=1):
+        print(f"  {idx}) {f.name}")
+
+    while True:
+        try:
+            choice = input(f"\nSelect {label} (number, or 'q' to quit): ").strip()
+            if choice.lower() == "q":
+                return None
+            idx = int(choice)
+            if 1 <= idx <= len(files):
+                return str(files[idx - 1])
+            print(f"Please enter a number between 1 and {len(files)}")
+        except (ValueError, KeyboardInterrupt):
+            print("\nCancelled.")
+            return None
 
 
 def main() -> None:
@@ -94,16 +139,19 @@ def main() -> None:
     Orchestrates the full startup sequence:
 
     1. Parses command-line arguments via ``parse_args``.
-    2. Prints the ASCII art banner to standard output.
-    3. Loads the input Excel file into a ``DataFrame`` via ``load_excel``.
-    4. Resolves configuration: if ``--config`` is supplied, reads ``geminate``
+    2. If ``input`` is not provided, prompts the user to select an Excel file
+       from ``data/unprocessed/``. If ``--config`` is not provided, prompts for
+       a TOML config from ``data/language_settings/``.
+    3. Prints the ASCII art banner to standard output.
+    4. Loads the input Excel file into a ``DataFrame`` via ``load_excel``.
+    5. Resolves configuration: if ``--config`` is supplied, reads ``geminate``
        and custom characters from the TOML file; otherwise falls back to
        ``geminate=True`` and ``DEFAULT_CUSTOM_CHARS``. A ``--geminate`` /
        ``--no-geminate`` flag on the command line always takes precedence over
        the config file value.
-    5. Registers custom characters with ``CustomCharacter`` via
+    6. Registers custom characters with ``CustomCharacter`` via
        ``configure_custom_characters``.
-    6. Branches on execution mode:
+    7. Branches on execution mode:
 
        - **Interactive** (``--run`` not set): delegates to ``run_interactive``
          and returns when the user quits.
@@ -116,6 +164,19 @@ def main() -> None:
         None
     """
     args = parse_args()
+
+    if args.run and args.input is None:
+        print("Error: --run requires explicit input file path", file=sys.stderr)
+        sys.exit(1)
+
+    if args.input is None:
+        args.input = _select_file("data/unprocessed", "xlsx", "input spreadsheet")
+        if args.input is None:
+            print("No input file selected. Exiting.")
+            sys.exit(0)
+
+    if args.config is None:
+        args.config = _select_file("data/language_settings", "toml", "language config")
 
     # Auto-generate output filenames from input: YYYY-MM-DD_<stem>_auto.{csv,xlsx}
     input_stem = Path(args.input).stem

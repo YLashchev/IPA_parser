@@ -10,6 +10,7 @@ def test_warns_without_config(monkeypatch, capsys):
 
     monkeypatch.setattr(cli, "load_excel", lambda _path: dummy_df)
     monkeypatch.setattr(cli, "configure_custom_characters", lambda _chars: None)
+    monkeypatch.setattr(cli, "_select_file", lambda *args: None)
 
     def fake_build_final_dataframe(_df, geminate=True, fill_na=True):
         return dummy_df, []
@@ -29,6 +30,7 @@ def test_format_xlsx(monkeypatch):
 
     monkeypatch.setattr(cli, "load_excel", lambda _path: dummy_df)
     monkeypatch.setattr(cli, "configure_custom_characters", lambda _chars: None)
+    monkeypatch.setattr(cli, "_select_file", lambda *args: None)
 
     def fake_build_final_dataframe(_df, geminate=True, fill_na=True):
         return dummy_df, []
@@ -49,3 +51,18 @@ def test_format_xlsx(monkeypatch):
     _, output_xlsx, output_format = export_calls[0]
     assert output_format == "xlsx"
     assert output_xlsx.endswith("_auto.xlsx")
+
+
+def test_select_file_finds_toml_configs():
+    from pathlib import Path
+
+    files = sorted(Path("data/language_settings").glob("*.toml"))
+    assert len(files) == 3, f"Expected 3 TOML files, found {len(files)}"
+
+
+def test_batch_mode_without_input_fails():
+    import subprocess
+
+    result = subprocess.run([".venv/bin/ipa-parser", "--run"], capture_output=True, text=True)
+    assert result.returncode != 0, "Should exit with error code"
+    assert "Error" in result.stderr or "error" in result.stderr
