@@ -1,0 +1,141 @@
+geminate = true
+
+[[custom_chars]]
+sequence = "OP"
+category = "PAUSE"
+rank = 0
+
+[[custom_chars]]
+sequence = "SP"
+category = "PAUSE"
+rank = 0
+
+[[custom_chars]]
+sequence = "ɐi"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "ju"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "juː"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "jə"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "d͡ʒ"
+category = "CONSONANT"
+rank = 1
+
+[[custom_chars]]
+sequence = "dʒ"
+category = "CONSONANT"
+rank = 1
+
+[[custom_chars]]
+sequence = "ea"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "t͡ʃ"
+category = "CONSONANT"
+rank = 1
+
+[[custom_chars]]
+sequence = "tʃ"
+category = "CONSONANT"
+rank = 1
+
+[[custom_chars]]
+sequence = "aj"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "ei"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "ej"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "jaː"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "ja"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "ʉj"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "uj"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "ai"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "ɔˤː"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "ɔˤ"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "i̯a"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "jɐ"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "oi"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "i̯ə"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "oa"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "ɔu"
+category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "jɔ"
+category = "VOWEL"
+rank = 1

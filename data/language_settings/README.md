@@ -9,8 +9,8 @@ rules needed to correctly parse IPA transcriptions for a specific language.
 | File | Format | Status |
 |---|---|---|
 | `Northwest_Sahaptin.toml` | TOML | Active (preferred) |
-| `Italian` | Python snippet | Legacy |
-| `Northern_Tepehuan` | Python snippet | Legacy |
+| `Italian.toml` | TOML | Active (preferred) |
+| `Northern_Tepehuan.toml` | TOML | Active (preferred) |
 
 TOML is the preferred format. Legacy Python snippet files contain bare
 `CustomCharacter.add_char(...)` calls and must be executed directly; they are
