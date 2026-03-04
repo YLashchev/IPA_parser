@@ -4,16 +4,15 @@ Backlog items for future refactors and improvements.
 Keep this list concise and update it as work is completed.
 
 ## Medium Priority
+
+## Low Priority
+
+## Completed
 - Convert remaining `data/language_settings/` text files to TOML format.
 - Add "remove custom character" to interactive CLI with TOML persistence.
 - Add CLI to select language sheet and language settings config. 
 - Update notebook to use `from ipa.pipeline import build_final_dataframe`.
 - Implement grapheme-cluster aware segmentation for tie bars/combining marks.
-
-
-## Low Priority
-
-## Completed
 - Restructure `data/` directory: `unprocessed/` for input, `processed/` for output.
 - Auto-name output files with `YYYY-MM-DD` prefix and `_auto` suffix.
 - Add `--format` CLI flag for csv/xlsx/both output selection.
