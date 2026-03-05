@@ -78,3 +78,106 @@ def test_clear_all():
 
 def test_get_nonexistent_returns_none():
     assert CustomCharacter.get_char("xyz") is None
+
+
+# Tests for convenience helpers (Task 8)
+
+
+def test_register_common_affricates_count():
+    """After calling register_common_affricates(), verify all COMMON_AFFRICATES keys are registered."""
+    from ipa import COMMON_AFFRICATES
+
+    CustomCharacter.register_common_affricates()
+    for affricate in COMMON_AFFRICATES:
+        assert CustomCharacter.is_valid_char(affricate) is True
+
+
+def test_register_common_affricates_category():
+    """After registration, each affricate entry has category 'AFFRICATE'."""
+    from ipa import COMMON_AFFRICATES
+
+    CustomCharacter.register_common_affricates()
+    for affricate in COMMON_AFFRICATES:
+        char_data = CustomCharacter.get_char(affricate)
+        assert char_data is not None
+        assert char_data["category"] == "AFFRICATE"
+
+
+def test_register_common_diphthongs_count():
+    """After calling register_common_diphthongs(), verify all COMMON_DIPHTHONGS keys are registered."""
+    from ipa import COMMON_DIPHTHONGS
+
+    CustomCharacter.register_common_diphthongs()
+    for diphthong in COMMON_DIPHTHONGS:
+        assert CustomCharacter.is_valid_char(diphthong) is True
+
+
+def test_register_common_diphthongs_category():
+    """After registration, each diphthong entry has category 'DIPHTHONG'."""
+    from ipa import COMMON_DIPHTHONGS
+
+    CustomCharacter.register_common_diphthongs()
+    for diphthong in COMMON_DIPHTHONGS:
+        char_data = CustomCharacter.get_char(diphthong)
+        assert char_data is not None
+        assert char_data["category"] == "DIPHTHONG"
+
+
+def test_register_common_affricates_custom_rank():
+    """register_common_affricates(rank=2) assigns rank 2 to all affricates."""
+    from ipa import COMMON_AFFRICATES
+
+    CustomCharacter.register_common_affricates(rank=2)
+    for affricate in COMMON_AFFRICATES:
+        char_data = CustomCharacter.get_char(affricate)
+        assert char_data is not None
+        assert char_data["rank"] == 2
+
+
+def test_add_char_invalid_category_raises():
+    """add_char with invalid category raises ValueError."""
+    with pytest.raises(ValueError):
+        CustomCharacter.add_char("x", "NOT_REAL")
+
+
+def test_add_char_valid_categories_accepted():
+    """add_char accepts all valid categories from VALID_CATEGORIES."""
+    for category in CustomCharacter.VALID_CATEGORIES:
+        # Use a unique char for each category to avoid conflicts
+        test_char = f"test_{category}"
+        CustomCharacter.add_char(test_char, category)
+        assert CustomCharacter.is_valid_char(test_char) is True
+
+
+def test_register_then_parse_affricate():
+    """After registering affricates, IPAString segment_type includes AFFRICATE."""
+    from ipa import IPAString
+
+    CustomCharacter.register_common_affricates()
+    result = IPAString("t͡sa")
+    assert result.segment_type == ["AFFRICATE", "VOWEL"]
+
+
+def test_register_then_parse_diphthong():
+    """After registering diphthongs, IPAString segment_type includes DIPHTHONG."""
+    from ipa import IPAString
+
+    CustomCharacter.register_common_diphthongs()
+    result = IPAString("pa͡ɪ")
+    assert result.segment_type == ["CONSONANT", "DIPHTHONG"]
+
+
+def test_common_affricates_importable():
+    """COMMON_AFFRICATES can be imported from ipa."""
+    from ipa import COMMON_AFFRICATES
+
+    assert isinstance(COMMON_AFFRICATES, dict)
+    assert len(COMMON_AFFRICATES) == 8
+
+
+def test_common_diphthongs_importable():
+    """COMMON_DIPHTHONGS can be imported from ipa."""
+    from ipa import COMMON_DIPHTHONGS
+
+    assert isinstance(COMMON_DIPHTHONGS, dict)
+    assert len(COMMON_DIPHTHONGS) == 5

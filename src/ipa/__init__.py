@@ -30,7 +30,7 @@ Example:
     'STRESSED'
 """
 
-from .ipa_char import IPA_CHAR, CustomCharacter
+from .ipa_char import IPA_CHAR, CustomCharacter, COMMON_AFFRICATES, COMMON_DIPHTHONGS
 from .ipa_string import IPAString
 from .dict_loader import DictionaryLoader
 from .debug import ValidationError
@@ -43,4 +43,6 @@ __all__ = [
     "DictionaryLoader",
     "ValidationError",
     "load_language_config",
+    "COMMON_AFFRICATES",
+    "COMMON_DIPHTHONGS",
 ]

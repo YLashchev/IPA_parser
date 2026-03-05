@@ -11,12 +11,12 @@ category = "PAUSE"
 rank = 0
 
 [[custom_chars]]
-sequence = "iá"
+sequence = "iá"
 category = "VOWEL"
 rank = 1
 
 [[custom_chars]]
-sequence = "ái"
+sequence = "ái"
 category = "VOWEL"
 rank = 1
 
@@ -36,7 +36,7 @@ category = "VOWEL"
 rank = 1
 
 [[custom_chars]]
-sequence = "ió"
+sequence = "ió"
 category = "VOWEL"
 rank = 1
 
@@ -48,4 +48,9 @@ rank = 1
 [[custom_chars]]
 sequence = "ɛ́i"
 category = "VOWEL"
+rank = 1
+
+[[custom_chars]]
+sequence = "ai"
+category = "DIPHTHONG"
 rank = 1

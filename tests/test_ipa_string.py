@@ -143,6 +143,7 @@ def test_combining_accent_single_segment():
 
 def test_tie_bar_joins_bases():
     s = "t" + "\u0361" + "\u0283"
+    CustomCharacter.add_char(s, "AFFRICATE", rank=1)
     result = IPAString(s)
     assert len(result.segments) == 1
     assert result.segments[0] == s
@@ -150,6 +151,7 @@ def test_tie_bar_joins_bases():
 
 def test_tie_bar_with_combining_mark_stays_single_segment():
     s = "t" + "\u0361" + "\u0283" + "\u0301"
+    CustomCharacter.add_char(s, "AFFRICATE", rank=1)
     result = IPAString(s)
     assert result.segments == [s]
 

@@ -57,7 +57,7 @@ def test_select_file_finds_toml_configs():
     from pathlib import Path
 
     files = sorted(Path("data/language_settings").glob("*.toml"))
-    assert len(files) == 3, f"Expected 3 TOML files, found {len(files)}"
+    assert len(files) == 4, f"Expected 4 TOML files, found {len(files)}"
 
 
 def test_batch_mode_without_input_fails():

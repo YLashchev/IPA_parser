@@ -77,11 +77,20 @@ class ValidationError(Exception):
         error_messages = {
             "FILE_NOT_FOUND": lambda: f"File not found:\n    {self.kwargs['file_path']}",
             "INVALID_JSON": lambda: f"Invalid JSON format in file:\n    {self.kwargs['file_path']}",
-            "INVALID_SCHEMA": lambda: f"Invalid IPA schema in file:\n    {self.kwargs['file_path']}",
-            "EMPTY_INPUT_CHARACTER": lambda: "Input character is empty or consists only of whitespace.",
+            "INVALID_SCHEMA": lambda: (
+                f"Invalid IPA schema in file:\n    {self.kwargs['file_path']}"
+            ),
+            "EMPTY_INPUT_CHARACTER": lambda: (
+                "Input character is empty or consists only of whitespace."
+            ),
             "STRING OR LIST MISMATCH": lambda: "The lists or strings are not the same length.",
             "SYMBOL_NOT_FOUND": lambda: f"Symbol not found:\n    '{self.kwargs['char']}'",
-            "INVALID_SEGMENT": lambda: f"Invalid segment(s) in string:\n    Segments: {self.kwargs['segment']}\n    Full string: {self.kwargs['string']}"
+            "INVALID_SEGMENT": lambda: (
+                f"Invalid segment(s) in string:\n    Segments: {self.kwargs['segment']}\n    Full string: {self.kwargs['string']}"
+            ),
+            "UNREGISTERED_TIE_BAR": lambda: (
+                f'Unregistered tie-bar sequence: \'{self.kwargs["segment"]}\'\n    Register it with: CustomCharacter.add_char("{self.kwargs["segment"]}", "AFFRICATE", rank=1)\n    Or add to your language config TOML:\n        [[custom_chars]]\n        sequence = "{self.kwargs["segment"]}"\n        category = "AFFRICATE"\n        rank = 1'
+            ),
         }
 
         message_func = error_messages.get(self.error_type, lambda: "An unknown error occurred.")

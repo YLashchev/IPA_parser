@@ -169,6 +169,13 @@ class IPAString:
         return i
 
     def _validate_string(self):
+        for segment in self.segments:
+            if self._has_tiebar(segment):
+                if not CustomCharacter.is_valid_char(segment) and not IPA_CHAR.is_valid_char(
+                    segment
+                ):
+                    raise ValidationError("UNREGISTERED_TIE_BAR", segment=segment)
+
         invalid_segments = []
         for segment in self.segments:
             if not self._is_valid_segment(segment):
@@ -201,6 +208,10 @@ class IPAString:
             i += 1
 
         return True
+
+    @staticmethod
+    def _has_tiebar(segment: str) -> bool:
+        return len(segment) > 2 and segment[1] in {"\u0361", "\u035c"}
 
     def char_only(self):
         categories_to_remove = {"DIACRITIC", "SUPRASEGMENTAL", "TONE", "ACCENT_MARK"}

@@ -30,7 +30,7 @@ Column constants:
 
 from __future__ import annotations
 
-from typing import Any, Callable, Iterable
+from typing import Any, Callable, Iterable, cast
 
 import pandas as pd
 
@@ -157,7 +157,9 @@ def insert_sp(df: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(rows).reset_index(drop=True)
 
 
-def assign_pauses(df: pd.DataFrame, phoneme_column: str = "Phoneme", word_column: str = "Word") -> None:
+def assign_pauses(
+    df: pd.DataFrame, phoneme_column: str = "Phoneme", word_column: str = "Word"
+) -> None:
     """Overwrite the ``Word`` column with the pause label for pause-phoneme rows.
 
     For every row where the phoneme value is ``"OP"`` (other pause) or ``"SP"``
@@ -183,7 +185,9 @@ def assign_pauses(df: pd.DataFrame, phoneme_column: str = "Phoneme", word_column
     df.loc[pause_mask, word_column] = df.loc[pause_mask, phoneme_column]
 
 
-def get_word_list_and_indices(df: pd.DataFrame, word_column: str = "Word") -> tuple[list[str], list[int]]:
+def get_word_list_and_indices(
+    df: pd.DataFrame, word_column: str = "Word"
+) -> tuple[list[str], list[int]]:
     """Extract the ordered unique word list and the DataFrame index of each word's first row.
 
     Iterates through the DataFrame in order and records each word string
@@ -242,9 +246,7 @@ def collapse_nested_list(nested_list: list) -> list:
         with one level of list wrapping removed.
     """
     return [
-        element
-        for item in nested_list
-        for element in (item if isinstance(item, list) else [item])
+        element for item in nested_list for element in (item if isinstance(item, list) else [item])
     ]
 
 
@@ -294,7 +296,7 @@ def word_columns(original_word_list: list[str], geminate: bool = True) -> tuple[
             word_labels.append(word)
             unique_idx.append(word)
         else:
-            phonological_length = IPAString(word, geminate=geminate).total_length()
+            phonological_length = cast(int, IPAString(word, geminate=False).total_length())
             repeated_word_list.append([word] * phonological_length)
             word_labels.append([i] * phonological_length)
             unique_idx.append([j] * phonological_length)
@@ -373,7 +375,7 @@ def syllable_columns(original_syllable_list: list, geminate: bool = True) -> lis
 
         syllable_count = 1
         for syllable in item:
-            phonological_length = IPAString(syllable, geminate=geminate).total_length()
+            phonological_length = cast(int, IPAString(syllable, geminate=False).total_length())
             syllable_labels.extend([syllable_count] * phonological_length)
             syllable_count += 1
 
@@ -806,7 +808,10 @@ def get_isi_idx(df: pd.DataFrame) -> list[int]:
 
 
 def calculate_interstress_duration(
-    df: pd.DataFrame, isi_idx: list[int], summed_col_name: str = "", excluded_words: set | None = None
+    df: pd.DataFrame,
+    isi_idx: list[int],
+    summed_col_name: str = "",
+    excluded_words: set | None = None,
 ) -> pd.DataFrame:
     """Sum and broadcast ``Duration (ms.)`` over each ISI block into a new column.
 
@@ -899,7 +904,9 @@ def ISI_Pause(df: pd.DataFrame, isi_idx: list[int]) -> pd.DataFrame:
     return df
 
 
-def ISI_By_Segment(df: pd.DataFrame, isi_idx: list[int], segment_col: str = "SegmentType") -> tuple[list, list, list]:
+def ISI_By_Segment(
+    df: pd.DataFrame, isi_idx: list[int], segment_col: str = "SegmentType"
+) -> tuple[list, list, list]:
     """Count consonants and vowels in each ISI interval, broadcast per row.
 
     Divides the DataFrame into intervals using ``[0] + isi_idx`` as
@@ -946,7 +953,10 @@ def ISI_By_Segment(df: pd.DataFrame, isi_idx: list[int], segment_col: str = "Seg
 
 
 def ISI_By_Syllable(
-    df: pd.DataFrame, intervals: list[int], unique_syll_col: str = "unique_syll_idx", word_column: str = "Word"
+    df: pd.DataFrame,
+    intervals: list[int],
+    unique_syll_col: str = "unique_syll_idx",
+    word_column: str = "Word",
 ) -> list:
     """Count unique syllables in each ISI interval, broadcast per row.
 
@@ -1196,9 +1206,7 @@ def build_final_dataframe(
 
     syllable_list = pre_syllable_columns(original_word_list, geminate=geminate)
     syllable_column_flat = collapse_nested_list(syllable_list)
-    syllable_list_flat, _, unique_syll_idx = word_columns(
-        syllable_column_flat, geminate=geminate
-    )
+    syllable_list_flat, _, unique_syll_idx = word_columns(syllable_column_flat, geminate=geminate)
     syllable_labels = syllable_columns(syllable_list, geminate=geminate)
 
     df["SyllableLengthByPhoneme"] = syllable_length_by_phoneme(

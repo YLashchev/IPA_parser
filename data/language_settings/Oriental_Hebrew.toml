@@ -1,0 +1,21 @@
+geminate = false
+
+[[custom_chars]]
+sequence = "OP"
+category = "PAUSE"
+rank = 0
+
+[[custom_chars]]
+sequence = "SP"
+category = "PAUSE"
+rank = 0
+
+[[custom_chars]]
+sequence = "t͡s"
+category = "CONSONANT"
+rank = 1
+
+[[custom_chars]]
+sequence = "ts"
+category = "CONSONANT"
+rank = 1

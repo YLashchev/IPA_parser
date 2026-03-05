@@ -16,7 +16,6 @@ from .dict_loader import DictionaryLoader
 from .debug import ValidationError
 
 
-
 class IPA_CHAR:
     """Class-based lookup interface for built-in IPA symbols.
 
@@ -38,12 +37,7 @@ class IPA_CHAR:
     _data = DictionaryLoader.get_data() or {}
     _weights = DictionaryLoader.get_weights() or {}
 
-    ranking_dictionary = {
-        **_weights,
-        'AFFRICATE': 1,
-        'DIPHTHONG': 1,
-        'PAUSE': 0
-    }
+    ranking_dictionary = {**_weights, "AFFRICATE": 1, "DIPHTHONG": 1, "PAUSE": 0}
 
     @classmethod
     def _char_data(cls, char):
@@ -77,8 +71,8 @@ class IPA_CHAR:
             raise ValidationError("EMPTY_INPUT_CHARACTER")
 
         # Handle multi-codepoint characters
-        char_codes = [format(ord(c), '04x') for c in char]
-        char_code = ''.join(char_codes)
+        char_codes = [format(ord(c), "04x") for c in char]
+        char_code = "".join(char_codes)
 
         for category, symbols in cls._data.items():
             for name, value in symbols.items():
@@ -86,7 +80,6 @@ class IPA_CHAR:
                     return category, name, value["code"]
 
         raise ValidationError("SYMBOL_NOT_FOUND", char=char)
-
 
     @classmethod
     def rank(cls, char):
@@ -189,6 +182,28 @@ class IPA_CHAR:
         except ValidationError:
             return False
 
+
+# Common IPA affricates and diphthongs with tie-bar U+0361
+COMMON_AFFRICATES = {
+    "t͡s": "voiceless alveolar affricate",
+    "d͡z": "voiced alveolar affricate",
+    "t͡ʃ": "voiceless postalveolar affricate",
+    "d͡ʒ": "voiced postalveolar affricate",
+    "t͡ɕ": "voiceless alveolo-palatal affricate",
+    "d͡ʑ": "voiced alveolo-palatal affricate",
+    "t͡θ": "voiceless dental affricate",
+    "t͡ɬ": "voiceless alveolar lateral affricate",
+}
+
+COMMON_DIPHTHONGS = {
+    "a͡ɪ": "open front to near-close near-front",
+    "a͡ʊ": "open front to near-close near-back",
+    "e͡ɪ": "close-mid front to near-close near-front",
+    "o͡ɪ": "close-mid back to near-close near-front",
+    "o͡ʊ": "close-mid back to near-close near-back",
+}
+
+
 class CustomCharacter:
     """Registry for user-defined multi-character IPA sequences.
 
@@ -212,6 +227,18 @@ class CustomCharacter:
 
     _custom_chars: dict[str, dict[str, int | str]] = {}
 
+    VALID_CATEGORIES = {
+        "CONSONANT",
+        "VOWEL",
+        "DIPHTHONG",
+        "AFFRICATE",
+        "PAUSE",
+        "DIACRITIC",
+        "SUPRASEGMENTAL",
+        "TONE",
+        "ACCENT_MARK",
+    }
+
     @classmethod
     def add_char(cls, char_sequence, category, rank=1):
         """Register a custom character sequence in the registry.
@@ -227,8 +254,16 @@ class CustomCharacter:
                 ``'AFFRICATE'``, ``'DIPHTHONG'``, ``'CONSONANT'``).
             rank (int, optional): The phonological weight of the sequence
                 used by ``IPAString.total_length()``.  Defaults to ``1``.
+
+        Raises:
+            ValueError: If ``category`` is not one of the valid phonological
+                categories defined in ``VALID_CATEGORIES``.
         """
-        cls._custom_chars[char_sequence] = {'category': category, 'rank': rank}
+        if category not in cls.VALID_CATEGORIES:
+            raise ValueError(
+                f"Invalid category '{category}'. Must be one of: {', '.join(sorted(cls.VALID_CATEGORIES))}"
+            )
+        cls._custom_chars[char_sequence] = {"category": category, "rank": rank}
 
     @classmethod
     def remove_char(cls, char_sequence):
@@ -265,4 +300,25 @@ class CustomCharacter:
     def is_valid_char(cls, char):
         """Return ``True`` if ``char`` is a registered custom sequence."""
         return char in cls._custom_chars
-    
+
+    @classmethod
+    def register_common_affricates(cls, rank=1):
+        """Register all standard IPA affricates as AFFRICATE category.
+
+        Args:
+            rank (int, optional): The phonological weight to assign to each
+                affricate.  Defaults to ``1``.
+        """
+        for sequence in COMMON_AFFRICATES:
+            cls.add_char(sequence, "AFFRICATE", rank=rank)
+
+    @classmethod
+    def register_common_diphthongs(cls, rank=1):
+        """Register all standard IPA diphthongs as DIPHTHONG category.
+
+        Args:
+            rank (int, optional): The phonological weight to assign to each
+                diphthong.  Defaults to ``1``.
+        """
+        for sequence in COMMON_DIPHTHONGS:
+            cls.add_char(sequence, "DIPHTHONG", rank=rank)

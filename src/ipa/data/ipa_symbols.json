@@ -1014,7 +1014,7 @@
         "name": "pharyngealized",
         "unicode": "\\u02e4",
         "hex": "0x02E4",
-        "alternates": [],
+        "alternates": ["ˁ"],
         "example": "tˤ, dˤ"
       },
       {
