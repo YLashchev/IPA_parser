@@ -5,7 +5,7 @@
 
 UTF-8 Unicode IPA parser and analysis toolkit.
 
-Created for PRAAT TextGrid rhythm typology research at the SPArK lab.
+Created for rhythm typology research at the SPArK lab.
 Parses IPA strings phonetically (not character-wise) using grapheme-cluster-aware
 maximal munch segmentation backed by a comprehensive JSON dictionary of official
 IPA symbols defined in `src/ipa/data/ipa_symbols.json`.
@@ -154,7 +154,7 @@ automatically re-scans for unrecognized symbols and prints any remaining.
 - Calculate word/syllable/sentence durations and inter-stress intervals (ISI)
 - Detect phoneme alignment mismatches between input words and parsed segments
 - Bulk-register common IPA affricates and diphthongs with one method call
-- Support language-specific rules via TOML configs and `CustomCharacter`
+
 
 ## Architecture
 
@@ -195,13 +195,13 @@ graph TD
 ```mermaid
 flowchart LR
     IN[Excel input] --> LOAD[load_excel]
-    LOAD --> PRE[Preprocessing\ninsert_sp / assign_pauses]
-    PRE --> WORD[Word metrics\nlength, duration]
-    WORD --> SYLL[Syllable metrics\nlength, duration, coda, stress]
-    SYLL --> PHON[Phoneme metrics\nsegment type columns]
-    PHON --> SENT[Sentence metrics\nduration, length]
-    SENT --> ISI[ISI metrics\ninter-stress intervals]
-    ISI --> FIN[Finalization\npause fill, column select]
+    LOAD --> PRE[Preprocessing<br>insert_sp<br> assign_pauses]
+    PRE --> WORD[Word metrics<br>length, duration]
+    WORD --> SYLL[Syllable metrics<br>length, duration, coda, stress]
+    SYLL --> PHON[Phoneme metrics<br>segment type columns]
+    PHON --> SENT[Sentence metrics<br>duration, length]
+    SENT --> ISI[ISI metrics<br>inter-stress intervals]
+    ISI --> FIN[Finalization<br>pause fill, column select]
     FIN --> OUT[CSV / XLSX output]
 ```
 
