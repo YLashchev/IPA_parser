@@ -1,10 +1,26 @@
 # IPA Parser
 
+![Python >= 3.11](https://img.shields.io/badge/python-%3E%3D3.11-blue)
+![License: MIT](https://img.shields.io/badge/license-MIT-green)
+
 UTF-8 Unicode IPA parser and analysis toolkit.
 
 Created for PRAAT TextGrid rhythm typology research at the SPArK lab.
 Parses IPA strings phonetically (not character-wise) using a comprehensive
 JSON dictionary of official IPA symbols defined in `src/ipa/data/ipa_symbols.json`.
+
+## Table of Contents
+
+- [Prerequisites](#prerequisites)
+- [Installation](#installation)
+- [CLI Usage](#cli-usage)
+- [Features](#features)
+- [Architecture](#architecture)
+- [Library Usage](#library-usage)
+- [Language Configuration (TOML)](#language-configuration-toml)
+- [Data Source: ipa_symbols.json](#data-source-ipa_symbolsjson)
+- [Development](#development)
+- [License](#license)
 
 ## Prerequisites
 
