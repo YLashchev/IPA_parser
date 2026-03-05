@@ -270,13 +270,12 @@ IPAString("ˈhæp.pi", geminate=False).total_length()   # 5
 **Processed string and char-only:**
 
 ```python
-word = IPAString("ˈnæ.nə")
-
-# process_string() returns the geminate-processed form
-word.process_string()   # "ˈnæ.nə" (no geminates here, so unchanged)
+# process_string() returns the geminate-collapsed form
+word = IPAString("ˈnotte", geminate=True)
+word.process_string()   # "ˈnote" (tt -> t)
 
 # char_only() strips diacritics, suprasegmentals, tones, and accent marks
-word.char_only()        # "nænə"
+word.char_only()        # "note"
 ```
 
 **Unicode representation:**
