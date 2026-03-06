@@ -3,9 +3,9 @@ geminate = true
 [[custom_chars]]
 sequence = "OP"
 category = "PAUSE"
-rank = 0
+weight = 0
 
 [[custom_chars]]
 sequence = "SP"
 category = "PAUSE"
-rank = 0
+weight = 0

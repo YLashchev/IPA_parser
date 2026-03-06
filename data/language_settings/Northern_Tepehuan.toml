@@ -3,54 +3,54 @@ geminate = true
 [[custom_chars]]
 sequence = "OP"
 category = "PAUSE"
-rank = 0
+weight = 0
 
 [[custom_chars]]
 sequence = "SP"
 category = "PAUSE"
-rank = 0
+weight = 0
 
 [[custom_chars]]
 sequence = "iá"
 category = "VOWEL"
-rank = 1
+weight = 1
 
 [[custom_chars]]
 sequence = "ái"
 category = "VOWEL"
-rank = 1
+weight = 1
 
 [[custom_chars]]
 sequence = "ɛːi"
 category = "VOWEL"
-rank = 1
+weight = 1
 
 [[custom_chars]]
 sequence = "ɨːi"
 category = "VOWEL"
-rank = 1
+weight = 1
 
 [[custom_chars]]
 sequence = "ɨi"
 category = "VOWEL"
-rank = 1
+weight = 1
 
 [[custom_chars]]
 sequence = "ió"
 category = "VOWEL"
-rank = 1
+weight = 1
 
 [[custom_chars]]
 sequence = "oi"
 category = "VOWEL"
-rank = 1
+weight = 1
 
 [[custom_chars]]
 sequence = "ɛ́i"
 category = "VOWEL"
-rank = 1
+weight = 1
 
 [[custom_chars]]
 sequence = "ai"
 category = "DIPHTHONG"
-rank = 1
+weight = 1

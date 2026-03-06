@@ -129,7 +129,7 @@ def test_non_tiebar_sequences_unaffected():
 
 def test_char_only_retains_registered_tiebar():
     """Test that char_only preserves registered tie-bar affricates while removing stress."""
-    CustomCharacter.add_char("t͡s", "AFFRICATE", rank=1)
+    CustomCharacter.add_char("t͡s", "AFFRICATE", p_weight=1)
     result = IPAString("ˈt͡sa")
     cleaned = result.char_only()
     assert cleaned == "t͡sa"  # Stress removed, affricate kept
@@ -137,7 +137,7 @@ def test_char_only_retains_registered_tiebar():
 
 def test_char_only_tiebar_with_diacritics():
     """Test that char_only removes diacritics but preserves registered tie-bar affricates."""
-    CustomCharacter.add_char("t͡ʃ", "AFFRICATE", rank=1)
+    CustomCharacter.add_char("t͡ʃ", "AFFRICATE", p_weight=1)
     result = IPAString("t͡ʃʰa")
     cleaned = result.char_only()
     assert cleaned == "t͡ʃa"  # Aspiration removed, affricate kept
@@ -145,27 +145,25 @@ def test_char_only_tiebar_with_diacritics():
 
 def test_coda_registered_affricate():
     """Test that coda counts registered tie-bar affricates as single consonants."""
-    CustomCharacter.add_char("t͡s", "AFFRICATE", rank=1)
+    CustomCharacter.add_char("t͡s", "AFFRICATE", p_weight=1)
     result = IPAString("pat͡s")
     assert result.coda == 1
 
 
 def test_coda_registered_diphthong_ends_vowel():
     """Test that coda returns 0 when word ends with registered tie-bar diphthong."""
-    CustomCharacter.add_char("a͡ɪ", "DIPHTHONG", rank=1)
+    CustomCharacter.add_char("a͡ɪ", "DIPHTHONG", p_weight=1)
     result = IPAString("pa͡ɪ")
     assert result.coda == 0
 
 
 def test_total_length_with_registered_tiebar():
-    """Test that total_length counts registered tie-bar segments based on their rank."""
-    CustomCharacter.add_char("t͡s", "AFFRICATE", rank=1)
+    CustomCharacter.add_char("t͡s", "AFFRICATE", p_weight=1)
     result = IPAString("t͡sa")
-    assert result.total_length() == 2  # t͡s (rank=1) + a (rank=1)
+    assert result.total_length() == 2  # t͡s (weight=1) + a (weight=1)
 
 
-def test_total_length_tiebar_rank_zero():
-    """Test that total_length excludes registered tie-bar segments with rank=0."""
-    CustomCharacter.add_char("‿", "PAUSE", rank=0)
+def test_total_length_tiebar_p_weight_zero():
+    CustomCharacter.add_char("‿", "PAUSE", p_weight=0)
     result = IPAString("pa‿ba")
-    assert result.total_length() == 4  # p + a + b + a, pause (rank=0) excluded
+    assert result.total_length() == 4  # p + a + b + a, pause (weight=0) excluded

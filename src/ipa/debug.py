@@ -1,79 +1,17 @@
-"""Custom exception types for the ipa-parser library.
-
-This module defines ``ValidationError``, the single exception class used
-throughout the library to signal all input-validation and data-loading
-failures.  Each error carries a machine-readable ``error_type`` string and
-formats a human-readable, bordered message automatically.
-"""
+"""Validation errors used throughout the package."""
 
 
 class ValidationError(Exception):
-    """Custom exception for IPA parsing and data-loading validation failures.
-
-    Wraps a short machine-readable ``error_type`` code and any number of
-    context keyword arguments.  On construction the human-readable message is
-    built by ``_get_error_message`` and forwarded to the base ``Exception``
-    class so that ``str(exc)`` and ``repr(exc)`` produce a formatted
-    diagnostic message.
-
-    Supported ``error_type`` codes and their required keyword arguments:
-
-    +--------------------------+-------------------------------------------+
-    | error_type               | Required kwargs                           |
-    +==========================+===========================================+
-    | ``FILE_NOT_FOUND``       | ``file_path`` (str)                       |
-    +--------------------------+-------------------------------------------+
-    | ``INVALID_JSON``         | ``file_path`` (str)                       |
-    +--------------------------+-------------------------------------------+
-    | ``INVALID_SCHEMA``       | ``file_path`` (str)                       |
-    +--------------------------+-------------------------------------------+
-    | ``EMPTY_INPUT_CHARACTER``| (none)                                    |
-    +--------------------------+-------------------------------------------+
-    | ``SYMBOL_NOT_FOUND``     | ``char`` (str)                            |
-    +--------------------------+-------------------------------------------+
-    | ``INVALID_SEGMENT``      | ``segment`` (str), ``string`` (str)       |
-    +--------------------------+-------------------------------------------+
-    | ``STRING OR LIST MISMATCH`` | (none)                                 |
-    +--------------------------+-------------------------------------------+
-
-    Attributes:
-        error_type (str): Machine-readable error code.
-        kwargs (dict): Context values used when formatting the error message.
-
-    Example:
-        >>> raise ValidationError("SYMBOL_NOT_FOUND", char="Q")
-        ValidationError [SYMBOL_NOT_FOUND]: Symbol not found:
-            'Q'
-    """
+    """Validation error with a short machine-readable ``error_type``."""
 
     def __init__(self, error_type, **kwargs):
-        """Initialize a ValidationError with a type code and context values.
-
-        Args:
-            error_type (str): A machine-readable code identifying the kind of
-                error (e.g. ``'SYMBOL_NOT_FOUND'``, ``'FILE_NOT_FOUND'``).
-            **kwargs: Arbitrary keyword arguments providing context for the
-                error message.  The required keys depend on ``error_type``
-                (see class docstring for details).
-        """
+        """Store the error code and render the final exception message."""
         self.error_type = error_type
         self.kwargs = kwargs
         super().__init__(self._get_error_message())
 
     def _get_error_message(self) -> str:
-        """Build and return the formatted error message string.
-
-        Constructs a bordered, human-readable block of text from the
-        ``error_type`` code and any context values stored in ``self.kwargs``.
-        Unknown error type codes produce a generic fallback message.
-
-        Returns:
-            str: A multi-line string beginning and ending with a row of dashes,
-                containing a centred ``ERROR OCCURRED`` header, the
-                type-specific detail text, and a centred
-                ``END OF ERROR MESSAGE`` footer.
-        """
-        # Error messages
+        """Return the formatted message for this validation error."""
         error_messages = {
             "FILE_NOT_FOUND": lambda: f"File not found:\n    {self.kwargs['file_path']}",
             "INVALID_JSON": lambda: f"Invalid JSON format in file:\n    {self.kwargs['file_path']}",
@@ -89,7 +27,7 @@ class ValidationError(Exception):
                 f"Invalid segment(s) in string:\n    Segments: {self.kwargs['segment']}\n    Full string: {self.kwargs['string']}"
             ),
             "UNREGISTERED_TIE_BAR": lambda: (
-                f'Unregistered tie-bar sequence: \'{self.kwargs["segment"]}\'\n    Register it with: CustomCharacter.add_char("{self.kwargs["segment"]}", "AFFRICATE", rank=1)\n    Or add to your language config TOML:\n        [[custom_chars]]\n        sequence = "{self.kwargs["segment"]}"\n        category = "AFFRICATE"\n        rank = 1'
+                f'Unregistered tie-bar sequence: \'{self.kwargs["segment"]}\'\n    Register it with: CustomCharacter.add_char("{self.kwargs["segment"]}", "AFFRICATE", p_weight=1)\n    Or add to your language config TOML:\n        [[custom_chars]]\n        sequence = "{self.kwargs["segment"]}"\n        category = "AFFRICATE"\n        weight = 1'
             ),
         }
 

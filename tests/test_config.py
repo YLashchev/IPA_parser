@@ -13,11 +13,11 @@ def test_remove_custom_char_removes_existing_sequence():
         tmp.write("[[custom_chars]]\n")
         tmp.write('sequence = "ts"\n')
         tmp.write('category = "CONSONANT"\n')
-        tmp.write("rank = 1\n\n")
+        tmp.write("weight = 1\n\n")
         tmp.write("[[custom_chars]]\n")
         tmp.write('sequence = "OP"\n')
         tmp.write('category = "PAUSE"\n')
-        tmp.write("rank = 0\n")
+        tmp.write("weight = 0\n")
         tmp.flush()
 
         geminate, custom_chars = remove_custom_char(tmp.name, "ts")
@@ -38,7 +38,7 @@ def test_remove_custom_char_raises_valueerror_when_not_found():
         tmp.write("[[custom_chars]]\n")
         tmp.write('sequence = "ts"\n')
         tmp.write('category = "CONSONANT"\n')
-        tmp.write("rank = 1\n")
+        tmp.write("weight = 1\n")
         tmp.flush()
 
         try:

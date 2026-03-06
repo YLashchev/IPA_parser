@@ -25,12 +25,12 @@ def test_name_returns_string():
     assert name
 
 
-def test_rank_consonant_is_1():
-    assert IPA_CHAR.rank("p") == 1
+def test_p_weight_consonant_is_1():
+    assert IPA_CHAR.p_weight("p") == 1
 
 
-def test_rank_diacritic_is_0():
-    assert IPA_CHAR.rank("ʰ") == 0
+def test_p_weight_diacritic_is_0():
+    assert IPA_CHAR.p_weight("ʰ") == 0
 
 
 def test_is_valid_char_true():
@@ -52,25 +52,25 @@ def test_unknown_symbol_raises():
 
 
 def test_add_and_get_custom_char():
-    CustomCharacter.add_char("t͡s", "CONSONANT", rank=1)
+    CustomCharacter.add_char("t͡s", "CONSONANT", p_weight=1)
     custom = CustomCharacter.get_char("t͡s")
-    assert custom == {"category": "CONSONANT", "rank": 1}
+    assert custom == {"category": "CONSONANT", "p_weight": 1}
 
 
 def test_is_valid_after_add():
-    CustomCharacter.add_char("t͡s", "CONSONANT", rank=1)
+    CustomCharacter.add_char("t͡s", "CONSONANT", p_weight=1)
     assert CustomCharacter.is_valid_char("t͡s") is True
 
 
 def test_remove_char():
-    CustomCharacter.add_char("t͡s", "CONSONANT", rank=1)
+    CustomCharacter.add_char("t͡s", "CONSONANT", p_weight=1)
     CustomCharacter.remove_char("t͡s")
     assert CustomCharacter.is_valid_char("t͡s") is False
 
 
 def test_clear_all():
-    CustomCharacter.add_char("t͡s", "CONSONANT", rank=1)
-    CustomCharacter.add_char("oʊ", "DIPHTHONG", rank=1)
+    CustomCharacter.add_char("t͡s", "CONSONANT", p_weight=1)
+    CustomCharacter.add_char("oʊ", "DIPHTHONG", p_weight=1)
     CustomCharacter.clear_all_chars()
     assert CustomCharacter.is_valid_char("t͡s") is False
     assert CustomCharacter.is_valid_char("oʊ") is False
@@ -123,15 +123,15 @@ def test_register_common_diphthongs_category():
         assert char_data["category"] == "DIPHTHONG"
 
 
-def test_register_common_affricates_custom_rank():
-    """register_common_affricates(rank=2) assigns rank 2 to all affricates."""
+def test_register_common_affricates_custom_p_weight():
+    """register_common_affricates(p_weight=2) assigns p_weight 2 to all affricates."""
     from ipa import COMMON_AFFRICATES
 
-    CustomCharacter.register_common_affricates(rank=2)
+    CustomCharacter.register_common_affricates(p_weight=2)
     for affricate in COMMON_AFFRICATES:
         char_data = CustomCharacter.get_char(affricate)
         assert char_data is not None
-        assert char_data["rank"] == 2
+        assert char_data["p_weight"] == 2
 
 
 def test_add_char_invalid_category_raises():

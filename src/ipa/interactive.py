@@ -1,24 +1,4 @@
-"""Interactive menu-driven CLI for exploring and validating IPA data.
-
-This module implements the interactive mode of the ``ipa-parser`` command.
-It exposes a numbered menu loop that lets the user:
-
-- Browse the deduplicated word list derived from the input DataFrame.
-- Inspect individual words to see their segments, syllable structure, stress
-  pattern, coda complexity, and phonological length.
-- Explore unique graphemes and their frequencies across the corpus.
-- Identify non-phoneme symbols (weight-0 marks) grouped by category.
-- Detect unrecognized symbols that are absent from both the IPA symbol table
-  and any registered custom characters.
-- View, add, or update custom character definitions that extend the base IPA
-  symbol set.
-- Run the full processing pipeline and export results to CSV and XLSX.
-
-All public and private functions in this module operate on a ``pandas``
-``DataFrame`` whose schema matches ``DEFAULT_COLUMNS`` defined in
-``pipeline.py``. The ``geminate`` flag is threaded through every
-``IPAString`` call to ensure consistent phonological counting.
-"""
+"""Interactive CLI helpers for exploring and exporting IPA data."""
 
 from __future__ import annotations
 
@@ -42,52 +22,7 @@ def run_interactive(
     output_xlsx: str,
     output_format: str = "both",
 ) -> None:
-    """Run the interactive menu loop for IPA data exploration.
-
-    Displays a numbered option menu and dispatches to the appropriate helper
-    function based on the user's input. The loop continues until the user
-    selects option ``9`` (Quit). The word list is lazily built on first access
-    and cached for subsequent menu options that require it; the cache is
-    invalidated whenever a new custom character is added (option ``7``).
-
-    Menu options:
-
-    1. Show word list -- tabular display of all words with syllable count,
-       phonological length, and stress pattern.
-    2. Inspect word -- detailed segment-level breakdown of a single word.
-    3. Show unique graphemes -- frequency-ranked list of every segment token
-       occurring in the ``Phoneme`` column.
-    4. Show non-phoneme marks (weight 0) -- symbols whose rank is ``0``,
-       grouped by category.
-    5. Show unrecognized symbols -- segments absent from the IPA table and
-       all registered custom characters.
-    6. Show custom characters -- currently registered ``CustomCharacter``
-       entries with their categories and ranks.
-    7. Add custom character -- interactive prompt to register a new custom
-       character and optionally persist it to the TOML config file.
-    8. Remove custom character -- interactive prompt to remove an existing
-       custom character from both the in-memory registry and the TOML config.
-    9. Run pipeline and export -- executes ``build_final_dataframe`` and
-       writes results in the format(s) specified by ``output_format``.
-    10. Quit -- exits the loop.
-
-    Args:
-        df: Input ``DataFrame`` loaded from the Excel source file. Must
-            contain at least a ``Phoneme`` column and the columns defined in
-            ``DEFAULT_COLUMNS``.
-        geminate: Whether geminate consonant handling is enabled. Passed
-            through to all ``IPAString`` instantiations.
-        config_path: Filesystem path to the active TOML language config, or
-            ``None`` if no config was supplied. Used to persist new custom
-            characters added during the session.
-        output_csv: Destination path for the CSV export produced by option 8.
-        output_xlsx: Destination path for the XLSX export produced by option 8.
-        output_format: Output format selection. One of ``'csv'``, ``'xlsx'``,
-            or ``'both'`` (default).
-
-    Returns:
-        None
-    """
+    """Run the interactive menu loop."""
     words_cache: list[str] | None = None
     while True:
         print("\n=== IPA Parser ===")
@@ -168,23 +103,7 @@ def run_interactive(
 
 
 def _build_word_list(df: pd.DataFrame) -> list[str]:
-    """Build an ordered, deduplicated list of words from the input DataFrame.
-
-    Preprocesses the DataFrame by inserting SP (sentence-pause) rows between
-    sentences and assigning pause labels to pause phonemes. Consecutive
-    duplicate word values (which arise because each phoneme segment occupies
-    its own row) are collapsed to a single entry. Missing ``Word`` values are
-    treated as ``"SP"``.
-
-    Args:
-        df: Input ``DataFrame`` with at least ``Sentence``, ``Word``, and
-            ``Phoneme`` columns in the schema expected by ``insert_sp`` and
-            ``assign_pauses``.
-
-    Returns:
-        An ordered list of unique consecutive word strings, including ``"SP"``
-        and ``"OP"`` markers that represent sentence and other pauses.
-    """
+    """Return an ordered list of unique consecutive words."""
     prepared = insert_sp(df)
     assign_pauses(prepared)
     words: list[str] = []
@@ -202,28 +121,7 @@ def _build_word_list(df: pd.DataFrame) -> list[str]:
 
 
 def _show_word_list_table(words: list[str], geminate: bool) -> None:
-    """Print a formatted table of words with their phonological metrics.
-
-    For each word in ``words``, computes and displays:
-
-    - 1-based index number.
-    - Word string (left-aligned, padded to 30 characters).
-    - Syllable count (or ``"-"`` for pause markers ``"OP"`` / ``"SP"``).
-    - Phonological length returned by ``IPAString.total_length()``.
-    - Stress pattern string returned by ``IPAString.stress()``.
-
-    Words that raise ``ValidationError`` during parsing are shown with
-    ``"ERR"`` in all metric columns. Pause markers (``"OP"``, ``"SP"``) are
-    displayed with ``"-"`` syllables, ``0`` length, and ``"PAUSE"`` stress.
-
-    Args:
-        words: Ordered list of word strings as produced by ``_build_word_list``.
-        geminate: Whether geminate consonant handling is enabled. Passed to
-            each ``IPAString`` constructor.
-
-    Returns:
-        None
-    """
+    """Print words with syllable count, length, and stress."""
     print(f"Total words: {len(words)}")
     header = f"{'#':>4}  {'Word':<30}  {'Syllables':>9}  {'Length':>6}  {'Stress':<10}"
     print(header)
@@ -232,7 +130,7 @@ def _show_word_list_table(words: list[str], geminate: bool) -> None:
         try:
             if word in {"OP", "SP"}:
                 syllable_count: int | str = "-"
-                length: int | str = 0
+                length: int | float | str = 0
                 stress: str = "PAUSE"
             else:
                 ipa = IPAString(word, geminate=geminate)
@@ -247,36 +145,7 @@ def _show_word_list_table(words: list[str], geminate: bool) -> None:
 
 
 def _inspect_word(words: list[str], geminate: bool) -> None:
-    """Prompt the user to select a word and print its full phonological breakdown.
-
-    Accepts either a 1-based integer index into ``words`` or a raw IPA string
-    typed directly by the user. For the selected word, displays:
-
-    - The original word string.
-    - The result of ``IPAString.process_string()`` (canonical form with
-      tie-bars and diacritics stripped based on char-only filtering).
-    - The list of parsed segments.
-    - The per-segment type list (raw category names).
-    - The CV-reduced type list (``"C"`` for CONSONANT, ``"V"`` for VOWEL,
-      other values left as-is).
-    - The syllable list from ``IPAString.syllables``.
-    - Total phonological length.
-    - Stress pattern.
-    - Coda complexity value.
-    - Whether geminate handling is currently active.
-
-    If the index is out of range or the IPA string fails to parse, an
-    informative error message is printed and the function returns without
-    raising.
-
-    Args:
-        words: Ordered list of word strings as produced by ``_build_word_list``.
-        geminate: Whether geminate consonant handling is enabled. Passed to
-            the ``IPAString`` constructor.
-
-    Returns:
-        None
-    """
+    """Print a detailed breakdown for a selected word."""
     selection = input("Enter word number or IPA string: ").strip()
     if not selection:
         return
@@ -315,25 +184,7 @@ def _inspect_word(words: list[str], geminate: bool) -> None:
 
 
 def _iter_phoneme_segments(df: pd.DataFrame, geminate: bool) -> Iterable[str]:
-    """Yield individual segment tokens from the ``Phoneme`` column of the DataFrame.
-
-    Iterates over each non-null value in the ``Phoneme`` column. Pause markers
-    (``"OP"``, ``"SP"``) are yielded as single tokens unchanged. All other
-    values are parsed through ``IPAString`` and each resulting segment is
-    yielded individually. If ``IPAString`` raises ``ValidationError`` for a
-    phoneme entry, the raw Unicode codepoints of that string are yielded
-    instead as individual characters.
-
-    Args:
-        df: Input ``DataFrame`` with a ``Phoneme`` column.
-        geminate: Whether geminate consonant handling is enabled. Passed to
-            each ``IPAString`` constructor.
-
-    Yields:
-        Individual segment strings -- either single IPA characters, multi-
-        character custom sequences, or single-character fallbacks from failed
-        parses.
-    """
+    """Yield segment tokens from the ``Phoneme`` column."""
     for value in df["Phoneme"].dropna().tolist():
         phoneme = str(value).strip()
         if not phoneme:
@@ -350,21 +201,7 @@ def _iter_phoneme_segments(df: pd.DataFrame, geminate: bool) -> Iterable[str]:
 
 
 def _unique_graphemes(df: pd.DataFrame, geminate: bool) -> Counter[str]:
-    """Count the frequency of every unique segment token in the corpus.
-
-    Consumes ``_iter_phoneme_segments`` and returns a ``Counter`` mapping each
-    distinct segment string to the number of times it appears across all
-    phoneme entries in the DataFrame.
-
-    Args:
-        df: Input ``DataFrame`` with a ``Phoneme`` column.
-        geminate: Whether geminate consonant handling is enabled. Passed
-            through to ``_iter_phoneme_segments``.
-
-    Returns:
-        A ``Counter[str]`` where keys are segment strings and values are their
-        occurrence counts, suitable for ``most_common()`` ranking.
-    """
+    """Count segment tokens across the corpus."""
     return Counter(_iter_phoneme_segments(df, geminate))
 
 
@@ -372,7 +209,7 @@ def _non_phoneme_symbols_by_category(df: pd.DataFrame, geminate: bool) -> dict[s
     """Collect all weight-0 (non-phoneme) symbols grouped by their category.
 
     Iterates over every unique segment in the corpus and retains only those
-    whose rank is ``0`` -- i.e., symbols that do not contribute to
+    whose weight is ``0`` -- i.e., symbols that do not contribute to
     phonological length (diacritics, pause markers, tone marks, etc.). Custom
     characters registered with ``CustomCharacter`` are checked first; then the
     base IPA symbol table via ``IPA_CHAR`` is consulted.
@@ -385,19 +222,19 @@ def _non_phoneme_symbols_by_category(df: pd.DataFrame, geminate: bool) -> dict[s
     Returns:
         A ``dict`` mapping category name strings (e.g., ``"PAUSE"``,
         ``"DIACRITIC"``) to sorted lists of symbol strings belonging to that
-        category whose rank is ``0``. Returns an empty dict if no such symbols
+        category whose weight is ``0``. Returns an empty dict if no such symbols
         are found.
     """
     categories: dict[str, set[str]] = {}
     for symbol in _unique_graphemes(df, geminate):
         if CustomCharacter.is_valid_char(symbol):
             custom_char = CustomCharacter.get_char(symbol)
-            if custom_char and custom_char["rank"] == 0:
+            if custom_char and custom_char["p_weight"] == 0:
                 category = str(custom_char["category"])
                 categories.setdefault(category, set()).add(symbol)
             continue
 
-        if IPA_CHAR.is_valid_char(symbol) and IPA_CHAR.rank(symbol) == 0:
+        if IPA_CHAR.is_valid_char(symbol) and IPA_CHAR.p_weight(symbol) == 0:
             category = IPA_CHAR.category(symbol)
             categories.setdefault(category, set()).add(symbol)
 
@@ -435,7 +272,7 @@ def _print_custom_characters() -> None:
     """Print all currently registered custom characters to standard output.
 
     Reads the internal ``CustomCharacter._custom_chars`` mapping and prints
-    each entry in alphabetical sequence order with its category and rank.
+    each entry in alphabetical sequence order with its category and weight.
     If no custom characters have been registered, prints an informative
     message instead.
 
@@ -448,13 +285,13 @@ def _print_custom_characters() -> None:
         return
 
     for sequence, data in sorted(custom_chars.items()):
-        print(f"{sequence}: {data['category']} (rank={data['rank']})")
+        print(f"{sequence}: {data['category']} (weight={data['p_weight']})")
 
 
 def _add_custom_character(config_path: str | None) -> None:
     """Interactively prompt the user to register a new custom character.
 
-    Collects the character sequence, category, and rank from standard input,
+    Collects the character sequence, category, and weight from standard input,
     registers the entry with ``CustomCharacter.add_char``, and -- if a config
     path is available -- persists the change to the TOML file via
     ``append_custom_char``. If no config path is provided, the registration
@@ -466,7 +303,7 @@ def _add_custom_character(config_path: str | None) -> None:
       if empty.
     - **Category**: Non-empty string, converted to uppercase (e.g.,
       ``"CONSONANT"``). Required; returns early if empty.
-    - **Rank**: Integer (default ``1``). Non-integer input falls back to ``1``
+    - **Weight**: Integer (default ``1``). Non-integer input falls back to ``1``
       with a warning message.
 
     Args:
@@ -487,20 +324,20 @@ def _add_custom_character(config_path: str | None) -> None:
         print("Category is required.")
         return
 
-    rank_input = input("Rank [1]: ").strip()
-    rank = 1
-    if rank_input:
+    weight_input = input("Weight [1]: ").strip()
+    p_weight = 1
+    if weight_input:
         try:
-            rank = int(rank_input)
+            p_weight = int(weight_input)
         except ValueError:
-            print("Rank must be an integer; using 1.")
-            rank = 1
+            print("Weight must be an integer; using 1.")
+            p_weight = 1
 
-    CustomCharacter.add_char(sequence, category, rank=rank)
+    CustomCharacter.add_char(sequence, category, p_weight=p_weight)
 
     if config_path:
         try:
-            append_custom_char(config_path, sequence, category, rank)
+            append_custom_char(config_path, sequence, category, p_weight)
             print(f"Saved to {config_path}")
         except (OSError, ValueError) as exc:
             print(f"Failed to update config: {exc}")

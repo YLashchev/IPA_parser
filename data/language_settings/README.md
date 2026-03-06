@@ -41,27 +41,27 @@ geminate = false
 [[custom_chars]]
 sequence = "t͡s"       # The exact Unicode string to match (tie bar included)
 category = "CONSONANT" # Phonological category (see table below)
-rank = 1               # Phonological weight: 1 = counted, 0 = not counted
+weight = 1               # Phonological weight: 1 = counted, 0 = not counted
 
 [[custom_chars]]
 sequence = "t͡ʃ"
 category = "CONSONANT"
-rank = 1
+weight = 1
 
 [[custom_chars]]
 sequence = "ai"
 category = "VOWEL"     # Diphthong treated as a single vowel segment
-rank = 1
+weight = 1
 
 [[custom_chars]]
 sequence = "OP"
 category = "PAUSE"     # Other-pause marker; excluded from phoneme counts
-rank = 0
+weight = 0
 
 [[custom_chars]]
 sequence = "SP"
 category = "PAUSE"     # Sentence-pause marker; excluded from phoneme counts
-rank = 0
+weight = 0
 ```
 
 ---
@@ -101,7 +101,7 @@ are part of the sequence and must be included verbatim.
 
 The phonological category assigned to this sequence. Valid values:
 
-| Value | Description | Default rank |
+| Value | Description | Default weight |
 |---|---|---|
 | `CONSONANT` | Consonant phoneme | 1 |
 | `VOWEL` | Vowel phoneme or diphthong | 1 |
@@ -115,7 +115,7 @@ how `IPAString.coda` classifies the final syllable.
 `AFFRICATE` is normalized to `CONSONANT`, and `DIPHTHONG` is normalized to
 `VOWEL` for C/V counts and segment-type mappings.
 
-#### `rank`
+#### `weight`
 
 | Type | Default | Required |
 |---|---|---|
@@ -167,7 +167,7 @@ configure_custom_characters(custom_chars)
 
 - `geminate` — `bool`
 - `custom_chars` — `list[tuple[str, str, int]]`, where each tuple is
-  `(sequence, category, rank)`
+  `(sequence, category, p_weight)`
 
 `configure_custom_characters` clears the current `CustomCharacter` registry
 and registers each entry from the list.
@@ -181,7 +181,7 @@ custom character at runtime. The CLI prompts for:
 
 1. `Sequence` — the Unicode string
 2. `Category` — e.g., `CONSONANT`, `VOWEL`, `PAUSE`
-3. `Rank` — integer weight (default `1`)
+3. `Weight` — integer weight (default `1`)
 
 If a `--config` path was provided when the CLI was launched, the new entry is
 appended to the TOML file automatically using `append_custom_char` from
