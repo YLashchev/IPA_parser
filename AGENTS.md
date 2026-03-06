@@ -1,112 +1,105 @@
 # AGENTS.md
 
-This file guides agentic coding assistants working in this repository.
-Follow existing conventions unless a change is explicitly requested.
+Guidance for coding agents working in this repository.
 
 ## Project Overview
-- Package name: ipa-parser
-- Python package lives in `src/ipa`
-- Primary user workflow: notebooks and scripts in `notebooks/` and `scripts/`
-- Core logic: IPA parsing and phonological analysis
-- Data assets: IPA symbol table in `src/ipa/data/ipa_symbols.json`
+- Package: `ipa-parser`
+- Source: `src/ipa`
+- Main workflows: notebooks in `notebooks/` and scripts in `scripts/`
+- Core domain: IPA parsing and phonological analysis
+- Symbol data: `src/ipa/data/ipa_symbols.json`
 
 ## Repository Layout
-- `src/ipa/`: library code
-- `tests/`: unit tests
-- `scripts/`: runnable scripts (e.g., `scripts/ipa_parser.py`)
-- `notebooks/`: analysis notebooks
-- `data/`: input sheets and language settings
-- `pyproject.toml`: package metadata and dependencies
-- `requirements.txt`: pinned runtime dependencies for the venv
+- `src/ipa/` - library code
+- `tests/` - unit tests
+- `scripts/` - runnable scripts
+- `notebooks/` - analysis notebooks
+- `data/` - input sheets and language settings
+- `qmd-knowledge/` - project memory notes
 
-## Environment Setup
+## Setup And Commands
 - Create venv: `python -m venv .venv`
-- Upgrade pip tooling: `.venv/bin/python -m pip install -U pip setuptools wheel`
-- Install deps: `.venv/bin/python -m pip install -r requirements.txt`
-- Editable install (recommended): `.venv/bin/python -m pip install -e .`
-- Dev install: `.venv/bin/python -m pip install -e .[dev]`
-
-## Build / Package
-- Build wheel/sdist (if needed): `python -m pip install build && python -m build`
-- There is no custom build script beyond setuptools metadata.
-
-## Run Commands
-- Run the script: `.venv/bin/python scripts/ipa_parser.py`
-- Notebook usage: open `notebooks/Ling199_Sheet_Automator.ipynb`
-
-## Test Commands
+- Install runtime deps: `.venv/bin/python -m pip install -r requirements.txt`
+- Install editable: `.venv/bin/python -m pip install -e .`
+- Install dev deps: `.venv/bin/python -m pip install -e .[dev]`
+- Run CLI script: `.venv/bin/python scripts/ipa_parser.py`
 - Run tests: `pytest`
-
-## Single Test Command
-- Run one test: `pytest tests/test_ipa_string.py::test_name`
-
-## Lint / Format
+- Run one test: `pytest tests/test_ipa_string.py::test_basic_segments`
 - Lint: `ruff check src tests`
-- Formatting: not configured (avoid reformatting noise).
+- Type check: `mypy src tests`
 
-## Types
-- Types: `mypy src tests`
+## QMD Memory
+Before answering repo-specific questions about conventions, past fixes, debugging
+history, design choices, or "why", search QMD first.
 
-## Code Style Guidelines
+- Collection: `IPA_parser`
+- Preferred tools: `vector_search` for semantic search, `search` for exact terms
+- If QMD has relevant results, use them
+- If not, proceed normally and say no relevant QMD memory was found when it matters
+
+Use `qmd_memory` when available for search, dedupe, and recording.
+
+### Learning vs issue
+- `learning`: reusable convention, pattern, architecture lesson, or debugging takeaway
+- `issue`: concrete bug, limitation, failure mode, workaround, regression, or fix history
+
+Prefer `issue` when a specific problem was diagnosed, reproduced, worked around,
+or fixed.
+
+Before creating a new note, search for similar notes and update an existing one
+when that is a better fit.
+
+### QMD constraints
+- Knowledge base must live in `qmd-knowledge/`, not a dot-directory
+- `deep_search` is disabled in OpenCode on this machine for memory-safety reasons
+- Use `./scripts/qmd-start.sh` if QMD needs to be started or warmed
+- If the collection looks stale, follow `QMD_WORKFLOW.md`
+
+## Code Style
 
 ### Imports
-- Prefer explicit imports (avoid wildcard imports).
-- Order imports as: stdlib, third-party, local (`src/ipa/...`).
-- Keep one import per line when adding new ones.
-
-### Formatting
-- Use 4-space indentation.
-- Keep line lengths reasonable (no strict formatter enforced).
-- Avoid introducing non-ASCII characters unless required for IPA data.
+- Prefer explicit imports
+- Order imports as stdlib, third-party, local
 
 ### Naming
-- Classes: `CamelCase` (e.g., `IPAString`, `CustomCharacter`).
-- Functions/methods: `snake_case`.
-- Constants: `UPPER_SNAKE_CASE`.
-- Use descriptive names for dataframes and lists.
+- Classes: `CamelCase`
+- Functions and methods: `snake_case`
+- Constants: `UPPER_SNAKE_CASE`
 
-### Types
-- Type hints are minimal today; add only if it improves clarity.
-- If adding hints, keep them consistent and lightweight.
+### Formatting
+- Use 4-space indentation
+- Keep lines reasonable
+- Avoid non-ASCII unless IPA data requires it
 
-### Error Handling
-- Use `ValidationError` from `src/ipa/debug.py` for validation failures.
-- Prefer raising exceptions over printing errors.
-- Validate inputs early (empty strings, invalid symbols).
+### Error handling
+- Use `ValidationError` from `src/ipa/debug.py` for validation failures
+- Prefer raising exceptions over printing errors
+- Validate empty strings and invalid symbols early
 
-### Data Handling
-- Preserve IPA and Unicode handling; do not normalize away diacritics.
-- `CustomCharacter` is the extension mechanism for language-specific IPA.
-- `IPAString` relies on maximal munch segmentation; avoid changing it lightly.
-- Keep `ipa_symbols.json` in sync with parsing logic when modifying data.
+### Data handling
+- Preserve IPA and Unicode behavior; do not normalize away diacritics
+- `CustomCharacter` is the extension mechanism for language-specific IPA
+- `IPAString` depends on maximal munch segmentation; change carefully
+- Keep `ipa_symbols.json` aligned with parsing logic
 
-### Pandas Usage
-- Keep numeric columns numeric during processing.
-- Convert to display strings (e.g., "N/A") only at final export.
-- Use `.copy()` when creating `final_df` from slices to avoid view pitfalls.
+### Pandas
+- Keep numeric columns numeric during processing
+- Convert placeholders like `N/A` only at final export
+- Use `.copy()` when building final slices
 
-### Side Effects
-- Scripts and notebooks often mutate dataframes in place; be explicit.
-- Avoid modifying global state in `src/ipa` unless required.
+### Paths and packaging
+- Avoid hardcoded absolute paths in library code
+- Package data under `src/ipa/data/*.json` must remain included
 
-## Notebook Conventions
-- The notebook assumes the package is installed editable from repo root.
-- Prefer `.venv/bin/python -m pip install -e .` for local usage.
-- Use absolute paths when exporting outputs to avoid confusion.
+## Notebook And Script Conventions
+- The notebook expects an editable install from repo root
+- Scripts and notebooks may mutate dataframes in place; be explicit
+- Absolute output paths are fine in scripts when needed
 
-## Packaging Notes
-- Package is installed from `src/` using setuptools `package-dir`.
-- Keep `src/ipa/data/*.json` included via package data.
+## Session Wrap-Up
+At the end of a meaningful session, run `/wrap-up` to review work and record
+durable learnings or issues to QMD.
 
-## OS/Path Expectations
-- This repo runs on macOS and Linux.
-- Avoid hardcoded absolute paths inside library code.
-- Scripts may use explicit output paths when needed.
-
-## Cursor/Copilot Rules
-- No `.cursorrules`, `.cursor/rules/`, or `.github/copilot-instructions.md` found.
-- If added later, update this file to reflect them.
-
-## When Adding New Workflows
-- If you add tests or linting, update this file with exact commands.
-- If you add scripts, document expected inputs/outputs here.
+## Maintenance
+- If workflows change, update this file with the exact commands or rules that matter
+- If tests, lint, or scripts change, keep the command list current
