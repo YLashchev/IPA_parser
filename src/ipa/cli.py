@@ -10,6 +10,9 @@ from pathlib import Path
 import pandas as pd
 
 from .config import load_language_config
+
+# Resolve data paths relative to repo root, not CWD
+_REPO_ROOT = Path(__file__).resolve().parents[2]
 from .interactive import run_interactive
 from .pipeline import build_final_dataframe, configure_custom_characters, load_excel
 
@@ -99,18 +102,18 @@ def main() -> None:
         sys.exit(1)
 
     if args.input is None:
-        args.input = _select_file("data/unprocessed", "xlsx", "input spreadsheet")
+        args.input = _select_file(str(_REPO_ROOT / "data" / "unprocessed"), "xlsx", "input spreadsheet")
         if args.input is None:
             print("No input file selected. Exiting.")
             sys.exit(0)
 
     if args.config is None:
-        args.config = _select_file("data/language_settings", "toml", "language config")
+        args.config = _select_file(str(_REPO_ROOT / "data" / "language_settings"), "toml", "language config")
 
     # Auto-generate output filenames from input: YYYY-MM-DD_<stem>_auto.{csv,xlsx}
     input_stem = Path(args.input).stem
     today = date.today().strftime("%Y-%m-%d")
-    output_base = f"data/processed/{today}_{input_stem}_auto"
+    output_base = str(_REPO_ROOT / "data" / "processed" / f"{today}_{input_stem}_auto")
     output_csv = args.output_csv or f"{output_base}.csv"
     output_xlsx = args.output_xlsx or f"{output_base}.xlsx"
 

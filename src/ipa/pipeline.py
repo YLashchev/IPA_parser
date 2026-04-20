@@ -203,7 +203,12 @@ def segment_type(segments: list[str], geminate: bool = True) -> list:
 
     temp = collapse_nested_list(segment_type_list)
     segment_type_column = [
-        "C" if item == "CONSONANT" else "V" if item == "VOWEL" else item for item in temp
+        "C"
+        if item in ("CONSONANT", "AFFRICATE")
+        else "V"
+        if item in ("VOWEL", "DIPHTHONG")
+        else item
+        for item in temp
     ]
     return segment_type_column
 

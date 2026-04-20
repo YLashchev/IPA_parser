@@ -1,19 +1,50 @@
+# Python build artifacts
 __pycache__/
 *.egg-info/
+*.pyc
+*.pyo
 .venv/
 build/
 dist/
+
+# Python tooling caches
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
+.coverage
+coverage.xml
+htmlcov/
+
+# Editor / IDE
 .vscode/
-.opencode/
-
 IPA_parser.code-workspace
+.idea/
+*.swp
+*.swo
 
+# Agent tooling — nothing agent-related committed
+.opencode/
+.pi/
+.pi-lens/
+.engram/
+.agents/
+.claude/
+.cursor/
+.cursorrules
+AGENTS.md
+CLAUDE.md
+skills-lock.json
+opencode.json
+scripts/booboo_append_slop.sh
+
+# OS / editor junk
 **/.DS_Store
+Thumbs.db
 ~$*
 
+# Jupyter
+notebooks/.ipynb_checkpoints/
+**/.ipynb_checkpoints/
 /notebooks
 
 # Generated outputs
@@ -21,3 +52,11 @@ data/processed/*.csv
 data/processed/*.xlsx
 !data/processed/.gitkeep
 check.xlsx
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+

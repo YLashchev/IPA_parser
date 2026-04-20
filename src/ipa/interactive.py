@@ -168,7 +168,12 @@ def _inspect_word(words: list[str], geminate: bool) -> None:
     processed = ipa.process_string()
     segment_types = ipa.segment_type
     cv_types = [
-        "C" if item == "CONSONANT" else "V" if item == "VOWEL" else item for item in segment_types
+        "C"
+        if item in ("CONSONANT", "AFFRICATE")
+        else "V"
+        if item in ("VOWEL", "DIPHTHONG")
+        else item
+        for item in segment_types
     ]
 
     print(f"\nWord: {word}")
