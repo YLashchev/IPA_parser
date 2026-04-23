@@ -1,0 +1,89 @@
+geminate = false
+
+[[custom_chars]]
+sequence = "OP"
+category = "PAUSE"
+weight = 0
+
+[[custom_chars]]
+sequence = "SP"
+category = "PAUSE"
+weight = 0
+
+
+[[custom_chars]]
+sequence = "o̟"
+category = "VOWEL"
+weight = 1
+
+[[custom_chars]]
+sequence = "ʊ̟"
+category = "VOWEL"
+weight = 1
+
+[[custom_chars]]
+sequence = "ʧ"
+category = "CONSONANT"
+weight = 1
+
+
+[[custom_chars]]
+sequence = "ʧ"
+category = "CONSONANT"
+weight = 1
+
+
+[[custom_chars]]
+sequence = "ʊ̟ɪ"
+category = "VOWEL"
+weight = 1
+
+[[custom_chars]]
+sequence = "ɐˑʊ"
+category = "VOWEL"
+weight = 1
+
+[[custom_chars]]
+sequence = "ɛɪ"
+category = "VOWEL"
+weight = 1
+
+[[custom_chars]]
+sequence = "ɛʊ"
+category = "VOWEL"
+weight = 1
+
+[[custom_chars]]
+sequence = "ʌɪˑ"
+category = "VOWEL"
+weight = 1
+
+[[custom_chars]]
+sequence = "ɛɪˑ"
+category = "VOWEL"
+weight = 1
+
+[[custom_chars]]
+sequence = "ʌɪ"
+category = "VOWEL"
+weight = 1
+
+[[custom_chars]]
+sequence = "ɛʊˑ"
+category = "VOWEL"
+weight = 1
+
+[[custom_chars]]
+sequence = "ɒʊˑ"
+category = "VOWEL"
+weight = 1
+
+[[custom_chars]]
+sequence = "ɐˑʊ"
+category = "VOWEL"
+weight = 1
+
+[[custom_chars]]
+sequence = "ʌɪˑ"
+category = "VOWEL"
+weight = 1
