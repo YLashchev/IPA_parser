@@ -257,7 +257,10 @@ class IPAString:
             i = 1
 
         while i < len(decomposed):
-            if unicodedata.category(decomposed[i]) not in {"Mn", "Mc", "Me"}:
+            # Require combining marks to be known IPA diacritics so unknown
+            # marks (e.g. U+20DD enclosing circle) fail validation early
+            # instead of producing silent weight=None in the pipeline.
+            if not IPAString._is_known_diacritic(decomposed[i]):
                 return False
             i += 1
 

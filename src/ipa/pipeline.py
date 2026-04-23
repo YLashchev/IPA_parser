@@ -567,9 +567,10 @@ def _detect_uncollapsed_modifier_geminate(word: str) -> str | None:
         if a != c or b != d:
             continue
         # Modifier must be a weight-0 symbol (DIACRITIC, SUPRASEGMENTAL,
-        # TONE, ACCENT_MARK, etc.). Weight-1 bases don't qualify.
-        weight = IPAString._segment_weight(b)
-        if weight is None or weight != 0:
+        # TONE, ACCENT_MARK, etc.). Weight-1 bases don't qualify. All
+        # segments that reach this point are valid (unknown diacritics
+        # would have raised in ``_validate_string``), so weight is not None.
+        if IPAString._segment_weight(b) != 0:
             continue
         candidate = a + b
         if CustomCharacter.is_valid_char(candidate):
