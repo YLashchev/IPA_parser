@@ -1,6 +1,43 @@
 """Validation errors used throughout the package."""
 
 
+class LengthMismatchError(Exception):
+    """Raised when xlsx row counts don't match phonological length of words.
+
+    Typical cause: a multi-codepoint phoneme (e.g. aspirated ``tʰ`` or
+    palatalized ``bʲ``) appears in a cell but isn't registered as a custom
+    character, so the parser treats it as base + modifier while the annotator
+    treated it as a single atomic phoneme.
+    """
+
+    def __init__(self, mismatches):
+        """``mismatches`` is a list of ``(excel_row, word, expected, actual, suggestion)``."""
+        self.mismatches = mismatches
+        super().__init__(self._render())
+
+    def _render(self) -> str:
+        header = (
+            f"Length mismatch for {len(self.mismatches)} word(s). "
+            "Each word's xlsx row count disagrees with its phonological length."
+        )
+        lines = [header, ""]
+        for excel_row, word, expected, actual, suggestion in self.mismatches:
+            lines.append(
+                f"  xlsx row {excel_row}: word {word!r} expects {expected} "
+                f"phoneme row(s), found {actual}."
+            )
+            if suggestion:
+                lines.append(f"    Hint: {suggestion}")
+        lines.append("")
+        lines.append(
+            "Fix by either (a) adjusting xlsx rows to match the word's "
+            "phoneme count, or (b) registering any multi-codepoint phoneme "
+            "(e.g. aspirated, palatalized, labialized consonants) as a custom "
+            "character in your language TOML config."
+        )
+        return "\n".join(lines)
+
+
 class ValidationError(Exception):
     """Validation error with a short machine-readable ``error_type``."""
 

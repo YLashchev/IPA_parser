@@ -1,4 +1,3 @@
-import re
 import unicodedata
 
 from .debug import ValidationError
@@ -9,8 +8,9 @@ class IPAString:
     def __init__(self, string, geminate=True):
         self.string = string.strip()
         self.geminate = geminate
-        processed_string = self.process_string()
-        self.segments = self._maximal_munch(processed_string)
+        self.segments = self._maximal_munch(self.string)
+        if self.geminate:
+            self.segments = self._degeminate(self.segments)
         self._validate_string()
 
     @property
@@ -73,25 +73,29 @@ class IPAString:
             return "STRESSED_2"
         return "UNSTRESSED"
 
+    def _degeminate(self, segments):
+        """Collapse adjacent duplicate CONSONANT segments into one.
+
+        Operates on phoneme-level tokens produced by ``_maximal_munch``, so
+        plain+modified clusters (e.g. ``t̪``+``t``) never collapse falsely.
+        """
+        collapsed = []
+        for segment in segments:
+            if (
+                collapsed
+                and collapsed[-1] == segment
+                and self._segment_category(segment) == "CONSONANT"
+            ):
+                continue
+            collapsed.append(segment)
+        return collapsed
+
     def process_string(self):
-        processed_string = self.string
-
-        if self.geminate:
-
-            def replace_geminate_if_consonant(match):
-                char = match.group(1)
-                if IPA_CHAR.category(char) == "CONSONANT":
-                    return char
-                return match.group(0)
-
-            processed_string = re.sub(r"(.)\1+", replace_geminate_if_consonant, processed_string)
-
-        return processed_string
+        # Retained for backwards compatibility. Degemination now happens at
+        # the segment level (see ``_degeminate``); this returns the raw input.
+        return self.string
 
     def total_length(self):
-        processed_str = self.process_string()
-        self.segments = self._maximal_munch(processed_str)
-
         total = 0
         for segment in self.segments:
             p_weight = self._segment_weight(segment)
@@ -175,16 +179,47 @@ class IPAString:
         return "".join(base)
 
     @staticmethod
+    def _is_known_diacritic(char):
+        """True if ``char`` is a single combining mark present in the IPA table.
+
+        Used to gate the base-char fallback so only sequences composed of
+        recognized IPA diacritics on a valid base resolve to a category.
+        """
+        if len(char) != 1:
+            return False
+        if unicodedata.category(char) not in {"Mn", "Mc", "Me"}:
+            return False
+        return IPA_CHAR.is_valid_char(char)
+
+    @staticmethod
+    def _composed_is_known(segment):
+        """True if segment decomposes to one recognized base + known diacritics."""
+        decomposed = unicodedata.normalize("NFD", segment)
+        if not decomposed:
+            return False
+        base = decomposed[0]
+        if not IPA_CHAR.is_valid_char(base):
+            return False
+        for ch in decomposed[1:]:
+            if not IPAString._is_known_diacritic(ch):
+                return False
+        return True
+
+    @staticmethod
     def _segment_category(segment):
-        """Return category for any valid segment (custom, exact, or base+diacritic)."""
+        """Return category for any valid segment (custom, exact, or base+diacritic).
+
+        Base+diacritic fallback only resolves when every diacritic is a known
+        IPA combining mark. Unknown marks (e.g. U+20DD enclosing circle) return
+        None so callers can surface them as unrecognized.
+        """
         if CustomCharacter.is_valid_char(segment):
             custom = CustomCharacter.get_char(segment)
             return custom["category"] if custom else None
         if IPA_CHAR.is_valid_char(segment):
             return IPA_CHAR.category(segment)
-        base = IPAString._base_char(segment)
-        if base and IPA_CHAR.is_valid_char(base):
-            return IPA_CHAR.category(base)
+        if IPAString._composed_is_known(segment):
+            return IPA_CHAR.category(IPAString._base_char(segment))
         return None
 
     @staticmethod
@@ -195,9 +230,8 @@ class IPAString:
             return custom["p_weight"] if custom else None
         if IPA_CHAR.is_valid_char(segment):
             return IPA_CHAR.p_weight(segment)
-        base = IPAString._base_char(segment)
-        if base and IPA_CHAR.is_valid_char(base):
-            return IPA_CHAR.p_weight(base)
+        if IPAString._composed_is_known(segment):
+            return IPA_CHAR.p_weight(IPAString._base_char(segment))
         return None
 
     def _is_valid_segment(self, segment):

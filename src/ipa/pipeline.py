@@ -6,6 +6,7 @@ from typing import Any, Callable, Iterable, cast
 
 import pandas as pd
 
+from .debug import LengthMismatchError
 from .ipa_char import CustomCharacter
 from .ipa_string import IPAString
 
@@ -516,6 +517,154 @@ def fill_pause_columns(df: pd.DataFrame) -> pd.DataFrame:
     return df
 
 
+def _suggest_custom_registration(word: str, geminate: bool) -> str | None:
+    """If the word contains modifier letters attached to bases, suggest
+    registering the base+modifier as a custom character.
+
+    Returns a hint string or ``None`` if no suggestion applies.
+    """
+    import unicodedata
+
+    segs = IPAString(word, geminate=geminate).segments
+    # Stress/length modifiers precede a base so they segment BEFORE a base,
+    # not after. Skip those specific known-harmless codepoints explicitly.
+    skip = {"\u02c8", "\u02cc", "\u02d0", "\u02d1", "."}
+    for i in range(len(segs) - 1):
+        base = segs[i]
+        mod = segs[i + 1]
+        if len(mod) != 1 or mod in skip:
+            continue
+        if unicodedata.category(mod) != "Lm":
+            continue
+        candidate = base + mod
+        if CustomCharacter.is_valid_char(candidate):
+            continue
+        return (
+            f"register {candidate!r} as a custom CONSONANT in your TOML config "
+            f'([[custom_chars]] sequence = {candidate!r}, category = "CONSONANT", weight = 1)'
+        )
+    return None
+
+
+def _detect_uncollapsed_modifier_geminate(word: str) -> str | None:
+    """Detect word strings containing an unregistered modifier-letter geminate.
+
+    Looks for the pattern ``[BASE_1, MOD_1, BASE_2, MOD_2]`` where
+    ``BASE_1 == BASE_2`` and ``MOD_1 == MOD_2`` and ``MOD`` is any weight-0
+    symbol (diacritic, suprasegmental modifier, tone mark, etc.). Such a
+    sequence encodes a geminate phoneme that the parser cannot collapse at
+    the word level because munch treats base and modifier as separate
+    segments, leaving the two base tokens non-adjacent. Fix: register
+    ``BASE+MOD`` as a custom CONSONANT so munch glues it into one segment.
+
+    Returns the recommended custom sequence, or ``None`` if no such pattern.
+    Lets any parser ``ValidationError`` propagate so unknown symbols in the
+    word surface as explicit errors rather than being silently swallowed.
+    """
+    segs = IPAString(word, geminate=True).segments
+    for i in range(len(segs) - 3):
+        a, b, c, d = segs[i], segs[i + 1], segs[i + 2], segs[i + 3]
+        if a != c or b != d:
+            continue
+        # Modifier must be a weight-0 symbol (DIACRITIC, SUPRASEGMENTAL,
+        # TONE, ACCENT_MARK, etc.). Weight-1 bases don't qualify.
+        weight = IPAString._segment_weight(b)
+        if weight is None or weight != 0:
+            continue
+        candidate = a + b
+        if CustomCharacter.is_valid_char(candidate):
+            continue
+        return candidate
+    return None
+
+
+def _cell_expansion_count(cell: str, geminate: bool) -> int:
+    """Number of ``segment_type`` entries that ``cell`` will contribute.
+
+    Mirrors the logic in ``segment_type`` so we can pre-check cells that
+    would produce more (or fewer) entries than their single xlsx row.
+    """
+    if cell in ("OP", "SP"):
+        return 1
+    try:
+        char_only_str = IPAString(cell, geminate=geminate).char_only()
+        types = IPAString(char_only_str, geminate=geminate).segment_type
+    except Exception:
+        return 1
+    return len(types) if isinstance(types, list) else 1
+
+
+def find_length_mismatches(
+    df: pd.DataFrame,
+    original_word_list: list[str],
+    word_start_indices: list[int],
+    geminate: bool = True,
+    phoneme_column: str = "Phoneme",
+) -> list[tuple[int, str, int, int, str | None]]:
+    """Return words whose xlsx rows don't align with pipeline expectations.
+
+    Two independent checks:
+      1. Row count vs. word phoneme count (``total_length`` at ``gem=False``).
+      2. Row count vs. per-cell ``segment_type`` expansion at the pipeline's
+         ``geminate`` flag. Catches cases where a cell like ``"pp"`` under
+         ``gem=False`` inflates to 2 entries for 1 row.
+
+    Each entry is ``(excel_row, word, expected_len, actual_rows, suggestion)``.
+    Excel row numbers are 1-based including header (start_idx + 2).
+    """
+    results: list[tuple[int, str, int, int, str | None]] = []
+    num_words = len(original_word_list)
+    for i in range(num_words):
+        word = original_word_list[i]
+        if word in ("OP", "SP"):
+            continue
+        start_idx = word_start_indices[i]
+        end_idx = word_start_indices[i + 1] if i + 1 < num_words else len(df)
+        actual = end_idx - start_idx
+
+        # Check 1: word phoneme count (always gem=False for raw count)
+        expected = int(IPAString(word, geminate=False).total_length())
+        if expected != actual:
+            suggestion = _suggest_custom_registration(word, geminate=geminate)
+            results.append((start_idx + 2, word, expected, actual, suggestion))
+            continue
+
+        # Check 2: cell expansion under the pipeline's geminate flag
+        cell_total = 0
+        for j in range(start_idx, end_idx):
+            cell = str(df.at[j, phoneme_column]).strip()
+            cell_total += _cell_expansion_count(cell, geminate=geminate)
+        if cell_total != actual:
+            suggestion = (
+                "one or more cells contain a doubled-character geminate "
+                "(e.g. 'pp' or 'mm') while geminate=false; either set "
+                "geminate=true in your TOML config, or annotate each half of "
+                "the geminate on its own row as single characters"
+            )
+            results.append((start_idx + 2, word, cell_total, actual, suggestion))
+            continue
+
+        # Check 3: word contains a modifier-letter geminate (e.g. tʰtʰ)
+        # that won't collapse at word level unless base+modifier is registered.
+        # Silently produces inflated WordLengthByPhoneme otherwise.
+        if geminate:
+            candidate = _detect_uncollapsed_modifier_geminate(word)
+            if candidate is not None:
+                collapsed = int(
+                    IPAString(word.replace(candidate * 2, candidate), geminate=True).total_length()
+                )
+                suggestion = (
+                    f"word contains an unregistered modifier-letter geminate "
+                    f"{candidate * 2!r}; register {candidate!r} as a custom "
+                    f"CONSONANT in your TOML config so the geminate collapses "
+                    f"at the word level "
+                    f"([[custom_chars]] sequence = {candidate!r}, "
+                    f'category = "CONSONANT", weight = 1)'
+                )
+                results.append((start_idx + 2, word, collapsed, actual, suggestion))
+    return results
+
+
 def find_mismatches_with_phoneme_alignment(
     df: pd.DataFrame,
     original_word_list: list[str],
@@ -572,6 +721,13 @@ def build_final_dataframe(
     assign_pauses(df)
 
     original_word_list, word_start_indices = get_word_list_and_indices(df)
+
+    length_issues = find_length_mismatches(
+        df, original_word_list, word_start_indices, geminate=geminate
+    )
+    if length_issues:
+        raise LengthMismatchError(length_issues)
+
     mismatches = find_mismatches_with_phoneme_alignment(
         df, original_word_list, word_start_indices, geminate=geminate
     )

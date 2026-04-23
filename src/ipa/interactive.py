@@ -8,7 +8,7 @@ from typing import Iterable
 import pandas as pd
 
 from .config import append_custom_char, remove_custom_char
-from .debug import ValidationError
+from .debug import LengthMismatchError, ValidationError
 from .ipa_char import IPA_CHAR, CustomCharacter
 from .ipa_string import IPAString
 from .pipeline import assign_pauses, build_final_dataframe, insert_sp
@@ -90,7 +90,12 @@ def run_interactive(
         elif choice == "9":
             from .cli import _export
 
-            final_df, mismatches = build_final_dataframe(df, geminate=geminate, fill_na=True)
+            try:
+                final_df, mismatches = build_final_dataframe(df, geminate=geminate, fill_na=True)
+            except LengthMismatchError as err:
+                print("\n!! Pipeline halted: length mismatch detected.\n")
+                print(err)
+                continue
             if mismatches:
                 print(mismatches)
             print(final_df)
@@ -268,6 +273,11 @@ def _unrecognized_symbols(df: pd.DataFrame, geminate: bool) -> set[str]:
         if CustomCharacter.is_valid_char(symbol):
             continue
         if IPA_CHAR.is_valid_char(symbol):
+            continue
+        # Composed sequences (e.g. t̪ = t + U+032A dental) aren't in the
+        # atomic symbol table but resolve via base-char fallback. Consider
+        # them recognized when a category can be determined.
+        if IPAString._segment_category(symbol) is not None:
             continue
         unknown.add(symbol)
     return unknown
