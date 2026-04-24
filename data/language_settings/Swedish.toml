@@ -1,4 +1,4 @@
-geminate = false
+geminate = true
 
 [[custom_chars]]
 sequence = "OP"
@@ -11,6 +11,7 @@ category = "PAUSE"
 weight = 0
 
 [[custom_chars]]
-sequence = "-"
-category = "SUPRASEGMENTAL"
-weight = 0
+sequence = "c"
+category = "VOWEL"
+weight = 1
+
