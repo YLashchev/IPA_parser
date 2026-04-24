@@ -1,4 +1,4 @@
-geminate = false
+geminate = true
 
 [[custom_chars]]
 sequence = "OP"
