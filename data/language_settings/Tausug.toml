@@ -1,0 +1,16 @@
+geminate = false
+
+[[custom_chars]]
+sequence = "OP"
+category = "PAUSE"
+weight = 0
+
+[[custom_chars]]
+sequence = "SP"
+category = "PAUSE"
+weight = 0
+
+[[custom_chars]]
+sequence = "-"
+category = "SUPRASEGMENTAL"
+weight = 0

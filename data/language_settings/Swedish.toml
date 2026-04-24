@@ -1,0 +1,17 @@
+geminate = true
+
+[[custom_chars]]
+sequence = "OP"
+category = "PAUSE"
+weight = 0
+
+[[custom_chars]]
+sequence = "SP"
+category = "PAUSE"
+weight = 0
+
+[[custom_chars]]
+sequence = "c"
+category = "VOWEL"
+weight = 1
+
