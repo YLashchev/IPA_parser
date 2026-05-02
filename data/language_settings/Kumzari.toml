@@ -1,0 +1,31 @@
+geminate = true
+
+[[custom_chars]]
+sequence = "OP"
+category = "PAUSE"
+weight = 0
+
+[[custom_chars]]
+sequence = "SP"
+category = "PAUSE"
+weight = 0
+
+[[custom_chars]]
+sequence = "d͡g"
+category = "AFFRICATE"
+weight = 1
+
+[[custom_chars]]
+sequence = "d͡ʒ"
+category = "AFFRICATE"
+weight = 1
+
+[[custom_chars]]
+sequence = "t͡ʃ"
+category = "AFFRICATE"
+weight = 1
+
+[[custom_chars]]
+sequence = "pːm̥"
+category = "CONSONANT"
+weight = 1
