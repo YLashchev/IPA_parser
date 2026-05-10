@@ -1,0 +1,61 @@
+geminate = true
+
+[[custom_chars]]
+sequence = "OP"
+category = "PAUSE"
+weight = 0
+
+[[custom_chars]]
+sequence = "SP"
+category = "PAUSE"
+weight = 0
+
+[[custom_chars]]
+sequence = "ǝ"
+category = "VOWEL"
+weight = 1
+
+[[custom_chars]]
+sequence = "t͡s"
+category = "AFFRICATE"
+weight = 1
+
+[[custom_chars]]
+sequence = "t͡ʃ"
+category = "AFFRICATE"
+weight = 1
+
+[[custom_chars]]
+sequence = "oi"
+category = "DIPHTHONG"
+weight = 1
+
+[[custom_chars]]
+sequence = "ei"
+category = "DIPHTHONG"
+weight = 1
+
+[[custom_chars]]
+sequence = "ɛu"
+category = "DIPHTHONG"
+weight = 1
+
+[[custom_chars]]
+sequence = "ǝu"
+category = "DIPHTHONG"
+weight = 1
+
+[[custom_chars]]
+sequence = "au"
+category = "DIPHTHONG"
+weight = 1
+
+[[custom_chars]]
+sequence = "iu"
+category = "DIPHTHONG"
+weight = 1
+
+[[custom_chars]]
+sequence = "əu"
+category = "DIPHTHONG"
+weight = 1
